@@ -1155,6 +1155,10 @@ section,
   clip-path: inset(0);
 }
 
+.call-to-action .bi-telegram {
+  color: blue;
+  margin-right: 4px;
+}
 .call-to-action img {
   position: fixed;
   top: 0;
