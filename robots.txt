@@ -1,0 +1,6 @@
+# Сгенерировано https://pr-cy.ru/
+
+Sitemap: https://homesstaging.ru/sitemap.xml
+User-agent: *
+Allow: https://homesstaging.ru/
+Allow: https://homesstaging.ru/mitino1-details.html
