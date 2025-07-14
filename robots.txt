@@ -4,3 +4,6 @@ Sitemap: https://homesstaging.ru/sitemap.xml
 User-agent: *
 Allow: https://homesstaging.ru/
 Allow: https://homesstaging.ru/mitino1-details.html
+Disallow: /forms/
+Crawl-delay: 5
+Host: homesstaging.online
