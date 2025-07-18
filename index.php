@@ -1,0 +1,660 @@
+<?php
+  session_start();
+  require_once "assets/vendor/connect-db/connect.php";
+  // $user = mysqli_query($conn,"SELECT * FROM `user`;");
+  
+  $sql = "SELECT * FROM user;";
+  $stmt= $conn->prepare($sql);
+  // $stmt->bind_param("sssi", $name, $email, $password, $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  while ($row = $result->fetch_array(MYSQLI_NUM)) {
+        foreach ($row as $r) {
+            print "$r ";
+        }
+        print "\n";
+  }
+  // var_dump($result);
+  
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Хоумстейжинг. Москва</title>
+  <meta name="description" content="Упаковка квартир Москва.(Красногорск)">
+  <meta name="keywords" content="homestaging москва,упаковка квартир москва,homestaging красногорск,меблировка, комплектация квартир, хоумстейджер">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.ico?ver=2" rel="icon">
+  <link href="assets/img/apple-touch-icon.png?ver=2" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css?ver=2" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Day
+  * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header fixed-top">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:natalia888@homesstaging.online">natalia888@homesstaging.online</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span><a href="tel:+7(925) 63-888-30">+7(925) 63-888-30</a></span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="https://t.me/homeupakovka"><i class="bi bi-telegram"></i></a>
+          <a href="https://t.me/homeupakovka"><i class="bi bi-facebook"></i></a>
+          <a href="https://t.me/homeupakovka"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="/" class="logo d-flex align-items-center">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.png" alt=""> -->
+          <h1 class="sitename">Homestaging МОСКВА</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#hero" class="active">Главная</a></li>
+            <li><a href="#about">Обо мне</a></li>
+            <li><a href="#cards">Услуги</a></li>
+            <li><a href="#pricing">Цены</a></li>
+            <li><a href="#portfolio">Портфолио</a></li>
+            <li class="dropdown text-secondary"><a href="#"><span class="text-secondary">Проекты</span> <i
+                  class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="#">ЖК Кранштадский</a></li>
+                <li class="dropdown"><a href="#"><span>ЖК Митинский лес</span> <i
+                      class="bi bi-chevron-down toggle-dropdown"></i></a>
+                  <ul>
+                    <li><a href="mitino1-details.html">Муравская улица, 38Бк1</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#contact">Контакты</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-start">
+          <div class="col-lg-8">
+            <h2>Делаю стильные и уютные квартиры под ключ</h2>
+            <p>Обустройство объекта при вашем минимальном участии с максимальным результатом</p>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section Обо мне-->
+    <section id="about" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span>Обо мне<br></span>
+        <h2>Рада приветствовать вас,<br></h2>
+        <p>меня зовут <b>Наталия Снимщикова</b>,люблю преображать скучные ремонты от застройщика в уютные функциональные пространства для аренды или
+          последующей продажи. </p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+            <img src="assets/img/natalia.jpg?version=2" class="img-fluid" alt="Наталия">
+          </div>
+
+          <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+            <h3>ПРЕИМУЩЕСТВА</h3>
+            <p class="fst-italic">
+              сотрудничества со мной:
+            </p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> <span>✨Вы экономите свой бюджет.</span>
+                <br>
+                <span>Кажется, совсем не очевидно, но ребят, практика показывает и цифры говорят сами за себя,
+                  самостоятельно делая ремонт, зачастую, клиенты легко выходят за рамки бюджета, в силу неопытности и
+                  нехватки времени в оценке рынка товаров и услуг, тем более ценники переписываются практически
+                  еженедельно</span>
+              </li>
+              <li><i class="bi bi-check-circle"></i> <span>✨Вы экономите свое время.</span>
+                <br> <span>
+                  Разработка концепции, подбор мебели и замеры, нужные ребята-сантехники, оконщики, установщики дверей и
+                  кондеев, сборщики мебели, электрики, маляры, уборщики, фотографы и пр., а доставки в новостройки
+                  отдельная головная боль…особенно когда не работают лифты или все получают ключи одновременно, и машины
+                  стоят в очередь, чтобы разгрузиться у подъезда.
+                </span>
+
+              </li>
+              <li><i class="bi bi-check-circle"></i> <span>✨Вы получаете продуманную эргономику и современные стилевые
+                  решения.</span>
+                <br>
+                <span>Даже при таких широких возможностях для выбора товаров и богатом ассортименте мебели, аксессуаров
+                  и гаджетов для дома, у многих клиентов в итоге получается если не бабушкин евроремонт, то полный
+                  асинхрон в цветовом и стилевом концепте, розеток не хватает, материалы лишние, шторы короткие и
+                  пр.</span>
+              </li>
+              <li>
+                <i class="bi bi-check-circle"></i>
+                <span>✨Ваша квартира выделяется среди конкурентов/стоимость аренды или продажи существенно
+                  повышается.</span>
+                <br>
+                <span>На практике, квартиры даже с минимальным хоумстейджингом, сдаются/продаются быстрее, спрос на них
+                  выше, тк любому приятнее жить в квартире, как с картинки в Pinterest.
+                  Друзья - это вещи очевидные, но почему-то для многих, до сих пор невероятные☺️</span>
+                  <br>
+              </li>
+              <li>
+                <i class="bi"></i>
+                <span style="font-weight: 600;" >✨Особая благодарность за помощь и поддержку моему учителю и куратору Светлане Борисовой, известному хоумстейджеру и блогеру, ее Телеграм-канал.....</span>
+                <a href="https://t.me/homestaging_BS"><i class="bi bi-telegram"></i></a>
+              </li>
+            </ul>
+            <a href="https://t.me/homeupakovka" class="read-more"><span>еще</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Услуги Section -->
+    <section id="cards" class="cards section">
+
+      <div class="container">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <span>Услуги</span>
+          <h2>Услуги</h2>
+          <p>Комплектации и хоумстейджинга</p>
+        </div><!-- End Section Title -->
+        <div class="row no-gutters">
+
+          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="100">
+            <span>01</span>
+            <h4>Замеры</h4>
+            <p>Выезжаю на объект и провожу измерения для последующей расстановки мебели</p>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="200">
+            <span>02</span>
+            <h4>Подготовка мудборда и коллажей будущего интерьера </h4>
+            <p>Выбираем общий стиль и наполнение квартиры, опираясь на анализ конкурентов и ЦА для аренды или продажи.
+            </p>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="300">
+            <span>03</span>
+            <h4>Прием доставок</h4>
+            <p>Встречаем курьеров и координируем крупные доставки, проверяем качество мебели и ее соответствие.</p>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="400">
+            <span>04</span>
+            <h4>Сборка мебели и техники</h4>
+            <p>Проверенные мастера аккуратно и надежно собирают всю мебель, технику и производят необходимые ремонтные
+              работы, согласно утвержденному проекту.</p>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="400">
+            <span>05</span>
+            <h4>Клининг и профессиональная фотосъёмка готового интерьера</h4>
+            <p>Генеральная уборка "под тапочки", заезжай и живи, красивые фото для аренды или продажи.</p>
+          </div><!-- End Card Item -->
+
+          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="600">
+            <span>06</span>
+            <h4>Сдача готового объекта и передача ключей</h4>
+            <p>При личной встрече или через курьера (возможно и в другие города)</p>
+          </div><!-- End Card Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Cards Section -->
+
+    <!-- Обсудить сотрудничество Section -->
+    <section id="call-to-action" class="call-to-action section dark-background">
+
+      <img src="assets/img/cta-bg.jpg" alt="">
+
+      <div class="container">
+        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-xl-10">
+            <div class="text-center">
+              <h3>Интересное</h3>
+              <p>Все дополнительные ссылки и живое общение на моем Телеграм канале</p>
+              <a class="cta-btn" href="https://t.me/homeupakovka"><i class="bi bi-telegram"></i>Перейти</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Call To Action Section -->
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing section">
+      <!-- Section Title -->
+      <div class="container section-title mt-3 pb-0" data-aos="fade-up">
+        <span>Прайс</span>
+        <h2>Прайс</h2>
+      </div><!-- End Section Title -->
+  
+
+      <div class="container">
+        <div class="row g-4 g-lg-0">
+          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="pricing-item">
+              <h3>Студия</h3>
+              <h4><sup>₽</sup>150<span>000</span></h4>
+              <ul>
+               <li><i class="bi bi-check"></i> <span>замер, анализ ЦА, выбор планировочного решения всей квартиры</span></li>
+                <li><i class="bi bi-check"></i> <span>смета и последующий подбор всей мебели, техники и декора</span></li>
+                <li><i class="bi bi-check"></i> <span>визуализация в виде коллажей (2d)</span></li>
+                <li><i class="bi bi-check"></i> <span>закупка и прием всех материалов на объект</span></li>
+                <li><i class="bi bi-check"></i> <span>сборка мебели и техники, покраска стен и пр.</span></li>
+                <li><i class="bi bi-check"></i> <span>клининг и стейджинг, фотосъемка объекта</span></li>
+              </ul>
+              <div class="text-center"><a href="https://t.me/homeupakovka" class="buy-btn">Заказать</a></div>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-lg-4 featured" data-aos="zoom-in" data-aos-delay="200">
+            <div class="pricing-item">
+              <h3>1-комнатная</h3>
+              <h4><sup>₽</sup>180<span>000</span></h4>
+              <ul>
+                <li><i class="bi bi-check"></i> <span>замер, анализ ЦА, выбор планировочного решения всей квартиры</span></li>
+                <li><i class="bi bi-check"></i> <span>смета и последующий подбор всей мебели, техники и декора</span></li>
+                <li><i class="bi bi-check"></i> <span>визуализация в виде коллажей (2d)</span></li>
+                <li><i class="bi bi-check"></i> <span>закупка и прием всех материалов на объект</span></li>
+                <li><i class="bi bi-check"></i> <span>сборка мебели и техники, покраска стен и пр.</span></li>
+                <li><i class="bi bi-check"></i> <span>клининг и стейджинг, фотосъемка объекта</span></li>
+              </ul>
+              <div class="text-center"><a href="https://t.me/homeupakovka" class="buy-btn">Заказать</a></div>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="pricing-item">
+              <h3>2/3-х комнатная</h3>
+              <h4><sup>₽</sup>200<span>000</span></h4>
+              <ul>
+                <li><i class="bi bi-check"></i> <span>замер, анализ ЦА, выбор планировочного решения всей квартиры</span></li>
+                <li><i class="bi bi-check"></i> <span>смета и последующий подбор всей мебели, техники и декора</span></li>
+                <li><i class="bi bi-check"></i> <span>визуализация в виде коллажей (2d)</span></li>
+                <li><i class="bi bi-check"></i> <span>закупка и прием всех материалов на объект</span></li>
+                <li><i class="bi bi-check"></i> <span>сборка мебели и техники, покраска стен и пр.</span></li>
+                <li><i class="bi bi-check"></i> <span>клининг и стейджинг, фотосъемка объекта</span></li>
+              </ul>
+              <div class="text-center"><a href="https://t.me/homeupakovka" class="buy-btn">Заказать</a></div>
+            </div>
+          </div><!-- End Pricing Item -->
+
+        </div>
+
+
+      </div><!-- End Container -->
+
+
+      </div>
+
+    </section><!-- /Pricing Section -->
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span>ЗАВЕРШЕННЫЕ ПРОЕКТЫ</span>
+        <h2>ЗАВЕРШЕННЫЕ ПРОЕКТЫ</h2>
+
+      </div><!-- End Section Title -->
+
+      <div class="container">
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">Все</li>
+            <li data-filter=".filter-app">ЖК Митинский лес</li>
+            <li data-filter=".filter-product">ЖК Крондштатский</li>
+            <li data-filter=".filter-branding">ЖК Ильинские луга</li>
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="assets/img/kvartiri/Kronstadskii-kv1.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Кранштадский</h4>
+                <p>бюджет 1.1 млн</p>
+                <a href="assets/img/kvartiri/Kronstadskii-kv1.jpg" title="App 1" data-gallery="portfolio-gallery-app"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="assets/img/kvartiri/Kronstadskii-kv2.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Кранштадский</h4>
+                <p>бюджет 1.1 млн</p>
+                <a href="assets/img/kvartiri/Kronstadskii-kv2.jpg" title="Product 1" data-gallery="portfolio-gallery-product"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="assets/img/kvartiri/Kronstadskii-kv3.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Кранштадский</h4>
+                <p>бюджет 1.1 тыс</p>
+                <a href="assets/img/kvartiri/Kronstadskii-kv3.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="assets/img/kvartiri/Kronstadskii-kv4.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Кранштадский</h4>
+                <p>бюджет 1.1 млн</p>
+                <a href="assets/img/kvartiri/Kronstadskii-kv4.jpg" title="App 2" data-gallery="portfolio-gallery-app"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="assets/img/kvartiri/Mitinskii-les/1-spalnia.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Митинский лес</h4>
+                <p>бюджет 988.000₽</p>
+                <a href="assets/img/kvartiri/Mitinskii-les/1-spalnia.jpg" title="Product 2" data-gallery="portfolio-gallery-product"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="assets/img/kvartiri/Mitinskii-les/3-zal.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Митинский лес</h4>
+                <p>бюджет 988.000₽</p>
+                <a href="assets/img/kvartiri/Mitinskii-les/3-zal.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="assets/img/kvartiri/Mitinskii-les/4-zal.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Митинский лес</h4>
+                <p>бюджет 988.000₽</p>
+                <a href="assets/img/kvartiri/Mitinskii-les/4-zal.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="assets/img/kvartiri/Mitinskii-les/5-kuhnya.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Митинский лес</h4>
+                <p>бюджет 988.000₽</p>
+                <a href="assets/img/kvartiri/Mitinskii-les/5-kuhnya.jpg" title="App 3" data-gallery="portfolio-gallery-app"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="assets/img/kvartiri/Ilinskie-luga-kv9.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>ЖК Ильинские луга</h4>
+                <p>бюджет 800 тыс</p>
+                <a href="assets/img/kvartiri/Ilinskie-luga-kv9.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding"
+                  class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                    class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span>Контакты</span>
+        <h2>Контакты</h2>
+        <p>Основное место г. Москва, Митинский район</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-5">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
+              data-aos-delay="200">
+              <i class="bi bi-geo-alt"></i>
+              <h3>Адрес</h3>
+              <p>125222. г. Москва, ул. Генерала Белобородова</p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-lg-2 col-md-4">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
+              data-aos-delay="300">
+              <i class="bi bi-telephone"></i>
+              <h3>Позвонить</h3>
+              <p><a href="tel:+7 (925) 63-888-30">+7 (925) 63-888-30</a></p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-lg-2 col-md-4">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
+              data-aos-delay="300">
+              <i class="bi bi-telegram"></i>
+              <h3>Написать</h3>
+              <p><a href="https://t.me/Natalia_Snim">@Natalia_Snim</a></p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-lg-3 col-md-4">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
+              data-aos-delay="400">
+              <i class="bi bi-envelope"></i>
+              <h3>Email</h3>
+              <p><a href="mailto:natalia888@homesstaging.online">natalia888@homesstaging.online</a></p>
+            </div>
+          </div><!-- End Info Item -->
+
+        </div>
+      </div>
+
+    </section><!-- /Contact Section -->
+<?php
+      // Путь к файлу, в котором хранится счетчик
+      $filename = "counter.txt";
+      $count = 0;
+      // Проверяем, существует ли файл
+      if (file_exists($filename)) {
+          // Если файл существует, читаем текущее значение счетчика
+          $handle = fopen($filename, "r");
+          $count = (int)fread($handle, 20);
+          fclose($handle);
+      } else {
+          // Если файл не существует, создаем его и устанавливаем начальное значение 0
+          $count = 0;
+          $handle = fopen($filename, "w");
+          fwrite($handle, $count);
+          fclose($handle);
+      }
+
+      // Увеличиваем счетчик
+      $count++;
+
+      // Записываем обновленное значение в файл
+      $handle = fopen($filename, "w");
+      fwrite($handle, $count);
+      fclose($handle);
+
+      // Выводим текущее значение счетчика
+      // echo "Просмотров: " . $count;
+    ?>
+  </main>
+
+  <footer id="footer" class="footer position-relative dark-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-about">
+            <a href="index.html" class="logo sitename">Москва</a>
+            <div class="footer-contact pt-3">
+              <p>ул. Белобородова</p>
+              <p>125222, Митино.</p>
+              <p class="mt-3"><strong>Phone:</strong> <span>+7 (925) 63-888-30</span></p>
+              <p><strong>Email:</strong> <span>natalia888@homesstaging.online</span></p>
+            </div>
+            <div class="social-links d-flex mt-4">
+              <a href="https://t.me/homeupakovka"><i class="bi bi-telegram"></i></a>
+              <a href="https://t.me/homeupakovka"><i class="bi bi-facebook"></i></a>
+              <a href="https://t.me/homeupakovka"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Полезные ссылки</h4>
+          <ul>
+            <li><a href="#hero" class="active">Главная</a></li>
+            <li><a href="#about">Обо мне</a></li>
+            <li><a href="#cards">Услуги</a></li>
+            <li><a href="#pricing">Цены</a></li>
+            <li><a href="#portfolio">Портфолио</a></li>
+            <li><a href="#contact">Контакты</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Наши услуги</h4>
+          <ul>
+            <li><a href="#cards">Услуги</a></li>
+            <li><a href="#pricing">Цены</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Наша рассылка</h4>
+          <p>Подпишитесь на нашу рассылку и получайте последние новости о наших продуктах и ​​услугах!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form">
+              <input type="email" name="email">
+              <input type="submit" value="Subscribe">
+            </div>
+            <div class="loading">Загрузка</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Ваш запрос на подписку отправлен. Спасибо!</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>2025. Copyright</span> <strong class="px-1 sitename">Dazn311</strong> <span>All Rights Reserved</span>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        
+      </div>
+      <div class="count"><?php echo "Просмотров: " . $count; ?></p></div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js?ver=5"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
