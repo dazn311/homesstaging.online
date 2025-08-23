@@ -1,5 +1,5 @@
 
-<header id="header" class="header fixed-top">
+<header id="header" class="header ">
     <div class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
@@ -36,7 +36,7 @@
                             <li class="dropdown"><a href="#"><span>ЖК Митинский лес</span> <i
                                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
-                                    <li><a href="mitino1-details.html">Муравская улица, 38Бк1</a></li>
+                                    <li><a href="/?details=mitino1">Муравская улица, 38Бк1</a></li>
                                 </ul>
                             </li>
                         </ul>

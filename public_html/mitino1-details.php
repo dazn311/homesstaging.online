@@ -1,40 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>ЖК Митинский</title>
-  <meta name="description" content="Упаковка квартир Москва.">
-  <meta name="keywords" content="Homestaging Москва,Упаковка квартир Москва,Упаковка квартир Красногорск">
+<?php
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.ico?ver=2" rel="icon">
-  <link href="assets/img/apple-touch-icon.png?ver=2" rel="apple-touch-icon">
+require VIEWS . '/incs/header.php';
+require VIEWS . '/pages/sections/navbar.tpl.php';
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Day
-  * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
+?>
 
 <body class="portfolio-details-page">
 
@@ -86,7 +58,7 @@
       <div class="container">
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="index.html">Главная</a></li>
+            <li><a href="/">Главная</a></li>
             <li class="current">ЖК Митинский</li>
           </ol>
         </nav>
@@ -106,7 +78,7 @@
 
               <script type="application/json" class="swiper-config">
                 {
-                  "loop": true,
+                  "loop": false,
                   "speed": 600,
                   "autoplay": {
                     "delay": 5000
