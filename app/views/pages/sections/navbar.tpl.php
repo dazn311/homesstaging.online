@@ -1,8 +1,5 @@
 
-<body class="index-page">
-
 <header id="header" class="header fixed-top">
-
     <div class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">

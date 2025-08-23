@@ -42,3 +42,4 @@ session_start();
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
 </head>
+<body class="index-page">
