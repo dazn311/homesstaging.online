@@ -11,7 +11,7 @@
                     <script type="application/json" class="swiper-config">
                         {
                             "loop": false,
-                            "speed": 600,
+                            "speed": 1600,
                             "autoplay": {
                                 "delay": 5000
                             },

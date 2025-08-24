@@ -24,16 +24,18 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="#hero" class="active">Главная</a></li>
-                    <li><a href="#about">Обо мне</a></li>
-                    <li><a href="#cards">Услуги</a></li>
-                    <li><a href="#pricing">Цены</a></li>
-                    <li><a href="#portfolio">Портфолио</a></li>
-                    <li class="dropdown text-secondary"><a href="#"><span class="text-secondary">Проекты</span> <i
+                    <li><a href="/#hero" class="active">Главная</a></li>
+                    <li><a href="/#about">Обо мне</a></li>
+                    <li><a href="/#cards">Услуги</a></li>
+                    <li><a href="/#pricing">Цены</a></li>
+                    <li><a href="/#portfolio">Портфолио</a></li>
+                    <li class="dropdown text-secondary">
+                        <a><span class="text-secondary">Проекты</span> <i
                                     class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="#">ЖК Кранштадский</a></li>
-                            <li class="dropdown"><a href="#"><span>ЖК Митинский лес</span> <i
+                            <li><a>ЖК Кранштадский</a></li>
+                            <li class="dropdown">
+                                <a ><span>ЖК Митинский лес</span> <i
                                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
                                     <li><a href="/?details=mitino1">Муравская улица, 38Бк1</a></li>
