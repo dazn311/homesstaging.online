@@ -9,10 +9,27 @@ CREATE TABLE user (
                        role INT(10) NOT NULL
 );
 
+CREATE TABLE description (
+                          id INT AUTO_INCREMENT PRIMARY KEY,
+                          title VARCHAR(20) NOT NULL, #Евродвушка
+                          category VARCHAR(50) NOT NULL, # Комплектация "под ключ"
+                          price VARCHAR(10) NOT NULL, # 988 000₽
+                          project_url VARCHAR(100) NOT NULL, # https://t.me/homeupakovka
+                          project_des VARCHAR(100) NOT NULL, #  мой канал Telegram
+                          createDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                          end_date TIMESTAMP DEFAULT NULL
+);
+
+CREATE TABLE worksPerformed (
+                                id INT AUTO_INCREMENT PRIMARY KEY,
+                                title VARCHAR(20) NOT NULL, # красили стены, устанавливали панели;
+                                description_id INT NOT NULL,
+                                FOREIGN KEY (description_id) REFERENCES description(id)
+);
+
 CREATE TABLE document (
                        id INT AUTO_INCREMENT PRIMARY KEY,
-                       type VARCHAR(10) NOT NULL,
-                       idDoc VARCHAR(10) NOT NULL,
+                       type VARCHAR(30) NOT NULL, #Евродвушка
                        mode VARCHAR(10) NOT NULL,
                        createDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        userRole INT(10) NOT NULL,
@@ -46,11 +63,14 @@ CREATE TABLE message (
 INSERT INTO homesStaging.user (id, email, name, password, createDate, remember_me, avatar, role) VALUES (1, 'alex250555@bk.ru', 'Саша', '$2y$10$0tUwDA0PeoKDK2y.83XM3.68sCRxb8ACvfEjvZoJ3Wm9zmCKSxn9u', '2025-08-13 01:30:12', '1', '/uploads/avatars/2025/01/01/avatar-0.png', 1);
 INSERT INTO homesStaging.user (id, email, name, password, createDate, remember_me, avatar, role) VALUES (2, 'nkartashove@mail.ru', 'Natalia', '$2y$10$0tUwDA0PeoKDK2y.83XM3.68sCRxb8ACvfEjvZoJ3Wm9zmCKSxn9u', '2025-08-13 01:30:12', '1', '/uploads/avatars/2025/01/01/avatar-0.png', 1);
 
-INSERT INTO homesStaging.document (id, type, idDoc, mode, createDate, userRole, fileName) VALUES (1, 'invrpt', 'new', 'edit', '2025-08-11 23:31:18', 1, 'invrpt-new-Kramp-250807.json');
-INSERT INTO homesStaging.document (id, type, idDoc, mode, createDate, userRole, fileName) VALUES (2, 'invrpt', '1248923', 'edit', '2025-08-11 23:31:18', 1, 'invrpt1248923-edit-Kramp-250811.json');
+INSERT INTO homesStaging.document (id, type, mode, createDate, userRole, fileName) VALUES (1, 'Евродвушка', 'edit', '2025-08-11 23:31:18', 1, 'invrpt-new-Kramp-250807.json');
+INSERT INTO homesStaging.document (id, type,  mode, createDate, userRole, fileName) VALUES (2, 'Евродвушка', 'end', '2025-08-11 23:31:18', 1, 'invrpt1248923-edit-Kramp-250811.json');
 
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (1,  'doc-1-image-1-250824.json',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (2,  'doc-1-image-2-250824.json',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (1,  'assets/img/flats/Mitinskii-les/38/1.jpg',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (2,  'assets/img/flats/Mitinskii-les/38/2.png',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (3,  'assets/img/flats/Mitinskii-les/38/3.png',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (4,  'assets/img/flats/Mitinskii-les/38/4.jpg',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (5,  'assets/img/flats/Mitinskii-les/38/5.jpg',1);
 
 # INSERT INTO homesStaging.imageDocuments (image_id, document_id) VALUES (1,  1);
 # INSERT INTO homesStaging.imageDocuments (image_id, document_id) VALUES (2,  1);
