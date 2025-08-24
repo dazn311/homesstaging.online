@@ -1,0 +1,16 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Utils\\": "Lib/Utils/"
+    }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^5.6",
+    "predis/predis": "^3.1",
+    "ext-pdo": "*",
+    "minishlink/web-push": "^9.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  }
+}

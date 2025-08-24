@@ -1,0 +1,66 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-homesStaging
+    ports:
+      - "8088:80"
+    restart: always
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+      - PHP_IDE_CONFIG="serverName=homesStaging"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - .:/var/www/homesstaging
+      - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+      - php
+    networks:
+      - homesStaging_network
+  php:
+    build:
+      context: ./
+      dockerfile: ./php/Dockerfile
+    tty: true
+    working_dir: /var/www/homesstaging
+    container_name: php-homesStaging
+    environment:
+      PHP_IDE_CONFIG_OLD: serverName=homesStaging
+      PHP_UPLOAD_MAX_FILESIZE: 64M
+      PHP_POST_MAX_SIZE: 64M
+      PHP_IDE_CONFIG: 64M
+    volumes:
+      - ./:/var/www/homesstaging
+    networks:
+      - homesStaging_network
+    depends_on:
+      - mysql
+      - redis
+
+  redis:
+    image: redis:latest
+    container_name: redis-homesStaging
+    ports:
+      - "6380:6379"
+    networks:
+      - homesStaging_network
+    environment:
+      PHP_IDE_CONFIG: serverName=homesStaging
+  mysql:
+    image: mysql:8
+    container_name: mysql-homesStaging
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: homesStaging
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_CHARACTER_SET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_general_ci
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+    networks:
+      - homesStaging_network
+
+networks:
+  homesStaging_network:
+    driver: bridge

@@ -1,0 +1,131 @@
+<?php
+
+namespace Utils;
+
+class Validator
+{
+
+    protected array $errors = [];
+    protected array $data_items;
+    protected array $rules_list = ['required', 'min', 'max', 'email', 'match', 'unique', 'ext', 'size'];
+    protected array $messages = [
+        'required' => 'The :fieldname: field is required',
+        'min' => 'The :fieldname: field must be a minimun :rulevalue: characters',
+        'max' => 'The :fieldname: field must be a maximum :rulevalue: characters',
+        'email' => 'Not valid email',
+        'match' => 'The :fieldname: field must match :rulevalue: field',
+        'unique' => 'The :fieldname: is already taken',
+        'ext' => 'File :fieldname: extension does not match. Allowed :rulevalue:',
+        'size' => 'File :fieldname: is too big. Allowed :rulevalue: bytes',
+    ];
+
+    public function validate($data = [], $rules = [])
+    {
+        $this->data_items = $data;
+        foreach ($data as $fieldname => $value) {
+            if (isset($rules[$fieldname])) {
+                $this->check([
+                    'fieldname' => $fieldname,
+                    'value' => $value,
+                    'rules' => $rules[$fieldname],
+                ]);
+            }
+        }
+        return $this;
+    }
+
+    protected function check($field): void
+    {
+        foreach ($field['rules'] as $ruleName => $rule_value) {
+            if (in_array($ruleName, $this->rules_list)) {
+                if (!call_user_func_array([$this, $ruleName], [$field['value'], $rule_value])) {
+                    $this->addError(
+                        $field['fieldname'],
+                        str_replace(
+                            [':fieldname:', ':rulevalue:'],
+                            [$field['fieldname'], $rule_value],
+                            $this->messages[$ruleName]
+                        )
+                    );
+                }
+            }
+        }
+    }
+
+    protected function addError($fieldname, $error): void
+    {
+        $this->errors[$fieldname][] = $error;
+    }
+
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
+    public function hasErrors(): bool
+    {
+        return !empty($this->errors);
+    }
+
+    public function listErrors($fieldname): string
+    {
+        $output = '';
+        if (isset($this->errors[$fieldname])) {
+            $output .= "<div class='invalid-feedback d-block'><ul class='list-unstyled'>";
+            foreach ($this->errors[$fieldname] as $error) {
+                $output .= "<li>{$error}</li>";
+            }
+            $output .= "</ul></div>";
+        }
+        return $output;
+    }
+
+    protected function required($value, $rule_value): bool
+    {
+        return !empty($value);
+    }
+
+    protected function min($value, $rule_value): bool
+    {
+        return mb_strlen($value, 'UTF-8') >= $rule_value;
+    }
+
+    protected function max($value, $rule_value): bool
+    {
+        return mb_strlen($value, 'UTF-8') <= $rule_value;
+    }
+
+    protected function email($value, $rule_value)
+    {
+        return filter_var($value, FILTER_VALIDATE_EMAIL);
+    }
+
+    protected function match($value, $rule_value): bool
+    {
+        return $value === $this->data_items[$rule_value];
+    }
+
+    protected function unique($value, $rule_value): bool
+    {
+        $data = explode(':', $rule_value);
+        return (!db()->query("SELECT {$data[1]} FROM {$data[0]} WHERE {$data[1]} = ?", [$value])->getColumn());
+    }
+
+    protected function ext($value, $rule_value): bool
+    {
+        if (empty($value['name'])) {
+            return true;
+        }
+        $file_ext = get_file_ext($value['name']);
+        $allowed_exts = explode('|', $rule_value);
+        return in_array($file_ext, $allowed_exts);
+    }
+
+    protected function size($value, $rule_value): bool
+    {
+        if (empty($value['size'])) {
+            return true;
+        }
+        return $value['size'] <= $rule_value;
+    }
+}
