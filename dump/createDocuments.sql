@@ -29,11 +29,21 @@ CREATE TABLE worksPerformed (
 
 CREATE TABLE document (
                        id INT AUTO_INCREMENT PRIMARY KEY,
-                       type VARCHAR(30) NOT NULL, #Евродвушка
+                       type VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL, #Евродвушка
                        mode VARCHAR(10) NOT NULL,
                        createDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        userRole INT(10) NOT NULL,
                        fileName VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE breadcrumbs (
+                breadcrumbs_id INT NOT NULL AUTO_INCREMENT,
+                projectName VARCHAR(100) NOT NULL UNIQUE,# ЖК Митинский лес
+                street VARCHAR(100) NOT NULL UNIQUE,# ул. Муравская
+                house VARCHAR(100) NOT NULL UNIQUE,# 38Бк1
+                document_id INT NOT NULL,
+                FOREIGN KEY (document_id) REFERENCES document(id),
+                primary key(breadcrumbs_id, document_id)
 );
 
 CREATE TABLE image (
@@ -65,6 +75,8 @@ INSERT INTO homesStaging.user (id, email, name, password, createDate, remember_m
 
 INSERT INTO homesStaging.document (id, type, mode, createDate, userRole, fileName) VALUES (1, 'Евродвушка', 'edit', '2025-08-11 23:31:18', 1, 'invrpt-new-Kramp-250807.json');
 INSERT INTO homesStaging.document (id, type,  mode, createDate, userRole, fileName) VALUES (2, 'Евродвушка', 'end', '2025-08-11 23:31:18', 1, 'invrpt1248923-edit-Kramp-250811.json');
+
+INSERT INTO homesStaging.breadcrumbs (breadcrumbs_id, projectName, street,house,document_id) VALUES (1,  'ЖК Митинский лес','ул. Муравская','38Бк1',1);
 
 INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (1,  'assets/img/flats/Mitinskii-les/38/1.jpg',1);
 INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (2,  'assets/img/flats/Mitinskii-les/38/2.png',1);
