@@ -1,13 +1,40 @@
 <?php
 
-$title = 'Главная :: Cislink';
+use Utils\{App, Db};
+
+$title = 'Главная :: Home Staging';
+
+$db = App::get(Db::class);
+
 //dd($_REQUEST);
 if (isset($_REQUEST['details'])) {
-    $details = $_REQUEST['details'];
-//    if ($details == 'mitino1') {
-//        dd($details);
-//    }
+    $project_key = $_REQUEST['details'];
+
+    $documents = $db->query("
+        SELECT * FROM document 
+            LEFT JOIN addressBook
+                ON document.id = addressBook.document_id 
+            LEFT JOIN description
+                ON document.id = description.document_id 
+            LEFT JOIN breadcrumbs
+                ON document.id = breadcrumbs.document_id 
+                 WHERE document.project_key = ?;",[$project_key]);
+    $res = $documents->find();
+
+    $works = $db->query("
+        SELECT * FROM document
+            LEFT JOIN worksPerformed
+                ON document.id = worksPerformed.document_id 
+                 WHERE document.project_key = ?
+                ORDER BY worksPerformed.id ;",[$project_key]);
+    $worksArr = $works->findAll();
+
+    $title = "{$res['project_title']} :: HomeStaging";
+
     require_once VIEWS . '/pages/details.tpl.php';
     die();
 }
+
+$title = 'Главная :: Home Staging';
+
 require_once VIEWS . '/pages/index.tpl.php';

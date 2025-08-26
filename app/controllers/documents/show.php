@@ -2,7 +2,7 @@
 
 use Utils\{App, Db};
 
-$title = 'Cislink :: Home';
+$title = 'Home Staging :: Home';
 
 $db = App::get(Db::class);
 $idDoc = route_param('id','1248303');// '1248303'

@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 //require_once "config/config.php";
 ?>
 
@@ -9,7 +9,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Хоум стейджинг. Москва</title>
+    <title><?=$title ?? 'Хоум стейджинг. Москва'?></title>
     <meta name="description" content="Упаковка квартир Москва.(Красногорск)">
     <meta name="keywords" content="homestaging москва,упаковка квартир москва,homestaging красногорск,меблировка, комплектация квартир, хоумстейджер">
 

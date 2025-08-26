@@ -2,7 +2,7 @@
 
 use Utils\{App, Db, Validator};
 
-$title = "Cislink :: Login";
+$title = "Home Staging :: Login";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /** @var Db $db */

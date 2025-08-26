@@ -2,7 +2,7 @@
 
 use Utils\{App, Db};
 
-$title = 'Главная :: Cislink';
+$title = 'Главная :: Home Staging';
 
 $db = App::get(Db::class);
 
