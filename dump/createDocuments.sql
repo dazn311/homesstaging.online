@@ -110,11 +110,13 @@ VALUES (5, 'Установка сплит системы.' ,1);
 
 INSERT INTO homesStaging.breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (1,  'ЖК Митинский лес',1);
 
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (1,  'assets/img/flats/Mitinskii-les/38/1.jpg',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (2,  'assets/img/flats/Mitinskii-les/38/2.png',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (3,  'assets/img/flats/Mitinskii-les/38/3.png',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (4,  'assets/img/flats/Mitinskii-les/38/4.jpg',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (5,  'assets/img/flats/Mitinskii-les/38/5.jpg',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (1,  'assets/img/flats/Mitinskii-les/38/2.png',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (2,  'assets/img/flats/Mitinskii-les/38/4.jpg',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (3,  'assets/img/flats/Mitinskii-les/38/5.jpg',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (4,  'assets/img/flats/Mitinskii-les/38/6.jpg',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (5,  'assets/img/flats/Mitinskii-les/38/7.jpg',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (6,  'assets/img/flats/Mitinskii-les/38/8.jpg',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (7,  'assets/img/flats/Mitinskii-les/38/9.png',1);
 
 # INSERT INTO homesStaging.imageDocuments (image_id, document_id) VALUES (1,  1);
 # INSERT INTO homesStaging.imageDocuments (image_id, document_id) VALUES (2,  1);

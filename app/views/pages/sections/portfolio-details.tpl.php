@@ -1,4 +1,13 @@
 <!-- Portfolio Details Section -->
+<style>
+    .swiper-slide {
+        background-color: transparent;
+        background-repeat: no-repeat,repeat;
+        background-position: right 2px top 0,0 0;
+        height: 753px;
+        background-size: cover;
+    }
+</style>
 <section id="portfolio-details" class="portfolio-details section">
     <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
@@ -21,29 +30,10 @@
                     </script>
 
                     <div class="swiper-wrapper align-items-center">
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/1-spalnia2.png" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/3-zal.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/4-zal.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/5-kuhnya.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/7-vannaya.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/8-prihojka.png" alt="">
-                        </div>
+                        <?php foreach ($imagesArr as $image ): ?>
+                            <div class="swiper-slide" style="background-image: url(<?=$image['imageUrl']?>);" >
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
