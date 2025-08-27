@@ -6,7 +6,22 @@ $title = 'Главная :: HomeStaging';
 
 $db = App::get(Db::class);
 
-//dd($_REQUEST);
+
+$menu = $db->query("
+        SELECT B.breadcrumbs_id, D.project_key, A.street, B.project_title, A.apartment  FROM document D
+            LEFT JOIN breadcrumbs B     
+                ON D.id = B.document_id 
+            LEFT JOIN addressBook A
+                ON D.id = A.document_id 
+                WHERE D.mode = 'end'            
+                ORDER BY D.createDate DESC ;",[]);
+$menuArr = $menu->findAll();
+
+$menu2Arr = [];
+foreach ($menuArr as $menu) {
+    $menu2Arr[$menu['project_title']][] = $menu;
+}
+
 if (isset($_REQUEST['details'])) {
     $project_key = $_REQUEST['details'];
 
@@ -20,16 +35,6 @@ if (isset($_REQUEST['details'])) {
                 ON D.id = breadcrumbs.document_id 
                 WHERE D.project_key = ?;",[$project_key]);
     $res = $documents->find();
-
-    $menu = $db->query("
-        SELECT B.breadcrumbs_id, D.project_key, A.street, B.project_title, A.apartment  FROM document D
-            LEFT JOIN breadcrumbs B     
-                ON D.id = B.document_id 
-            LEFT JOIN addressBook A
-                ON D.id = A.document_id 
-                WHERE D.mode = 'end'            
-                ORDER BY D.createDate DESC ;",[]);
-    $menuArr = $menu->findAll();
 
     $works = $db->query("
         SELECT * FROM document
@@ -46,10 +51,6 @@ if (isset($_REQUEST['details'])) {
                 LIMIT 10;",[$res['id']]);
     $imagesArr = $images->findAll();
 
-    $menu2Arr = [];
-    foreach ($menuArr as $menu) {
-        $menu2Arr[$menu['project_title']][] = $menu;
-    }
 
 //var_dump($res);
 //var_dump($imagesArr);
