@@ -30,17 +30,26 @@
                     <li><a href="/#pricing">Цены</a></li>
                     <li><a href="/#portfolio">Портфолио</a></li>
                     <li class="dropdown text-secondary">
-                        <a><span class="text-secondary">Проекты</span> <i
-                                    class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a>
+                            <span class="text-secondary">Проекты</span>
+                            <i class="bi bi-chevron-down toggle-dropdown"></i>
+                        </a>
                         <ul>
-                            <li><a>ЖК Кранштадский</a></li>
-                            <li class="dropdown">
-                                <a ><span>ЖК Митинский лес</span> <i
-                                            class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="/?details=mitino1">Муравская улица, 38Бк1</a></li>
-                                </ul>
-                            </li>
+                            <?php foreach ($menu2Arr as $key => $menu ): ?>
+                                <li class="dropdown">
+                                    <a>
+                                        <span><?=$key; ?></span>
+                                        <i class="bi bi-chevron-down toggle-dropdown"></i>
+                                    </a>
+                                    <ul>
+                                        <?php if (is_array($menu)): ?>
+                                            <?php foreach ($menu as $menuObj ): ?>
+                                                <li><a href="/?details=<?=$menuObj['project_key']; ?>"><?=$menuObj['street']; ?>, <?=$menuObj['apartment']; ?></a></li>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </ul>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </li>
                     <li><a href="#contact">Контакты</a></li>

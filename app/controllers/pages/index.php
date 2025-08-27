@@ -2,7 +2,7 @@
 
 use Utils\{App, Db};
 
-$title = 'Главная :: Home Staging';
+$title = 'Главная :: HomeStaging';
 
 $db = App::get(Db::class);
 
@@ -11,15 +11,25 @@ if (isset($_REQUEST['details'])) {
     $project_key = $_REQUEST['details'];
 
     $documents = $db->query("
-        SELECT * FROM document 
+        SELECT D.id as id, title,category,street,apartment,price,end_date,project_title,project_url,project_des FROM document D 
             LEFT JOIN addressBook
-                ON document.id = addressBook.document_id 
+                ON D.id = addressBook.document_id 
             LEFT JOIN description
-                ON document.id = description.document_id 
+                ON D.id = description.document_id 
             LEFT JOIN breadcrumbs
-                ON document.id = breadcrumbs.document_id 
-                WHERE document.project_key = ?;",[$project_key]);
+                ON D.id = breadcrumbs.document_id 
+                WHERE D.project_key = ?;",[$project_key]);
     $res = $documents->find();
+
+    $menu = $db->query("
+        SELECT B.breadcrumbs_id, D.project_key, A.street, B.project_title, A.apartment  FROM document D
+            LEFT JOIN breadcrumbs B     
+                ON D.id = B.document_id 
+            LEFT JOIN addressBook A
+                ON D.id = A.document_id 
+                WHERE D.mode = 'end'            
+                ORDER BY D.createDate DESC ;",[]);
+    $menuArr = $menu->findAll();
 
     $works = $db->query("
         SELECT * FROM document
@@ -35,14 +45,18 @@ if (isset($_REQUEST['details'])) {
                 ORDER BY image.image_id
                 LIMIT 10;",[$res['id']]);
     $imagesArr = $images->findAll();
-//var_dump($imagesArr);
+
+    $menu2Arr = [];
+    foreach ($menuArr as $menu) {
+        $menu2Arr[$menu['project_title']][] = $menu;
+    }
+
 //var_dump($res);
+//var_dump($imagesArr);
     $title = "{$res['project_title']} :: HomeStaging";
 
     require_once VIEWS . '/pages/details.tpl.php';
     die();
 }
-
-$title = 'Главная :: Home Staging';
 
 require_once VIEWS . '/pages/index.tpl.php';

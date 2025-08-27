@@ -53,7 +53,7 @@ CREATE TABLE addressBook (
 
 CREATE TABLE breadcrumbs (
                 breadcrumbs_id INT NOT NULL AUTO_INCREMENT,
-                project_title VARCHAR(100) NOT NULL UNIQUE,# ЖК Митинский лес
+                project_title VARCHAR(100) NOT NULL,# ЖК Митинский лес
                 document_id INT NOT NULL,
                 FOREIGN KEY (document_id) REFERENCES document(id),
                 primary key(breadcrumbs_id, document_id)
@@ -87,36 +87,51 @@ INSERT INTO homesStaging.user (id, email, name, password, createDate, remember_m
 INSERT INTO homesStaging.user (id, email, name, password, createDate, remember_me, avatar, role) VALUES (2, 'nkartashove@mail.ru', 'Natalia', '$2y$10$0tUwDA0PeoKDK2y.83XM3.68sCRxb8ACvfEjvZoJ3Wm9zmCKSxn9u', '2025-08-13 01:30:12', '1', '/uploads/avatars/2025/01/01/avatar-0.png', 1);
 
 
+INSERT INTO homesStaging.document (id, type,  mode, project_key, createDate, userRole, fileName)
+VALUES (1, 'Евродвушка', 'end', 'kronstadskii1', '2025-05-11 23:31:18', 1, 'invrpt1248923-edit-Kramp-250811.json');
 
-INSERT INTO homesStaging.document (id, type, mode, project_key, createDate, userRole, fileName) VALUES (1, 'Евродвушка', 'edit', 'mitino1', '2025-08-11 23:31:18', 1, 'invrpt-new-Kramp-250807.json');
-INSERT INTO homesStaging.document (id, type,  mode, project_key, createDate, userRole, fileName) VALUES (2, 'Евродвушка', 'end', 'kronstadskii1', '2025-08-11 23:31:18', 1, 'invrpt1248923-edit-Kramp-250811.json');
+INSERT INTO homesStaging.document (id, type, mode, project_key, createDate, userRole, fileName)
+VALUES (2, 'Евродвушка', 'end', 'mitino1', '2025-06-11 23:31:18', 1, 'invrpt-new-Kramp-250807.json');
+
+INSERT INTO homesStaging.document (id, type, mode, project_key, createDate, userRole, fileName)
+VALUES (3, 'Евродвушка', 'end', 'mitino2', '2025-06-12 23:31:18', 1, 'invrpt-new-Kramp-250612.json');
+
 
 INSERT INTO homesStaging.addressBook (address_id, code, street, apartment, document_id)
-VALUES (1, '125222', 'ул. Муравская', '38Бк1', 1);
+VALUES (3, '125222', 'Кронштадтский бул.', '8к2', 1);
+
+INSERT INTO homesStaging.addressBook (address_id, code, street, apartment, document_id)
+VALUES (1, '125222', 'ул. Муравская', '38Бк1', 2);
+
+INSERT INTO homesStaging.addressBook (address_id, code, street, apartment, document_id)
+VALUES (2, '125222', 'ул. Муравская', '32к1', 3);
+
 
 INSERT INTO homesStaging.description (id, title, category,price,project_url,project_des,createDate,end_date,document_id)
-VALUES (1, 'Евродвушка' ,'Комплектация "под ключ"' ,'988 000' ,'https://t.me/homeupakovka' ,'мой канал Telegram' ,NULL,NULL,1);
+VALUES (1, 'Евродвушка' ,'Комплектация "под ключ"' ,'988 000' ,'https://t.me/homeupakovka' ,'мой канал Telegram' ,NULL,NULL,2);
 
 INSERT INTO homesStaging.worksPerformed (id, title_work, document_id)
-VALUES (1, 'красили стены, устанавливали панели;' ,1);
+VALUES (1, 'красили стены, устанавливали панели;' ,2);
 INSERT INTO homesStaging.worksPerformed (id, title_work, document_id)
-VALUES (2, 'меняли двери, в т.ч. входную, регулировали окна и меняли откосы;' ,1);
+VALUES (2, 'меняли двери, в т.ч. входную, регулировали окна и меняли откосы;' ,2);
 INSERT INTO homesStaging.worksPerformed (id, title_work, document_id)
-VALUES (3, 'в ванной меняли унитаз, красили швы, меняли душевую стойку и раковину;' ,1);
+VALUES (3, 'в ванной меняли унитаз, красили швы, меняли душевую стойку и раковину;' ,2);
 INSERT INTO homesStaging.worksPerformed (id, title_work, document_id)
-VALUES (4, 'бытовая техника Weissgauff, фартук на кухне демонтировали и сделали из керамогранита;' ,1);
+VALUES (4, 'бытовая техника Weissgauff, фартук на кухне демонтировали и сделали из керамогранита;' ,2);
 INSERT INTO homesStaging.worksPerformed (id, title_work, document_id)
-VALUES (5, 'Установка сплит системы.' ,1);
+VALUES (5, 'Установка сплит системы.' ,2);
 
-INSERT INTO homesStaging.breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (1,  'ЖК Митинский лес',1);
+INSERT INTO homesStaging.breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (1,  'ЖК Кронштадтский',1);
+INSERT INTO homesStaging.breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (2,  'ЖК Митинский лес',2);
+INSERT INTO homesStaging.breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (3,  'ЖК Митинский лес',3);
 
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (1,  'assets/img/flats/Mitinskii-les/38/2.png',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (2,  'assets/img/flats/Mitinskii-les/38/4.jpg',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (3,  'assets/img/flats/Mitinskii-les/38/5.jpg',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (4,  'assets/img/flats/Mitinskii-les/38/6.jpg',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (5,  'assets/img/flats/Mitinskii-les/38/7.jpg',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (6,  'assets/img/flats/Mitinskii-les/38/8.jpg',1);
-INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (7,  'assets/img/flats/Mitinskii-les/38/9.png',1);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (1,  'assets/img/flats/Mitinskii-les/38/2.png',2);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (2,  'assets/img/flats/Mitinskii-les/38/4.jpg',2);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (3,  'assets/img/flats/Mitinskii-les/38/5.jpg',2);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (4,  'assets/img/flats/Mitinskii-les/38/6.jpg',2);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (5,  'assets/img/flats/Mitinskii-les/38/7.jpg',2);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (6,  'assets/img/flats/Mitinskii-les/38/8.jpg',2);
+INSERT INTO homesStaging.image (image_id, image_url, document_id) VALUES (7,  'assets/img/flats/Mitinskii-les/38/9.png',2);
 
 # INSERT INTO homesStaging.imageDocuments (image_id, document_id) VALUES (1,  1);
 # INSERT INTO homesStaging.imageDocuments (image_id, document_id) VALUES (2,  1);
