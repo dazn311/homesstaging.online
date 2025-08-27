@@ -24,7 +24,7 @@
                         <a href="assets/img/kvartiri/Kronstadskii-kv1.jpg" title="App 1"
                            data-gallery="portfolio-gallery-app"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
@@ -37,7 +37,7 @@
                         <a href="assets/img/kvartiri/Kronstadskii-kv2.jpg" title="Product 1"
                            data-gallery="portfolio-gallery-product"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
@@ -50,7 +50,7 @@
                         <a href="assets/img/kvartiri/Kronstadskii-kv3.jpg" title="Branding 1"
                            data-gallery="portfolio-gallery-branding"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
@@ -63,7 +63,7 @@
                         <a href="assets/img/kvartiri/Kronstadskii-kv4.jpg" title="App 2"
                            data-gallery="portfolio-gallery-app"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
@@ -76,7 +76,7 @@
                         <a href="assets/img/kvartiri/Mitinskii-les/1-spalnia.jpg" title="Product 2"
                            data-gallery="portfolio-gallery-product"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
@@ -89,7 +89,7 @@
                         <a href="assets/img/kvartiri/Mitinskii-les/3-zal.jpg" title="Branding 2"
                            data-gallery="portfolio-gallery-branding"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
@@ -102,7 +102,7 @@
                         <a href="assets/img/kvartiri/Mitinskii-les/4-zal.jpg" title="Branding 2"
                            data-gallery="portfolio-gallery-branding"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
@@ -115,7 +115,7 @@
                         <a href="assets/img/kvartiri/Mitinskii-les/5-kuhnya.jpg" title="App 3"
                            data-gallery="portfolio-gallery-app"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
@@ -128,7 +128,7 @@
                         <a href="assets/img/kvartiri/Ilinskie-luga-kv9.jpg" title="Branding 2"
                            data-gallery="portfolio-gallery-branding"
                            class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="mitino1-details.html" title="More Details" class="details-link"><i
+                        <a href="/?details=mitino1" title="More Details" class="details-link"><i
                                     class="bi bi-link-45deg"></i></a>
                     </div>
                 </div><!-- End Portfolio Item -->
