@@ -54,7 +54,7 @@ if (isset($_REQUEST['details'])) {
 
 //var_dump($res);
 //var_dump($imagesArr);
-var_dump($worksArr);
+//var_dump($worksArr);
     $title = "{$res['project_title']} :: HomeStaging";
 
     require_once VIEWS . '/pages/details.tpl.php';
