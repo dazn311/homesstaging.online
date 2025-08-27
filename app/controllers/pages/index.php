@@ -59,6 +59,9 @@ if (isset($_REQUEST['details'])) {
 
     require_once VIEWS . '/pages/details.tpl.php';
     die();
+} if (isset($_REQUEST['documents'])) {
+    require_once CONTROLLERS . '/documents/index.php';
+    die();
 }
-
+//$router->get('documents', 'documents/index.php');
 require_once VIEWS . '/pages/index.tpl.php';

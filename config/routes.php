@@ -18,7 +18,7 @@ $router->get('chat', 'chat/index.php');
 $router->get('', 'pages/index.php');
 
 //documents
-$router->get('documents', 'documents/index.php');
+//$router->get('documents', 'documents/index.php');
 //$router->get('document/(?<id>\d+)', 'documents/show.php');
 //$router->get('documents/create', 'documents/create.php')->only('auth');
 //$router->post('documents', 'documents/store.php');
