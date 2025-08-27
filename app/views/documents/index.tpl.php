@@ -28,7 +28,7 @@
                                 echo $date->format('d.m.y (H:i)');
                                 ?></p>
                             <div class="d-grid" >
-                                <div class="card-text p-1 bg-body-secondary"><span class="fw-semibold">номер документа:</span> <?= $document['doc_id'] ?>;</div>
+                                <div class="card-text p-1 bg-body-secondary"><span class="fw-semibold">номер документа:</span><?= $document['doc_id'] ?>;</div>
                                 <div class="card-text p-1 bg-body-tertiary"><span class="fw-semibold">статус:</span> <?= $document['mode'] ?>;</div>
                                 <div class="card-text p-1 bg-body-secondary"><span class="fw-semibold">тип:</span> <?= $document['type'] ?>;</div>
                             </div>

@@ -5,13 +5,15 @@ namespace Utils;
 class Router
 {
     protected array $routes = [];
+    protected string $params;
     protected string $uri;
     protected mixed $method;
     public static array $route_params = [];
 
     public function __construct()
     {
-        $this->uri = trim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
+        $this->uri = trim(parse_url($_SERVER['REQUEST_URI'])['path'],'/');
+        $this->params = trim(parse_url($_SERVER['REQUEST_URI'])['query']);//document=4
         $this->method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
     }
 
@@ -32,14 +34,25 @@ class Router
                 }
                 foreach ($matches as $key => $match) {
                     if (is_string($key)) {
+                        $isMatches = true;
                         self::$route_params[$key] = $match;
                     }
                 }
-                $isMatches = true;
+                if (!$isMatches && $this->params) {
+                    if (preg_match("#^(document)=(\d+)$#", $this->params, $matches)) {
+                        if (count($matches) > 2) {
+                            self::$route_params['document_id'] = $matches['2'];
+                            require CONTROLLERS . "/documents/show.php";
+                            die();
+                        }
+                    }
+                }
+
                 require CONTROLLERS . "/{$route['controller']}";
                 break;
             }
         }
+
         if (!$isMatches) {
             if (preg_match("#^api/\w+#", $this->uri, $matches)) {
                 require CONTROLLERS . "/api/no-find-route.php";
