@@ -23,8 +23,6 @@
                 <ul>
                     <li><a href="#hero" class="active">Главная</a></li>
                     <li><a href="#about">Обо мне</a></li>
-                    <li><a href="#cards">Услуги</a></li>
-                    <li><a href="#pricing">Цены</a></li>
                     <li><a href="#portfolio">Портфолио</a></li>
                     <li><a href="#contact">Контакты</a></li>
                 </ul>
@@ -35,6 +33,7 @@
                 <ul>
                     <li><a href="#cards">Услуги</a></li>
                     <li><a href="#pricing">Цены</a></li>
+                    <li><a href="/documents">Проекты</a></li>
                 </ul>
             </div>
 
@@ -85,7 +84,7 @@
 <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
 <!-- Main JS File -->
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2"></script>
 
 </body>
 
