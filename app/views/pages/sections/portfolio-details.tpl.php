@@ -30,6 +30,10 @@
                     </script>
 
                     <div class="swiper-wrapper align-items-center">
+                        <?php if (count($imagesArr) === 0): ?>
+                            <div class="swiper-slide" style="opacity: 0.7;background-image: url('assets/img/hero-bg.jpg');" >
+                            </div>
+                        <?php endif; ?>
                         <?php foreach ($imagesArr as $image ): ?>
                             <div class="swiper-slide" style="background-image: url(<?=$image['imageUrl']?>);" >
                             </div>
@@ -55,15 +59,16 @@
                     </ul>
                 </div>
 
-                <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
-                    <h2>Произведенные работы</h2>
-                    <ul>
-                        <?php foreach ($worksArr as $work ): ?>
-                            <li><?=$work['title_work']?></li>
-                        <?php endforeach; ?>
-                    </ul>
-
-                </div>
+                <?php if (count($worksArr) > 0): ?>
+                    <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+                        <h2>Произведенные работы</h2>
+                        <ul>
+                            <?php foreach ($worksArr as $work ): ?>
+                                <li><?=$work['title_work']?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
             </div>
 
         </div>

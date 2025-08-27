@@ -37,11 +37,11 @@ if (isset($_REQUEST['details'])) {
     $res = $documents->find();
 
     $works = $db->query("
-        SELECT * FROM document
-            LEFT JOIN worksPerformed
-                ON document.id = worksPerformed.document_id 
-                WHERE document.project_key = ?
-                ORDER BY worksPerformed.id ;",[$project_key]);
+        SELECT * FROM document D
+            LEFT JOIN worksPerformed W
+                ON D.id = W.document_id 
+                WHERE D.project_key = ? AND W.title_work IS NOT NULL 
+                ORDER BY W.id ;",[$project_key]);
     $worksArr = $works->findAll();
 
     $images = $db->query("
@@ -54,6 +54,7 @@ if (isset($_REQUEST['details'])) {
 
 //var_dump($res);
 //var_dump($imagesArr);
+var_dump($worksArr);
     $title = "{$res['project_title']} :: HomeStaging";
 
     require_once VIEWS . '/pages/details.tpl.php';
