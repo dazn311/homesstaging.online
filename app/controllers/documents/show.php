@@ -20,17 +20,16 @@ $document = $db->query("
             ON D.userRole = U.role
             WHERE D.id = ?;",[$idDoc]);
 
-
-
 if ($document) {
     $document = $document->find();
-//    var_dump($idDoc);
+
     if (!$document) {
-        $document = [];
+        require_once VIEWS . '/errors/404.tpl.php';
+        die();
     } else {
-//        var_dump($document['project_key']);
         $title = "{$document['project_key']} :: HomeStaging";
     }
+
     $works = $db->query("
         SELECT * FROM document D
             LEFT JOIN worksPerformed W
@@ -38,7 +37,6 @@ if ($document) {
                 WHERE D.id = ? AND W.title_work IS NOT NULL 
                 ORDER BY W.id ;",[$idDoc]);
     $worksArr = $works->findAll();
-//    var_dump($worksArr);
 } else {
     $document = [];
 }

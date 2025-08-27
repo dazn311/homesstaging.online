@@ -26,9 +26,9 @@
                         <p class="card-text"><span class="fw-semibold pe-1">Статус проекта:</span><?=$document['mode'];?></p>
                         <p class="card-text"><span class="fw-semibold pe-1">Улица:</span><?=$document['street'];?></p>
                         <p class="card-text"><span class="fw-semibold pe-1">Дом:</span><?=$document['apartment'];?></p>
-                        <p class="card-text"><span class="fw-semibold pe-1">Дата создания:</span> <?=$document['fileName'];?></p>
+                        <p class="card-text"><span class="fw-semibold pe-1">Смета:</span> <?=$document['fileName'];?></p>
                         <?php if (count($worksArr) > 0): ?>
-                            <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+                            <div class="portfolio-description" >
                                 <span class="fw-semibold pe-1">Произведенные работы:</span>
                                 <ul>
                                     <?php foreach ($worksArr as $work ): ?>
@@ -40,7 +40,7 @@
                         <form action="/?document=<?= $document['doc_id'] ?>" method="post">
                             <input type="hidden" name="_method" value="delete">
                             <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
-                            <button type="submit" class="btn text-danger"><i class="bi bi-trash"></i> Delete document</button>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Редактировать документ</button>
                         </form>
                     </div>
                 </div>
@@ -50,3 +50,9 @@
 </main>
 
 <?php require VIEWS . '/incs/footer.php' ?>
+
+<!--<form action="/?document=--><?php //= $document['doc_id'] ?><!--" method="post">-->
+<!--    <input type="hidden" name="_method" value="delete">-->
+<!--    <input type="hidden" name="id" value="--><?php //= $document['doc_id'] ?><!--">-->
+<!--    <button type="submit" class="btn text-danger"><i class="bi bi-trash"></i> Delete document</button>-->
+<!--</form>-->
