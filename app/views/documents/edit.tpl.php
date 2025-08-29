@@ -66,22 +66,19 @@ $description_keys = [
                             <?php if (count($worksArr) > 0): ?>
                                 <div class="portfolio-description" >
                                     <span class="fw-semibold pe-1">Произведенные работы:</span>
-                                    <ul>
-                                        <?php foreach ($worksArr as $key=>$work ): ?>
-                                            <li class="col-md-12">
-                                                <div class="input-group">
-                                                    <i class="bi bi-pencil-square input-group-text"></i>
-                                                    <input
-                                                            type="text"
-                                                            class="form-control"
-                                                            id="worksPerformed_<?=$key;?>"
-                                                            aria-describedby="worksPerformed_<?=$key;?>"
-                                                            value="<?=$work['title_work']?>"
-                                                            placeholder="выполненные работы">
-                                                </div>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
+                                    <?php foreach ($worksArr as $key=>$work ): ?>
+                                        <div class="input-group">
+                                            <i class="bi bi-pencil-square input-group-text"></i>
+                                            <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="worksPerformed_<?=$key;?>"
+                                                    name="worksPerformed_<?=$key;?>"
+                                                    aria-describedby="worksPerformed_<?=$key;?>"
+                                                    value="<?=$work['title_work']?>"
+                                                    placeholder="выполненные работы">
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
                             <div class="form-group">
