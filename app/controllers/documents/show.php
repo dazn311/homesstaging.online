@@ -32,8 +32,16 @@ if ($document) {
         die();
     }
 
+    $description = $db->query("
+        SELECT W.title, W.category, W.price, W.project_url, W.project_des, W.end_date FROM document D
+            LEFT JOIN description W
+                ON D.id = W.document_id 
+                WHERE D.id = ?;",[$idDoc]);
+    $descriptionArr = $description->find();
+
+//    var_dump($descriptionArr);
     $works = $db->query("
-        SELECT * FROM document D
+        SELECT W.title_work FROM document D
             LEFT JOIN worksPerformed W
                 ON D.id = W.document_id 
                 WHERE D.id = ? AND W.title_work IS NOT NULL 

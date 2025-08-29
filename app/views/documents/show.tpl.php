@@ -1,4 +1,17 @@
-<?php require VIEWS . '/incs/header.php' ?>
+<?php
+
+require VIEWS . '/incs/header.php';
+
+$description_keys = [
+     'title'=>'Заголовок',
+     'category'=>'Категория',
+     'price'=>'Бюджет:',
+     'end_date'=>'Дата завершения: ',
+     'project_des'=>'Описание URL для проекта: ',
+     'project_url'=>'Проект URL: ',
+];
+
+?>
 <style>
     .avatar {
         width: 20px;
@@ -27,6 +40,19 @@
                         <p class="card-text"><span class="fw-semibold pe-1">Улица:</span><?=$document['street'];?></p>
                         <p class="card-text"><span class="fw-semibold pe-1">Дом:</span><?=$document['apartment'];?></p>
                         <p class="card-text"><span class="fw-semibold pe-1">Смета:</span> <?=$document['fileName'];?></p>
+                        <?php if (count($descriptionArr) > 0): ?>
+                            <div class="portfolio-description" >
+                                <span class="fw-semibold pe-1">Описание для сайта:</span>
+                                <ul>
+                                    <?php foreach ($description_keys as $key=>$value ): ?>
+                                        <p class="card-text">
+                                            <span class="fw-semibold pe-1"><?=$value;?></span>
+                                            <?=$descriptionArr[$key];?>
+                                        </p>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
                         <?php if (count($worksArr) > 0): ?>
                             <div class="portfolio-description" >
                                 <span class="fw-semibold pe-1">Произведенные работы:</span>
