@@ -9,6 +9,15 @@ $document_keys = [
         'fileName'=>'Смета:'
 ];
 
+$description_keys = [
+    'title'=>'Заголовок',
+    'category'=>'Категория',
+    'price'=>'Бюджет:',
+    'end_date'=>'Дата завершения: ',
+    'project_des'=>'Описание URL для проекта: ',
+    'project_url'=>'Проект URL: ',
+];
+
 ?>
 <style>
     .avatar {
@@ -20,8 +29,9 @@ $document_keys = [
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex gap-1">
                         <h1><?= h($document['project_key']) ?></h1>
+                        <span class="line-block text-opacity-50">(edit mode)</span>
                     </div>
                     <div class="card-body">
                         <p class="card-text">
@@ -53,6 +63,27 @@ $document_keys = [
                                     <small id="<?=$key;?>" class="form-text text-muted"></small>
                                 </div>
                             <?php endforeach; ?>
+                            <?php if (count($worksArr) > 0): ?>
+                                <div class="portfolio-description" >
+                                    <span class="fw-semibold pe-1">Произведенные работы:</span>
+                                    <ul>
+                                        <?php foreach ($worksArr as $key=>$work ): ?>
+                                            <li class="col-md-12">
+                                                <div class="input-group">
+                                                    <i class="bi bi-pencil-square input-group-text"></i>
+                                                    <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="worksPerformed_<?=$key;?>"
+                                                            aria-describedby="worksPerformed_<?=$key;?>"
+                                                            value="<?=$work['title_work']?>"
+                                                            placeholder="выполненные работы">
+                                                </div>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group">
                                 <input type="hidden" name="_method" value="POST">
                                 <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
@@ -62,16 +93,6 @@ $document_keys = [
                                 </div>
                             </div>
                         </form>
-                        <?php if (count($worksArr) > 0): ?>
-                            <div class="portfolio-description" >
-                                <span class="fw-semibold pe-1">Произведенные работы:</span>
-                                <ul>
-                                    <?php foreach ($worksArr as $work ): ?>
-                                        <li><?=$work['title_work']?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>
