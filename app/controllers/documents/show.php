@@ -39,7 +39,6 @@ if ($document) {
                 WHERE D.id = ?;",[$idDoc]);
     $descriptionArr = $description->find();
 
-//    var_dump($descriptionArr);
     $works = $db->query("
         SELECT W.title_work FROM document D
             LEFT JOIN worksPerformed W

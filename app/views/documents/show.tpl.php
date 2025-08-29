@@ -41,21 +41,18 @@ $description_keys = [
                         <p class="card-text"><span class="fw-semibold pe-1">Дом:</span><?=$document['apartment'];?></p>
                         <p class="card-text"><span class="fw-semibold pe-1">Смета:</span> <?=$document['fileName'];?></p>
                         <?php if (count($descriptionArr) > 0): ?>
-                            <div class="portfolio-description" >
-                                <span class="fw-semibold pe-1">Описание для сайта:</span>
-                                <ul>
-                                    <?php foreach ($description_keys as $key=>$value ): ?>
-                                        <p class="card-text">
-                                            <span class="fw-semibold pe-1"><?=$value;?></span>
-                                            <?=$descriptionArr[$key];?>
-                                        </p>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
+                            <div class="card-text">------------------------------------------------</div>
+                            <h6 class="fw-semibold p-2 text-bg-light">Описание для сайта:</h6>
+                            <?php foreach ($description_keys as $key=>$value ): ?>
+                                <div class="card-text">
+                                    <span class="fw-semibold pe-1"><?=$value;?></span>
+                                    <span class="desc"> <?=$descriptionArr[$key];?></span>
+                                </div>
+                            <?php endforeach; ?>
                         <?php endif; ?>
                         <?php if (count($worksArr) > 0): ?>
                             <div class="portfolio-description" >
-                                <span class="fw-semibold pe-1">Произведенные работы:</span>
+                                <span class="fw-semibold pb-1 pt-1 text-bg-light">Произведенные работы:</span>
                                 <ul>
                                     <?php foreach ($worksArr as $work ): ?>
                                         <li><?=$work['title_work']?></li>
