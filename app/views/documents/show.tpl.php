@@ -37,8 +37,8 @@
                                 </ul>
                             </div>
                         <?php endif; ?>
-                        <form action="/?document=<?= $document['doc_id'] ?>" method="post">
-                            <input type="hidden" name="_method" value="delete">
+                        <form action="/?documents=<?= $document['doc_id'] ?>" method="POST">
+                            <input type="hidden" name="_method" value="POST">
                             <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
                             <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Редактировать документ</button>
                         </form>

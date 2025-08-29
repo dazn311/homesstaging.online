@@ -4,6 +4,7 @@ namespace Utils;
 
 class Router
 {
+    protected array $spParams = [];
     protected array $routes = [];
     protected string $params;
     protected string $uri;
@@ -13,7 +14,7 @@ class Router
     public function __construct()
     {
         $this->uri = trim(parse_url($_SERVER['REQUEST_URI'])['path'],'/');
-        $this->params = trim(parse_url($_SERVER['REQUEST_URI'])['query']);//document=4
+        $this->params = trim(parse_url($_SERVER['REQUEST_URI'])['query'] ?? '');//document=4
         $this->method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
     }
 
@@ -23,8 +24,13 @@ class Router
     public function match(): void
     {
         $isMatches = false;
+
+        if (empty($this->uri) && empty($this->params) && ($this->method == 'GET')) {
+            require CONTROLLERS . "/pages/index.php";
+            die();
+        }
         foreach ($this->routes as $route) {
-            if ((preg_match("#^{$route['uri']}$#", $this->uri, $matches)) && (in_array($this->method, $route['method']))) {
+            if (empty($route['uri']) && (in_array($this->method, $route['method']))) {
                 if ($route['middleware']) {
                     $middleware = MIDDLEWARE[$route['middleware']] ?? false;
                     if (!$middleware) {
@@ -32,31 +38,30 @@ class Router
                     }
                     (new $middleware)->handle(); //IUser;
                 }
-                foreach ($matches as $key => $match) {
-                    if (is_string($key)) {
-                        $isMatches = true;
-                        self::$route_params[$key] = $match;
-                    }
-                }
-                if (!$isMatches && $this->params) {
-                    if (preg_match("#^(document)=(\d+)$#", $this->params, $matches)) {
-                        if (count($matches) > 2) {
-                            self::$route_params['document_id'] = $matches['2'];
-                            require CONTROLLERS . "/documents/show.php";
-                            die();
+
+                if ($this->params && $route['params']) { //'documents=2'
+                    if (preg_match("#{$route['params']}#", $this->params, $matches)) {
+                        if (isset($matches['key']) && isset($matches['id'])) {
+                            $key = $matches['key'];
+                            $id = $matches['id'];
+                            self::$route_params[$key] = $id;
+                            if ($this->method == 'GET') {
+                                require CONTROLLERS . '/' . $route['controller'] . ".php";
+                                die();
+                            }
+                            if ($this->method == 'POST') {
+                                require CONTROLLERS . "/{$key}/store.php";
+                                die();
+                            }
+
                         }
                     }
                 }
-
-                require CONTROLLERS . "/{$route['controller']}";
-                break;
             }
         }
 
         if (!$isMatches) {
-            if (preg_match("#^api/\w+#", $this->uri, $matches)) {
-                require CONTROLLERS . "/api/no-find-route.php";
-            }
+            require CONTROLLERS . "/api/no-find-route.php";
             abort();
         }
     }
@@ -67,15 +72,16 @@ class Router
         return $this;
     }
 
-    public function add(string $uri, string $controller, mixed $method): static
+    public function add(string $uri, string $params, string $controller, mixed $method): static
     {
         if (is_array($method)) {
             $method = array_map('strtoupper', $method);
         } else {
-            $method = [$method];
+            $method = [strtoupper($method)];
         }
         $this->routes[] = [
             'uri' => $uri,
+            'params' => $params,
             'controller' => $controller,
             'method' => $method,
             'middleware' => null,
@@ -83,19 +89,19 @@ class Router
         return $this;
     }
 
-    public function get(string $uri,string $controller): static
+    public function get(string $uri, string $params,string $controller): static
     {
-        return $this->add($uri, $controller, 'GET');
+        return $this->add($uri, $params, $controller, 'GET');
     }
 
-    public function post(string $uri, string $controller): static
+    public function post(string $uri, string $params, string $controller): static
     {
-        return $this->add($uri, $controller, 'POST');
+        return $this->add($uri, $params, $controller, 'POST');
     }
 
-    public function delete(string $uri, string $controller): static
+    public function delete(string $uri, string $params, string $controller): static
     {
-        return $this->add($uri, $controller, 'DELETE');
+        return $this->add($uri, $params, $controller, 'DELETE');
     }
 
 }

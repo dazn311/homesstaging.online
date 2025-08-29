@@ -8,7 +8,7 @@ use Utils\{App, Db};
 
 $db = App::get(Db::class);
 
-$users = $db->query("SELECT `name` FROM users;");
+$users = $db->query("SELECT `name` FROM user;");
 
 if ($users) {
     $users = $users->findAll();

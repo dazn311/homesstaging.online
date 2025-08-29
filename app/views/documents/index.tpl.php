@@ -1,5 +1,4 @@
 <?php
-//SELECT B.breadcrumbs_id, D.project_key, A.street, B.project_title, A.apartment  FROM document D
     require VIEWS . '/incs/header.php';
 ?>
 
@@ -12,7 +11,7 @@
                         <div class="card-header  d-flex gap-1">
                             <h5>
                                 <?= h($document['project_title']) ?>
-                                <a href="/?document=<?= $document['doc_id'] ?>"><i class="bi bi-view-list"></i></a>
+                                <a href="/?documents=<?= $document['doc_id'] ?>"><i class="bi bi-view-list"></i></a>
                             </h5>
 
                         </div>
