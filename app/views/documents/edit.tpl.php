@@ -14,7 +14,7 @@ $description_keys = [
     'category'=>'Категория',
     'price'=>'Бюджет:',
     'end_date'=>'Дата завершения: ',
-    'project_des'=>'Описание URL для проекта: ',
+    'project_des'=>'Описание URL: ',
     'project_url'=>'Проект URL: ',
 ];
 
@@ -62,9 +62,29 @@ $description_keys = [
                                             >
                                         </div>
                                     </div>
+                                    <?= isset($validation) ? $validation->listErrors($key) : ''  ?>
                                     <small id="<?=$key;?>" class="form-text text-muted"></small>
                                 </div>
                             <?php endforeach; ?>
+
+                            <div class="card-text">------------------------------------------------</div>
+                            <h6 class="fw-semibold p-2 text-bg-light">Описание для сайта:</h6>
+                            <?php foreach ($description_keys as $key=>$value ): ?>
+                                <div class="input-group">
+                                    <div class=" input-group-text" style="min-width: 170px;"> <?=$value;?></div>
+                                    <input
+                                            type="text"
+                                            class="form-control form-control-sm"
+                                            id="<?=$key;?>"
+                                            name="<?=$key;?>"
+                                            aria-describedby="<?=$key;?>"
+                                            value="<?=$descriptionArr[$key] ?? '';?>"
+                                            placeholder="<?=$key;?>"
+                                            required
+                                    >
+                                </div>
+                            <?php endforeach; ?>
+
                             <?php if (count($worksArr) > 0): ?>
                                 <div class="portfolio-description" >
                                     <span class="fw-semibold pe-1">Произведенные работы:</span>

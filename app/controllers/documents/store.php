@@ -8,12 +8,15 @@ for create and save document;
 use Utils\{App, Db, Validator};
 
 $db = App::get(Db::class);
-$fill_able = ['type','mode', 'street', 'apartment','fileName'];
+$fill_able = [
+    'type','mode', 'street', 'apartment','fileName',
+    'title','category','price','project_url','project_des','end_date'
+    ];
 $worksPerformed = [];
 
 $data = load($fill_able, true);
 $worksPerformed_data= loadOfKeys('worksPerformed_', true);
-//var_dump($data);
+var_dump($data);
 //var_dump($worksPerformed_data);
 //var_dump($_POST);
 $idDoc = route_param('documents','all');// '1248303'
@@ -82,6 +85,13 @@ if (!$validation->hasErrors()) {
         $valueStr = implode(',', $valueArr);
         $db->query("INSERT INTO worksPerformed (title_work, document_id) VALUES {$valueStr};", $paramsArr);
     }
+
+    if ($db->query("EXISTS(SELECT id FROM users WHERE id = ?",[$idDoc])) {
+        $db->query("UPDATE description
+        SET title = ?, category = ?, price = ?, project_url = ?, project_des = ?, end_date = ?
+        WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc]);
+    }
+
 }
 
 $querySt = "
@@ -106,6 +116,12 @@ if ($document) {
     } else {
         $title = "doc_store {$document['project_key']} :: edit.tpl";
     }
+    $description = $db->query("
+        SELECT W.title, W.category, W.price, W.project_url, W.project_des, W.end_date FROM document D
+            LEFT JOIN description W
+                ON D.id = W.document_id 
+                WHERE D.id = ?;",[$idDoc]);
+    $descriptionArr = $description->find();
 
     $works = $db->query("
         SELECT * FROM document D
