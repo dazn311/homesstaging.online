@@ -1,6 +1,14 @@
 <!-- Portfolio Details Section -->
+<style>
+    .swiper-slide {
+        background-color: transparent;
+        background-repeat: no-repeat,repeat;
+        background-position: right 2px top 0,0 0;
+        height: 753px;
+        background-size: cover;
+    }
+</style>
 <section id="portfolio-details" class="portfolio-details section">
-
     <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
             <div class="col-lg-8">
@@ -22,29 +30,14 @@
                     </script>
 
                     <div class="swiper-wrapper align-items-center">
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/1-spalnia2.png" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/3-zal.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/4-zal.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/5-kuhnya.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/7-vannaya.jpg" alt="">
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="assets/img/kvartiri/Mitinskii-les/8-prihojka.png" alt="">
-                        </div>
+                        <?php if (count($imagesArr) === 0): ?>
+                            <div class="swiper-slide" style="opacity: 0.7;background-image: url('assets/img/hero-bg.jpg');" >
+                            </div>
+                        <?php endif; ?>
+                        <?php foreach ($imagesArr as $image ): ?>
+                            <div class="swiper-slide" style="background-image: url(<?=$image['imageUrl']?>);" >
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -52,31 +45,30 @@
 
             <div class="col-lg-4">
                 <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Евродвушка</h3>
+                    <h3><?=$res['title'] ?></h3>
                     <ul>
-                        <li><strong>Категория</strong>: Комплектация "под ключ"</li>
-                        <li><strong>Бюджет</strong>: 988 000₽</li>
-                        <li><strong>Дата завершения</strong>: 20 января, 2025</li>
+                        <li><strong>Категория</strong>: <?=$res['category'] ?></li>
+                        <li><strong>Бюджет</strong>: <?=$res['price'] ?>₽</li>
+                        <li><strong>Дата завершения</strong>: <?=$res['end_date'] ?></li>
                         <li>
                             <strong>Проект URL</strong>:
-                            <a href="https://t.me/homeupakovka">
-                                <i class="bi bi-telegram" style="padding-left: 4px;" > мой канал Telegram</i>
+                            <a href="<?=$res['project_url'] ?>">
+                                <i class="bi bi-telegram" style="padding-left: 4px;" ><?=$res['project_des'] ?></i>
                             </a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
-                    <h2>Произведенные работы</h2>
-                    <ul>
-                        <li>красили стены, устанавливали панели;</li>
-                        <li>меняли двери, в т.ч. входную, регулировали окна и меняли откосы;</li>
-                        <li>в ванной меняли унитаз, красили швы, меняли душевую стойку и раковину;</li>
-                        <li>бытовая техника Weissgauff, фартук на кухне демонтировали и сделали из керамогранита;</li>
-                        <li>Установка сплит системы.</li>
-                    </ul>
-
-                </div>
+                <?php if (count($worksArr) > 0): ?>
+                    <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+                        <h2>Произведенные работы</h2>
+                        <ul>
+                            <?php foreach ($worksArr as $work ): ?>
+                                <li><?=$work['title_work']?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
             </div>
 
         </div>

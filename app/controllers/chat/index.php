@@ -3,7 +3,7 @@
 
 use Utils\{App, Db};
 
-$title = 'Cislink :: Home';
+$title = 'Home Staging :: Home';
 
 $db = App::get(Db::class);
 
@@ -16,7 +16,7 @@ if (!$users) {
     $users = [];
 }
 //dd($users);
-$title = "Чат :: Cislink";
+$title = "Чат :: Home Staging";
 
 if (isset($_SESSION['user'])) {
     require_once VIEWS . '/chat/index.tpl.php';

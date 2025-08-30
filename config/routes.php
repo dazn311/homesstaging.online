@@ -10,30 +10,23 @@ const MIDDLEWARE = [
 ];
 
 ///uploads/avatars/2025/08/11/avatar-5.png
-$router->get('uploads/avatars/\d+/\d+/\d+/avatar-\d+.png', 'api/uploads.php');
+$router->get('uploads/avatars/\d+/\d+/\d+/avatar-\d+.png','images', 'api/uploads.php');
 //chat;
-$router->get('chat', 'chat/index.php');
-
-//pages
-$router->get('', 'pages/index.php');
+//$router->get('chat','', 'chat/index.php');
+$router->get('', '(?<key>details)=(?<id>\w+)', 'pages/details');
 
 //documents
-//$router->get('document/(?<id>\d+)', 'documents/show.php');
-//$router->get('documents/create', 'documents/create.php')->only('auth');
-//$router->post('documents', 'documents/store.php');
-//$router->delete('documents', 'documents/destroy.php');
+//для отображения сайта
+$router->get('', '(?<key>documents)=(?<id>\d+)', 'documents/show');
+$router->get('', '(?<key>documents)=(?<id>\w+)', 'documents/index');
 
-// Pages
-$router->get('about', 'about.php');
-$router->get('contact', 'contact.php');
+//для сохранения измененных данных;
+$router->post('', '(?<key>documents)=(?<id>\d+)', 'documents/store');
 
-// api cislink;
-// api/user/info
-$router->get('api/user/info', 'api/user-info.php');
+$router->post('', '(?<key>documents)=(create)', 'documents/create')->only('auth');
+$router->delete('', '(?<key>documents)=(?<id>\d+)', 'documents/destroy');
 
-//api list;
-$router->get('api/filters/(?<type>\w{6})', 'api/no-find-route.php');
-$router->get('api/(?<type>\w{6})/list', 'api/no-find-route.php');
+$router->get('','', 'pages/index.php');
 
 // api/document/new/invrpt?isEditMode=true
 // api/document/1248923?isEditMode=true
@@ -41,8 +34,8 @@ $router->get('api/(?<type>\w{6})/list', 'api/no-find-route.php');
 //$router->get('api/document/new/(?<type>\w{6})', 'api/document-type.php');
 
 // User
-$router->add('register', 'users/register.php', ['get', 'post'])->only('guest');
+//$router->add('register', 'users/register.php', ['get', 'post'])->only('guest');
 //$router->post('register', 'users/store.php')->only('guest');
-$router->add('login', 'users/login.php', ['get', 'post'])->only('guest');
-$router->get('logout', 'users/logout.php')->only('auth');
-$router->get('user', 'users/index.php')->only('auth');
+//$router->add('login', 'users/login.php', ['get', 'post'])->only('guest');
+//$router->get('logout', 'users/logout.php')->only('auth');
+//$router->get('user', 'users/index.php')->only('auth');

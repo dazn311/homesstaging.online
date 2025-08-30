@@ -4,10 +4,10 @@
         <nav class="breadcrumbs">
             <ol>
                 <li><a href="/">Главная</a></li>
-                <li class="current">ЖК Митинский лес</li>
-                <li class="current">ул. Муравская, 38Бк1</li>
+                <li class="current"><?=$res['project_title'] ?></li>
+                <li class="current"><?=$res['street'] ?>, <?=$res['apartment'] ?></li>
             </ol>
         </nav>
-        <h1>ЖК Митинский лес</h1>
+        <h1><?=$res['project_title'] ?></h1>
     </div>
 </div><!-- End Page Title -->

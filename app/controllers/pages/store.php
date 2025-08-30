@@ -2,9 +2,9 @@
 /**
 for create document;
  */
-if (!check_auth()) {
-    redirect('/');
-}
+//if (!check_auth()) {
+//    redirect('/');
+//}
 use Utils\{App, Db, Validator};
 
 $db = App::get(Db::class);
@@ -55,11 +55,11 @@ $validation = $validator->validate($data, [
 ]);
 
 if (!$validation->hasErrors()) {
-    $userId = $db->query("SELECT `id` FROM users WHERE users.name = ?;", [$data['userName']])->find();
+    $userId = $db->query("SELECT `id` FROM user WHERE user.name = ?;", [$data['userName']])->find();
     $data['userId'] =  $userId['id'] ?? 0;
     $data['userId'] =  (string) $data['userId'];
     $request = [$data['typeDoc'], $data['idDoc'], $data['mode'],date("Y-m-d H:i:s"), $data['userId'], $data['fileName'] . 'json'];
-    $res = $db->query("INSERT INTO documents (`type`, `idDoc`, `mode`,`createDate`,`userId`,`fileName`) VALUES (?,?,?,?,?,?)", $request);
+    $res = $db->query("INSERT INTO document (`type`, `idDoc`, `mode`,`createDate`,`userId`,`fileName`) VALUES (?,?,?,?,?,?)", $request);
 
      if ($data['userId'] && $res) {
          if (!empty($data['docFile']['name'])) {
@@ -67,10 +67,10 @@ if (!$validation->hasErrors()) {
              $file_ext = get_file_ext($data['docFile']['name']);
              $dir = '/' . $data['userName'];// HoffSup;
 
-             if (!is_dir(TC_DATA . $dir)) {
-                 mkdir(TC_DATA . $dir, 0755, true);
+             if (!is_dir('TC_DATA' . $dir)) {
+                 mkdir('TC_DATA' . $dir, 0755, true);
              }
-             $filePath = TC_DATA . "{$dir}/{$data['fileName']}.{$file_ext}";
+             $filePath = 'TC_DATA' . "{$dir}/{$data['fileName']}.{$file_ext}";
              if (move_uploaded_file($data['docFile']['tmp_name'], $filePath)) {
                  $_SESSION['filePath'] = $filePath;
 //                 $db->query("UPDATE documents SET `fileName` = ? WHERE `id` = ?", [$data['fileName'],$id]);
@@ -82,7 +82,7 @@ if (!$validation->hasErrors()) {
      } else {
          $_SESSION['error'] =  $_SESSION['error'] ?? 'DB Error';
      }
-    redirect('/');
+//    redirect('/');
 } else {
     redirect('/documents/create');
 //    require VIEWS . '/documents/create.tpl.php';

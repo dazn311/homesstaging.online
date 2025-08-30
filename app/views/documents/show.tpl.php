@@ -1,32 +1,81 @@
-<?php require VIEWS . '/incs/header.php' ?>
+<?php
 
+require VIEWS . '/incs/header.php';
+
+$description_keys = [
+     'title'=>'Заголовок',
+     'category'=>'Категория',
+     'price'=>'Бюджет:',
+     'end_date'=>'Дата завершения: ',
+     'project_des'=>'Описание URL для проекта: ',
+     'project_url'=>'Проект URL: ',
+];
+
+?>
+<style>
+    .avatar {
+        width: 20px;
+    }
+</style>
 <main class="main py-3">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h1><?= h($document['fileName']) ?></h1>
+                        <h1><?= h($document['project_key']) ?> (read mode)</h1>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">
-                            <div class="name">
-                                Buyer:
-                                <img src="<?= h($document['avatar']) ?>" class="avatar" alt="avatar">
-                                <?= h($document['name']) ?></div>
-                        </h5>
-                        <p class="card-text">createDate: <?= h($document['createDate']) ?></p>
-                        <form action="/documents" method="post">
-                            <input type="hidden" name="_method" value="delete">
-                            <input type="hidden" name="id" value="<?= $document['id'] ?>">
-                            <button type="submit" class="btn btn-link">Delete document</button>
+                        <p class="card-text">
+                            <span class="fw-semibold pe-1">Автор:</span>
+                            <img src="<?= h($document['avatar']) ?>" class="avatar" alt="avatar">
+                            <?= h($document['name']) ?>
+                        </p>
+                        <p class="card-text"><span class="fw-semibold pe-1">Дата создания:</span><?php
+                            $date = new DateTimeImmutable($document['createDate'], new DateTimeZone('Europe/Moscow'));
+                            echo $date->format('d.m.y (H:i)');
+                            ?></p>
+                        <p class="card-text"><span class="fw-semibold pe-1">Тип объекта:</span><?=$document['type'];?></p>
+                        <p class="card-text"><span class="fw-semibold pe-1">Статус проекта:</span><?=$document['mode'];?></p>
+                        <p class="card-text"><span class="fw-semibold pe-1">Улица:</span><?=$document['street'];?></p>
+                        <p class="card-text"><span class="fw-semibold pe-1">Дом:</span><?=$document['apartment'];?></p>
+                        <p class="card-text"><span class="fw-semibold pe-1">Смета:</span> <?=$document['fileName'];?></p>
+                        <?php if (count($descriptionArr) > 0): ?>
+                            <div class="card-text">------------------------------------------------</div>
+                            <h6 class="fw-semibold p-2 text-bg-light">Описание для сайта:</h6>
+                            <?php foreach ($description_keys as $key=>$value ): ?>
+                                <div class="card-text">
+                                    <span class="fw-semibold pe-1"><?=$value;?></span>
+                                    <span class="desc"> <?=$descriptionArr[$key];?></span>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <?php if (count($worksArr) > 0): ?>
+                            <div class="portfolio-description" >
+                                <span class="fw-semibold pb-1 pt-1 text-bg-light">Произведенные работы:</span>
+                                <ul>
+                                    <?php foreach ($worksArr as $work ): ?>
+                                        <li><?=$work['title_work']?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                        <form action="/?documents=<?= $document['doc_id'] ?>" method="POST">
+                            <input type="hidden" name="_method" value="POST">
+                            <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Редактировать документ</button>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </main>
 
 <?php require VIEWS . '/incs/footer.php' ?>
+
+<!--<form action="/?document=--><?php //= $document['doc_id'] ?><!--" method="post">-->
+<!--    <input type="hidden" name="_method" value="delete">-->
+<!--    <input type="hidden" name="id" value="--><?php //= $document['doc_id'] ?><!--">-->
+<!--    <button type="submit" class="btn text-danger"><i class="bi bi-trash"></i> Delete document</button>-->
+<!--</form>-->

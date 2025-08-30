@@ -48,6 +48,19 @@ function load($fillable = [], $isPost = true): array
 
   return $data;
 }
+function loadOfKeys($keyPref = 'worksPerformed_', $isPost = true): array
+{
+  $loadData = $isPost ? $_POST : $_GET;
+  $data = [];
+  foreach ($loadData as $key=>$value) {//worksPerformed_0
+    if (str_contains($key, $keyPref)) {
+      $k = str_replace($keyPref, '', $key);
+      $data[$k] = is_array($value) ? $value : trim($value);
+    }
+  }
+
+  return $data;
+}
 
 function old($fieldName): string
 {
