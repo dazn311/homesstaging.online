@@ -13,20 +13,16 @@ const MIDDLEWARE = [
 $router->get('uploads/avatars/\d+/\d+/\d+/avatar-\d+.png','images', 'api/uploads.php');
 //chat;
 //$router->get('chat','', 'chat/index.php');
-
-//pages
-
-//$router->post('','', 'documents/create.php');
-
 $router->get('', '(?<key>details)=(?<id>\w+)', 'pages/details');
+
 //documents
-//$router->get('', 'documents=all', 'documents/show.php');
+//для отображения сайта
 $router->get('', '(?<key>documents)=(?<id>\d+)', 'documents/show');
 $router->get('', '(?<key>documents)=(?<id>\w+)', 'documents/index');
-$router->get('', '(?<key2>documents)','documents/index.php');
 
-
+//для сохранения измененных данных;
 $router->post('', '(?<key>documents)=(?<id>\d+)', 'documents/store');
+
 $router->post('', '(?<key>documents)=(create)', 'documents/create')->only('auth');
 $router->delete('', '(?<key>documents)=(?<id>\d+)', 'documents/destroy');
 

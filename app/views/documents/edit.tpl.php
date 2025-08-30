@@ -44,20 +44,22 @@ $description_keys = [
                             echo $date->format('d.m.y (H:i)');
                             ?></p>
 
-                        <form action="/?documents=<?= $document['doc_id'] ?>" method="POST">
+                        <form action="/?documents=<?=$document['doc_id'] ?>" class="needs-validation" novalidate method="POST">
                             <?php foreach ($document_keys as $key => $value ): ?>
                                 <div class="form-group">
-                                    <label for="<?=$key;?>"><?=$value;?></label>
                                     <div class="col-md-6">
                                         <div class="input-group">
-                                            <i class="bi bi-pencil-square input-group-text"></i>
+                                            <div class=" input-group-text" style="min-width: 150px;"> <?=$value;?></div>
                                             <input
                                                     type="text"
-                                                    class="form-control"
+                                                    class="form-control form-control-sm"
                                                     id="<?=$key;?>"
+                                                    name="<?=$key;?>"
                                                     aria-describedby="<?=$key;?>"
                                                     value="<?=$document[$key];?>"
-                                                    placeholder="Евродвушка">
+                                                    placeholder="<?=$key;?>"
+                                                    required
+                                            >
                                         </div>
                                     </div>
                                     <small id="<?=$key;?>" class="form-text text-muted"></small>
@@ -71,18 +73,21 @@ $description_keys = [
                                             <i class="bi bi-pencil-square input-group-text"></i>
                                             <input
                                                     type="text"
-                                                    class="form-control"
+                                                    class="form-control form-control-sm"
                                                     id="worksPerformed_<?=$key;?>"
                                                     name="worksPerformed_<?=$key;?>"
                                                     aria-describedby="worksPerformed_<?=$key;?>"
                                                     value="<?=$work['title_work']?>"
-                                                    placeholder="выполненные работы">
+                                                    placeholder="выполненные работы"
+                                                    required
+                                            >
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <input type="hidden" name="_method" value="POST">
+                                <input type="hidden" name="_action" value="save">
                                 <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
                                 <div class="input-group">
                                     <i class="bi bi-save input-group-text"></i>

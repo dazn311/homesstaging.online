@@ -2,7 +2,7 @@
 
 use Utils\{App, Db};
 
-$title = 'Проекты :: HomeStaging';
+$title = 'Проекты :: doc_index';
 
 $db = App::get(Db::class);
 
