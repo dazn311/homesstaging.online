@@ -86,12 +86,18 @@ if (!$validation->hasErrors()) {
         $db->query("INSERT INTO worksPerformed (title_work, document_id) VALUES {$valueStr};", $paramsArr);
     }
 
-    if ($db->query("EXISTS(SELECT id FROM users WHERE id = ?",[$idDoc])) {
-        $db->query("UPDATE description
-        SET title = ?, category = ?, price = ?, project_url = ?, project_des = ?, end_date = ?
-        WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc]);
-    }
+    $isHasTab = $db->query("SELECT COUNT(id) AS lengthId FROM description WHERE document_id = ?",[$idDoc]);
+    $isHasTab = $isHasTab->find();
 
+    if ($isHasTab['lengthId']) {
+        $db->query("UPDATE description
+        SET title = ?, category = ?, price = ?, project_url = ?, project_des = ?, end_date = ?, document_id = ?
+        WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc, $idDoc]);
+    } else {
+        $db->query("
+            INSERT INTO description (title, category, price, project_url, project_des, end_date, document_id) 
+            VALUES (?,?,?,?,?,?,?);",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc]);
+    }
 }
 
 $querySt = "
