@@ -1,6 +1,20 @@
 <?php
 require VIEWS . '/incs/header.php';
 
+$type_input = [
+        'type'=>'string',
+        'mode'=>'select',
+        'street'=>'string',
+        'apartment'=>'string',
+        'fileName'=>'file',
+        'title'=>'string',
+        'category'=>'string',
+        'price'=>'string',
+        'end_date'=>'date',
+        'project_des'=>'string',
+        'project_url'=>'string',
+];
+
 $document_keys = [
         'type'=>'Тип объекта:',
         'mode'=>'Статус проекта:',
@@ -17,6 +31,8 @@ $description_keys = [
     'project_des'=>'Описание URL: ',
     'project_url'=>'Проект URL: ',
 ];
+
+$options_mode = ['end','edit','new'];
 
 ?>
 <style>
@@ -50,16 +66,30 @@ $description_keys = [
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <div class=" input-group-text" style="min-width: 150px;"> <?=$value;?></div>
-                                            <input
-                                                    type="text"
-                                                    class="form-control form-control-sm"
-                                                    id="<?=$key;?>"
-                                                    name="<?=$key;?>"
-                                                    aria-describedby="<?=$key;?>"
-                                                    value="<?=$document[$key];?>"
-                                                    placeholder="<?=$key;?>"
-                                                    required
-                                            >
+                                            <?php if ($type_input[$key] == 'select'): ?>
+                                                <select
+                                                        name="<?=$key;?>"
+                                                        aria-describedby="<?=$key;?>"
+                                                        value="<?=$document[$key];?>"
+                                                        class="form-select form-control form-control-sm"
+                                                        required
+                                                        aria-label="Default select example">
+                                                    <?php foreach ($options_mode as $option ): ?>
+                                                        <option value="<?=$option;?>" <?=$document[$key] == $option ? 'selected' : '';?> ><?=$option;?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            <?php else: ?>
+                                                <input
+                                                        type="<?=$type_input[$key];?>"
+                                                        class="form-control form-control-sm"
+                                                        id="<?=$key;?>"
+                                                        name="<?=$key;?>"
+                                                        aria-describedby="<?=$key;?>"
+                                                        value="<?=$document[$key];?>"
+                                                        placeholder="<?=$key;?>"
+                                                        required
+                                                >
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                     <?= isset($validation) ? $validation->listErrors($key) : ''  ?>
@@ -73,8 +103,8 @@ $description_keys = [
                                 <div class="input-group">
                                     <div class=" input-group-text" style="min-width: 170px;"> <?=$value;?></div>
                                     <input
-                                            type="text"
-                                            class="form-control form-control-sm"
+                                            type="<?=$type_input[$key];?>"
+                                            class="form-control form-control-sm datepicker"
                                             id="<?=$key;?>"
                                             name="<?=$key;?>"
                                             aria-describedby="<?=$key;?>"

@@ -89,7 +89,7 @@ if (!$validation->hasErrors()) {
     $isHasTab = $db->query("SELECT COUNT(id) AS lengthId FROM description WHERE document_id = ?",[$idDoc]);
     $isHasTab = $isHasTab->find();
 
-    if ($isHasTab['lengthId']) {
+    if ($isHasTab['lengthId'] > 0) {
         $db->query("UPDATE description
         SET title = ?, category = ?, price = ?, project_url = ?, project_des = ?, end_date = ?, document_id = ?
         WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc, $idDoc]);
