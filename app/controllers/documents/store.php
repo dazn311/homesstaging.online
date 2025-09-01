@@ -16,9 +16,7 @@ $worksPerformed = [];
 
 $data = load($fill_able, true);
 $worksPerformed_data= loadOfKeys('worksPerformed_', true);
-var_dump($data);
-//var_dump($worksPerformed_data);
-//var_dump($_POST);
+
 $idDoc = route_param('documents','all');// '1248303'
 
 $title = 'doc_store=>edit.tpl';
@@ -123,7 +121,7 @@ if ($document) {
         $title = "doc_store {$document['project_key']} :: edit.tpl";
     }
     $description = $db->query("
-        SELECT W.title, W.category, W.price, W.project_url, W.project_des, W.end_date FROM document D
+        SELECT W.title, W.category, W.price, W.project_url, W.project_des, DATE_FORMAT( W.end_date, '%Y-%m-%d') AS end_date FROM document D
             LEFT JOIN description W
                 ON D.id = W.document_id 
                 WHERE D.id = ?;",[$idDoc]);

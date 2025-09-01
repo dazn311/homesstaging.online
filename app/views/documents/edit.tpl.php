@@ -153,3 +153,23 @@ $options_mode = ['end','edit','new'];
 </main>
 
 <?php require VIEWS . '/incs/footer.php' ?>
+
+<script type="text/javascript" >
+    document.addEventListener('DOMContentLoaded', function() {
+        // Your JavaScript code to manipulate the DOM goes here
+        console.log('DOM is fully loaded and parsed!');
+
+        // const $fileName = document.getElementById('fileName');
+        // const $idDoc = document.getElementById('idDoc');
+        // const $typeDoc = document.getElementById('typeDoc');
+        // const $userName = document.getElementById('userName');
+        // const $readMode = document.getElementById('readMode');
+        // const $docFile = document.getElementById('docFile');
+        // var d = new Date();
+        // document.getElementById("end_date").value = "12.12.2033";
+        // const datePicker = document.getElementById("end_date");
+        // datePicker.dataset.date = '2025-03-04';
+        // document.getElementById("end_date").datetimepicker("12.12.2033");
+        //document.getElementById("end_date").value = "<?php //=$descriptionArr['end_date'] ?? '';?>//";
+    });
+</script>
