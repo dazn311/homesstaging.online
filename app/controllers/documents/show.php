@@ -33,7 +33,7 @@ if ($document) {
     }
 
     $description = $db->query("
-        SELECT W.title, W.category, W.price, W.project_url, W.project_des, W.end_date FROM document D
+        SELECT W.title, W.category, W.price, W.project_url, W.project_des, DATE_FORMAT(W.end_date, '%d.%m.%Y') AS end_date FROM document D
             LEFT JOIN description W
                 ON D.id = W.document_id 
                 WHERE D.id = ?;",[$idDoc]);

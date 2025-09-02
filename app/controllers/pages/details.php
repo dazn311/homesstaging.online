@@ -27,7 +27,7 @@ switch (true) {
         $project_key = $_REQUEST['details'];
 
         $documents = $db->query("
-        SELECT D.id as id, title,category,street,apartment,price,end_date,project_title,project_url,project_des FROM document D
+        SELECT D.id as id, title,category,street,apartment,price,DATE_FORMAT(end_date, '%d.%m.%Y') AS end_date,project_title,project_url,project_des FROM document D
             LEFT JOIN addressBook
                 ON D.id = addressBook.document_id
             LEFT JOIN description
