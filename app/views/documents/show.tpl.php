@@ -16,6 +16,9 @@ $description_keys = [
     .avatar {
         width: 20px;
     }
+    .nav-link {
+        color: var(--accent-color);
+    }
 </style>
 <main class="main py-3">
     <div class="container">
