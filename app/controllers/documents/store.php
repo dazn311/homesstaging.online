@@ -11,7 +11,7 @@ $db = App::get(Db::class);
 
 $idDoc = route_param('documents','all');// '1248303'
 
-$title = 'doc_store=>edit.tpl';
+$title = 'doc_store_control=>edit.tpl';
 
 $data = load(['_action'], true);
 //var_dump($data);
@@ -21,6 +21,8 @@ switch ($data['_action']) {
         break;
     case 'save_description':
         require_once CONTROLLERS . '/documents/save_description.php';
+    case 'save_works':
+        require_once CONTROLLERS . '/documents/save_works.php';
         break;
         default:
 }
@@ -68,14 +70,16 @@ if ($document) {
                 WHERE D.id = ? AND W.title_work IS NOT NULL 
                 ORDER BY W.id ;",[$idDoc]);
     $worksArr = $works->findAll();
-    if (count($worksArr) == 0) {
-        $worksArr = array(
+    if (count($worksArr) < 5) {
+        $worksArr2 = array(
             0=> ["title_work" => ""],
             1=> ["title_work" => ""],
             3=> ["title_work" => ""],
             4=> ["title_work" => ""],
             5=> ["title_work" => ""]
         );
+        $mergedArray = array_merge($worksArr, $worksArr2);
+        $worksArr = array_slice($mergedArray,0,5);
     }
 
     $status_mode = $db->query("SELECT id, title_mode FROM mode;",[]);
@@ -99,5 +103,5 @@ if ($document) {
 } else {
     $document = [];
 }
-//var_dump($document);
+
 require_once VIEWS . '/documents/edit.tpl.php';
