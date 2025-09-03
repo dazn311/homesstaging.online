@@ -23,6 +23,9 @@ $querySt = "
         WHERE D.id = ?;";
 
 $document = $db->query($querySt,[$idDoc]);
+$descriptionArr = [];
+$worksArr = [];
+$imagesArr = [];
 
 if ($document) {
     $document = $document->find();
@@ -48,6 +51,10 @@ if ($document) {
                 WHERE D.id = ? AND W.title_work IS NOT NULL 
                 ORDER BY W.id ;",[$idDoc]);
     $worksArr = $works->findAll();
+
+    $images = $db->query("SELECT image_url, image_description FROM image WHERE document_id = ?;",[$idDoc]);
+    $imagesArr = $images->findAll();
+
 } else {
     require_once VIEWS . '/errors/404.tpl.php';
     die();

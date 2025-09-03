@@ -7,100 +7,100 @@ for save document;
 //    redirect('/');
 //}
 
-use Utils\{App, Db, Validator};
+//use Utils\{App, Db, Validator};
+//
+//$db = App::get(Db::class);
+//
+//$fill_able = [
+//    'type','mode', 'street', 'apartment','fileName',
+//    'title','category','price','project_url','project_des','end_date'
+//    ];
+//
+//$worksPerformed = [];
+//
+//$data = load($fill_able, true);
+//$worksPerformed_data= loadOfKeys('worksPerformed_', true);
+//
+//$idDoc = route_param('documents','all');// '1248303'
+//
+//$title = 'doc_store=>save.tpl';
+//
+//$validator = new Validator();
 
-$db = App::get(Db::class);
-
-$fill_able = [
-    'type','mode', 'street', 'apartment','fileName',
-    'title','category','price','project_url','project_des','end_date'
-    ];
-
-$worksPerformed = [];
-
-$data = load($fill_able, true);
-$worksPerformed_data= loadOfKeys('worksPerformed_', true);
-
-$idDoc = route_param('documents','all');// '1248303'
-
-$title = 'doc_store=>save.tpl';
-
-$validator = new Validator();
-
-$validation = $validator->validate($data, [
-    'type' => [
-        'required' => true,
-        'min' => 3,
-        'max' => 30,
-    ],
-    'mode' => [
-        'required' => true,
-        'min' => 3,
-        'max' => 4,
-    ],
-    'street' => [
-        'required' => true,
-        'min' => 6,
-        'max' => 50,
-    ],
-    'apartment' => [
-        'required' => true,
-        'min' => 3,
-        'max' => 100,
-    ],
-    'fileName' => [
+//$validation = $validator->validate($data, [
+//    'type' => [
 //        'required' => true,
-        // 'ext' => 'jpg|jpeg|png',
-//        'size' => 1_048_576,
-    ],
-]);
+//        'min' => 3,
+//        'max' => 30,
+//    ],
+//    'mode' => [
+//        'required' => true,
+//        'min' => 3,
+//        'max' => 4,
+//    ],
+//    'street' => [
+//        'required' => true,
+//        'min' => 6,
+//        'max' => 50,
+//    ],
+//    'apartment' => [
+//        'required' => true,
+//        'min' => 3,
+//        'max' => 100,
+//    ],
+//    'fileName' => [
+////        'required' => true,
+//        // 'ext' => 'jpg|jpeg|png',
+////        'size' => 1_048_576,
+//    ],
+//]);
 
-if (!$validation->hasErrors()) {
-    //запись документа;
-    $id_doc = $_POST['id'];
-    $request = [$data['type'], $data['mode'], $data['fileName'],$id_doc];
-    $db->query("UPDATE document SET `type` = ?, `mode` = ?,`fileName` = ? WHERE `id` = ?", $request);
-    //запись адресов;
-    $request = [$data['street'], $data['apartment'], $id_doc];
-    $db->query("UPDATE addressBook SET `street` = ?, `apartment` = ? WHERE `document_id` = ?", $request);
-    //удалить выполненные работы;
-    $db->query("DELETE FROM worksPerformed WHERE `document_id` = ?", [$id_doc]);
-    //добавить записи выполненные работы;
-    $insertValues = [];
-    if (is_array($worksPerformed_data)) {
-        foreach ($worksPerformed_data as $work) {
-            if (!empty($work)) {
-                $insertValues[] = $work;
-            }
-        }
-    }
-
-    if (count($insertValues) > 0) {
-        $valueArr = [];
-        $paramsArr = [];
-
-        foreach ($insertValues as $value) {
-            $valueArr[] = "(?,?)";
-            $paramsArr[] =  $value;
-            $paramsArr[] =  $id_doc;
-        }
-        $valueStr = implode(',', $valueArr);
-        $db->query("INSERT INTO worksPerformed (title_work, document_id) VALUES {$valueStr};", $paramsArr);
-    }
-
-    $isHasTab = $db->query("SELECT COUNT(id) AS lengthId FROM description WHERE document_id = ?",[$idDoc]);
-    $isHasTab = $isHasTab->find();
-
-    if ($isHasTab['lengthId'] > 0) {
-        $db->query("UPDATE description
-        SET title = ?, category = ?, price = ?, project_url = ?, project_des = ?, end_date = ?, document_id = ?
-        WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc, $idDoc]);
-    } else {
-        $db->query("
-            INSERT INTO description (title, category, price, project_url, project_des, end_date, document_id) 
-            VALUES (?,?,?,?,?,?,?);",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc]);
-    }
-}
+//if (!$validation->hasErrors()) {
+//    //запись документа;
+//    $id_doc = $_POST['id'];
+//    $request = [$data['type'], $data['mode'], $data['fileName'],$id_doc];
+//    $db->query("UPDATE document SET `type` = ?, `mode` = ?,`fileName` = ? WHERE `id` = ?", $request);
+//    //запись адресов;
+//    $request = [$data['street'], $data['apartment'], $id_doc];
+//    $db->query("UPDATE addressBook SET `street` = ?, `apartment` = ? WHERE `document_id` = ?", $request);
+//    //удалить выполненные работы;
+//    $db->query("DELETE FROM worksPerformed WHERE `document_id` = ?", [$id_doc]);
+//    //добавить записи выполненные работы;
+//    $insertValues = [];
+//    if (is_array($worksPerformed_data)) {
+//        foreach ($worksPerformed_data as $work) {
+//            if (!empty($work)) {
+//                $insertValues[] = $work;
+//            }
+//        }
+//    }
+//
+//    if (count($insertValues) > 0) {
+//        $valueArr = [];
+//        $paramsArr = [];
+//
+//        foreach ($insertValues as $value) {
+//            $valueArr[] = "(?,?)";
+//            $paramsArr[] =  $value;
+//            $paramsArr[] =  $id_doc;
+//        }
+//        $valueStr = implode(',', $valueArr);
+//        $db->query("INSERT INTO worksPerformed (title_work, document_id) VALUES {$valueStr};", $paramsArr);
+//    }
+//
+//    $isHasTab = $db->query("SELECT COUNT(id) AS lengthId FROM description WHERE document_id = ?",[$idDoc]);
+//    $isHasTab = $isHasTab->find();
+//
+//    if ($isHasTab['lengthId'] > 0) {
+//        $db->query("UPDATE description
+//        SET title = ?, category = ?, price = ?, project_url = ?, project_des = ?, end_date = ?, document_id = ?
+//        WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc, $idDoc]);
+//    } else {
+//        $db->query("
+//            INSERT INTO description (title, category, price, project_url, project_des, end_date, document_id)
+//            VALUES (?,?,?,?,?,?,?);",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc]);
+//    }
+//}
 
 
 

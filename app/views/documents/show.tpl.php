@@ -89,24 +89,20 @@ $description_keys = [
                             <!--body for "Фото"-->
                             <div class="tab-pane fade p-2" id="nav-photo" role="tabpanel" aria-labelledby="nav-photo-tab">
                                 <div class="row row-cols-1 row-cols-md-3 g-1">
-                                    <div class="card" >
-                                        <img src="assets/img/flats/Mitinskii-les/38/4.jpg" class="card-img-top" alt="...">
-                                        <div class="card-footer text-muted">
-                                            <p class="card-text">Some quick example text to build.</p>
+                                    <?php if (count($imagesArr) > 0): ?>
+                                        <?php foreach ($imagesArr as $image ): ?>
+                                            <div class="card" >
+                                                <img src="<?=$image['image_url']?>" class="card-img-top" alt="...">
+                                                <div class="card-footer text-muted">
+                                                    <p class="card-text"><?=$image['image_description']?></p>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <div style="width: 100%" >
+                                            Еще нет добавленных картинок.
                                         </div>
-                                    </div>
-                                    <div class="card">
-                                        <img src="assets/img/flats/Mitinskii-les/38/5.jpg" class="card-img-top" alt="...">
-                                        <div class="card-footer text-muted">
-                                            <p class="card-text">Some quick example text to build.</p>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <img src="assets/img/flats/Mitinskii-les/38/6.jpg" class="card-img-top" alt="...">
-                                        <div class="card-footer text-muted">
-                                            <p class="card-text">Some quick example text to build.</p>
-                                        </div>
-                                    </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
