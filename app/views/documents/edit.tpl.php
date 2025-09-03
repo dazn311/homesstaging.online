@@ -191,8 +191,10 @@ $options_mode = ['end', 'edit', 'new'];
                                         <input type="hidden" name="_action" value="save_project">
                                         <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
                                         <div class="input-group">
-                                            <i class="bi bi-save input-group-text"></i>
-                                            <button type="submit" class="btn btn-success">Сохранить документ</button>
+                                            <i class="bi bi-save input-group-text text-success"></i>
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <span class="ms-2">Сохранить документ</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -224,7 +226,7 @@ $options_mode = ['end', 'edit', 'new'];
                                         <input type="hidden" name="_action" value="save_description">
                                         <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
                                         <div class="input-group">
-                                            <i class="bi bi-save input-group-text"></i>
+                                            <i class="bi bi-save input-group-text text-success"></i>
                                             <button type="submit" class="btn btn-success">Сохранить Описание</button>
                                         </div>
                                     </div>
@@ -261,13 +263,62 @@ $options_mode = ['end', 'edit', 'new'];
                                         <input type="hidden" name="_action" value="save_works">
                                         <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
                                         <div class="input-group">
-                                            <i class="bi bi-save input-group-text"></i>
+                                            <i class="bi bi-save input-group-text text-success"></i>
                                             <button type="submit" class="btn btn-success">Сохранить произведенные работы</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <!--end body for "Произведенные работы"-->
+
+                            <!--body for "Фото"-->
+                            <div class="tab-pane fade p-2" id="nav-photo" role="tabpanel" aria-labelledby="nav-photo-tab">
+                                <div class="row row-cols-1 row-cols-md-3 g-1">
+                                    <?php if (isset($imagesArr) && is_array($imagesArr) && count($imagesArr) > 0): ?>
+                                        <?php foreach ($imagesArr as $image ): ?>
+                                            <div class="card" >
+                                                <img src="<?=$image['image_url']?>" class="card-img-top" alt="...">
+                                                <div class="card-footer text-muted">
+                                                    <p class="card-text"><?=$image['image_description']?></p>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                    <form
+                                        action="/?documents=<?= $document['doc_id'] ?>"
+                                        class="needs-validation"
+                                        novalidate
+                                        method="POST"
+                                        enctype="multipart/form-data">
+
+        <!--                            input fileName-->
+                                        <div class="input-group">
+                                            <div class=" input-group-text"
+                                                 style="min-width: 150px;">
+                                                Добавить фото:
+                                            </div>
+                                            <input
+                                                    type="file"
+                                                    class="form-control form-control-sm"
+                                                    id="filePhoto"
+                                                    name="filePhoto"
+                                                    aria-describedby="filePhoto"
+                                            >
+                                        </div>
+        <!--                             end  input fileName-->
+                                        <div class="form-group mt-3">
+                                            <input type="hidden" name="_method" value="POST">
+                                            <input type="hidden" name="_action" value="save_images">
+                                            <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
+                                            <div class="input-group">
+                                                <i class="bi bi-save input-group-text text-success"></i>
+                                                <button type="submit" class="btn btn-success">Сохранить картинки</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--end body for "Фото"-->
                         </div>
                     </div>
                 </div>

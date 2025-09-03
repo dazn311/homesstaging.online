@@ -110,7 +110,9 @@ $description_keys = [
                         <form action="/?documents=<?= $document['doc_id'] ?>" method="POST">
                             <input type="hidden" name="_method" value="POST">
                             <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Редактировать документ</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-pencil-square"></i><span class="ms-2">Редактировать документ</span>
+                            </button>
                         </form>
                     </div>
                 </div>

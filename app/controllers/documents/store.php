@@ -46,6 +46,7 @@ $descriptionArr = [];
 $worksArr = [];
 $statusModeArr = [];
 $captionsArr = [];
+$imagesArr = [];
 
 if ($document) {
     $document = $document->find();
@@ -99,6 +100,8 @@ if ($document) {
             $captionsArr[$caption['caption_key']] = $caption;
         }
     }
+    $images = $db->query("SELECT image_url, image_description FROM image WHERE document_id = ?;",[$idDoc]);
+    $imagesArr = $images->findAll();
 
 } else {
     $document = [];
