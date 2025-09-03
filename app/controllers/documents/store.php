@@ -20,17 +20,22 @@ if ($data['_action'] == 'save') {
 }
 
 $querySt = "
-    SELECT D.id AS doc_id, D.project_key, D.createDate, D.mode, D.type, D.fileName,
+    SELECT D.id AS doc_id, D.project_key, D.createDate, D.mode_id AS mode, M.title_mode AS modeTitle, D.type, D.fileName,
                A.street, A.apartment,
                U.avatar, U.name
     FROM document D
         LEFT JOIN addressBook A
             ON D.id = A.document_id
+        LEFT JOIN mode M
+            ON M.id = D.mode_id
         LEFT JOIN user U
             ON D.userRole = U.role
             WHERE D.id = ?;";
 
 $document = $db->query($querySt,[$idDoc]);
+$descriptionArr = [];
+$worksArr = [];
+$statusModeArr = [];
 
 if ($document) {
     $document = $document->find();
@@ -55,6 +60,10 @@ if ($document) {
                 WHERE D.id = ? AND W.title_work IS NOT NULL 
                 ORDER BY W.id ;",[$idDoc]);
     $worksArr = $works->findAll();
+
+    $status_mode = $db->query("SELECT id AS modeId, title_mode AS titleMode FROM mode;",[]);
+    $statusModeArr = $status_mode->findAll();
+    var_dump($statusModeArr);
 } else {
     $document = [];
 }

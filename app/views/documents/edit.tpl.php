@@ -1,6 +1,8 @@
 <?php
 require VIEWS . '/incs/header.php';
 
+global $document,$worksArr;
+
 $type_input = [
         'type'=>'string',
         'mode'=>'select',

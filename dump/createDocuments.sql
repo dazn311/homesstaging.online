@@ -94,9 +94,9 @@ INSERT INTO user (id, email, name, password, createDate, remember_me, avatar, ro
 INSERT INTO user (id, email, name, password, createDate, remember_me, avatar, role) VALUES (2, 'nkartashove@mail.ru', 'Natalia', '$2y$10$0tUwDA0PeoKDK2y.83XM3.68sCRxb8ACvfEjvZoJ3Wm9zmCKSxn9u', '2025-08-13 01:30:12', '1', '/uploads/avatars/2025/01/01/avatar-0.png', 1);
 
 INSERT INTO mode (id, title_mode)
-VALUES (1, 'создан');
+VALUES (1, 'Создан');
 INSERT INTO mode (id, title_mode)
-VALUES (2, 'в работе');
+VALUES (2, 'В работе');
 INSERT INTO mode (id, title_mode)
 VALUES (3, 'Завершен');
 

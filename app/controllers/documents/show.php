@@ -10,12 +10,14 @@ $idDoc = route_param('documents','all');// '1248303'
 
 
 $querySt = "
-    SELECT D.id AS doc_id, D.project_key, D.createDate, D.mode, D.type, D.fileName,
+    SELECT D.id AS doc_id, D.project_key, D.createDate, M.title_mode AS mode, D.type, D.fileName,
                A.street, A.apartment,
                U.avatar, U.name
     FROM document D
         LEFT JOIN addressBook A
             ON D.id = A.document_id
+        LEFT JOIN mode M
+            ON M.id = D.mode_id
         LEFT JOIN user U
             ON D.userRole = U.role
         WHERE D.id = ?;";
@@ -26,7 +28,7 @@ if ($document) {
     $document = $document->find();
 
     if ($document) {
-        $title = "doc_show {$document['project_key']} => show.tpl";
+        $title = "doc_show_contr {$document['project_key']} => doc_show.tpl";
     } else {
         require_once VIEWS . '/errors/404.tpl.php';
         die();
