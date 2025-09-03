@@ -20,7 +20,7 @@ if ($data['_action'] == 'save') {
 }
 
 $querySt = "
-    SELECT D.id AS doc_id, D.project_key, D.createDate, D.mode_id AS mode, M.title_mode AS modeTitle, D.type, D.fileName,
+    SELECT D.id AS doc_id, D.project_key, D.createDate, D.mode_id AS mode, D.type, D.fileName,
                A.street, A.apartment,
                U.avatar, U.name
     FROM document D
@@ -61,11 +61,17 @@ if ($document) {
                 ORDER BY W.id ;",[$idDoc]);
     $worksArr = $works->findAll();
 
-    $status_mode = $db->query("SELECT id AS modeId, title_mode AS titleMode FROM mode;",[]);
-    $statusModeArr = $status_mode->findAll();
+    $status_mode = $db->query("SELECT id, title_mode FROM mode;",[]);
+    $statusMode = $status_mode->findAll();
+    $statusModeArr = [];
+    if (is_array($statusMode)) {
+        foreach ($statusMode as $mode) {
+            $statusModeArr[$mode['id']] = $mode['title_mode'];
+        }
+    }
     var_dump($statusModeArr);
 } else {
     $document = [];
 }
-
+var_dump($document);
 require_once VIEWS . '/documents/edit.tpl.php';

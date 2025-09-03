@@ -1,8 +1,6 @@
 <?php
 require VIEWS . '/incs/header.php';
 
-global $document,$worksArr;
-
 $type_input = [
         'type'=>'string',
         'mode'=>'select',
@@ -76,8 +74,10 @@ $options_mode = ['end','edit','new'];
                                                         class="form-select form-control form-control-sm"
                                                         required
                                                         aria-label="Default select example">
-                                                    <?php foreach ($options_mode as $option ): ?>
-                                                        <option value="<?=$option;?>" <?=$document[$key] == $option ? 'selected' : '';?> ><?=$option;?></option>
+                                                    <?php foreach ($statusModeArr as  $modeId => $statusMode): ?>
+                                                        <option value="<?=(string) $modeId;?>" <?=$document[$key] == $modeId ? 'selected' : '';?> >
+                                                            <?=$statusMode;?>
+                                                        </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             <?php else: ?>
