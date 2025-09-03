@@ -9,14 +9,20 @@ CREATE TABLE user (
                        role INT(10) NOT NULL
 );
 
+CREATE TABLE mode (
+                      id INT AUTO_INCREMENT PRIMARY KEY,
+                      title_mode VARCHAR(255) NOT NULL# Завершен, в работе, создан;
+);
+
 CREATE TABLE document (
                        id INT AUTO_INCREMENT PRIMARY KEY,
                        type VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL, #Евродвушка
-                       mode VARCHAR(10) NOT NULL, # edit|end|start|create
                        project_key VARCHAR(255) NOT NULL, # mitino1|mitinskii38Бк1|kronstadskii222 - for create url;
                        createDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        userRole INT(10) NOT NULL,
-                       fileName VARCHAR(100) NOT NULL UNIQUE
+                       fileName VARCHAR(100) NOT NULL UNIQUE,
+                       mode_id INT NOT NULL,
+                       FOREIGN KEY (mode_id) REFERENCES mode(id)
 );
 
 CREATE TABLE description (
@@ -62,6 +68,7 @@ CREATE TABLE breadcrumbs (
 CREATE TABLE image (
                        image_id INT NOT NULL AUTO_INCREMENT,
                        image_url VARCHAR(100) NOT NULL UNIQUE,
+                       image_description VARCHAR(255) DEFAULT NULL,
                        document_id INT NOT NULL,
                        FOREIGN KEY (document_id) REFERENCES document(id),
                        primary key(image_id, document_id)
@@ -86,18 +93,25 @@ CREATE TABLE message (
 INSERT INTO user (id, email, name, password, createDate, remember_me, avatar, role) VALUES (1, 'alex250555@bk.ru', 'Саша', '$2y$10$0tUwDA0PeoKDK2y.83XM3.68sCRxb8ACvfEjvZoJ3Wm9zmCKSxn9u', '2025-08-13 01:30:12', '1', '/uploads/avatars/2025/01/01/avatar-0.png', 1);
 INSERT INTO user (id, email, name, password, createDate, remember_me, avatar, role) VALUES (2, 'nkartashove@mail.ru', 'Natalia', '$2y$10$0tUwDA0PeoKDK2y.83XM3.68sCRxb8ACvfEjvZoJ3Wm9zmCKSxn9u', '2025-08-13 01:30:12', '1', '/uploads/avatars/2025/01/01/avatar-0.png', 1);
 
+INSERT INTO mode (id, title_mode)
+VALUES (1, 'создан');
+INSERT INTO mode (id, title_mode)
+VALUES (2, 'в работе');
+INSERT INTO mode (id, title_mode)
+VALUES (3, 'Завершен');
 
-INSERT INTO document (id, type,  mode, project_key, createDate, userRole, fileName)
-VALUES (1, 'Евродвушка', 'end', 'kronstadskii1', '2025-05-11 23:31:18', 1, 'kronstadskii1-Nata-250811.xlsx');
 
-INSERT INTO document (id, type, mode, project_key, createDate, userRole, fileName)
-VALUES (2, 'Евродвушка', 'end', 'mitino1', '2025-06-11 23:31:18', 1, 'mitino1-Nata-250807.xlsx');
+INSERT INTO document (id, type,  project_key, createDate, userRole, fileName, mode_id)
+VALUES (1, 'Евродвушка',  'kronstadskii1', '2025-05-11 23:31:18', 1, 'kronstadskii1-Nata-250811.xlsx',3);
 
-INSERT INTO document (id, type, mode, project_key, createDate, userRole, fileName)
-VALUES (3, 'Евродвушка', 'end', 'mitino2', '2025-06-12 23:31:18', 1, 'mitino2-Nata-250612.xlsx');
+INSERT INTO document (id, type, project_key, createDate, userRole, fileName,mode_id)
+VALUES (2, 'Евродвушка',  'mitino1', '2025-06-11 23:31:18', 1, 'mitino1-Nata-250807.xlsx',3);
 
-INSERT INTO document (id, type, mode, project_key, createDate, userRole, fileName)
-VALUES (4, 'Евродвушка', 'new', 'ilyinskie1', '2025-08-22 23:31:18', 1, 'ilyinskie1-Nata-250822.xlsx');
+INSERT INTO document (id, type, project_key, createDate, userRole, fileName,mode_id)
+VALUES (3, 'Евродвушка', 'mitino2', '2025-06-12 23:31:18', 1, 'mitino2-Nata-250612.xlsx',3);
+
+INSERT INTO document (id, type, project_key, createDate, userRole, fileName, mode_id)
+VALUES (4, 'Евродвушка',  'ilyinskie1', '2025-08-22 23:31:18', 1, 'ilyinskie1-Nata-250822.xlsx',3);
 
 
 INSERT INTO addressBook (address_id, code, street, apartment, document_id)
@@ -132,8 +146,8 @@ INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (2, 
 INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (3,  'ЖК Митинский лес',3);
 INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (4,  'ЖК Ильинские луга',4);
 
-INSERT INTO image (image_id, image_url, document_id) VALUES (1,  'assets/img/flats/Mitinskii-les/38/2.png',2);
-INSERT INTO image (image_id, image_url, document_id) VALUES (2,  'assets/img/flats/Mitinskii-les/38/4.jpg',2);
+INSERT INTO image (image_id, image_url,image_description, document_id) VALUES (1,  'assets/img/flats/Mitinskii-les/38/2.png','Зал',2);
+INSERT INTO image (image_id, image_url,image_description, document_id) VALUES (2,  'assets/img/flats/Mitinskii-les/38/4.jpg','Зал',2);
 INSERT INTO image (image_id, image_url, document_id) VALUES (3,  'assets/img/flats/Mitinskii-les/38/5.jpg',2);
 INSERT INTO image (image_id, image_url, document_id) VALUES (4,  'assets/img/flats/Mitinskii-les/38/6.jpg',2);
 INSERT INTO image (image_id, image_url, document_id) VALUES (5,  'assets/img/flats/Mitinskii-les/38/7.jpg',2);
