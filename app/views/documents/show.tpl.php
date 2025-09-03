@@ -25,8 +25,9 @@ $description_keys = [
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h1><?= h($document['project_key']) ?> (read mode)</h1>
+                    <div class="card-header d-flex gap-1">
+                        <h1><?= h($document['project_key']) ?></h1>
+                        <span style="opacity: 0.3;line-height: 48px;">(просмотр)</span>
                     </div>
                     <div class="card-body">
                         <nav>
@@ -86,7 +87,28 @@ $description_keys = [
                                 <?php endif; ?>
                             </div>
                             <!--body for "Фото"-->
-                            <div class="tab-pane fade p-2" id="nav-photo" role="tabpanel" aria-labelledby="nav-photo-tab">tab-content 3...</div>
+                            <div class="tab-pane fade p-2" id="nav-photo" role="tabpanel" aria-labelledby="nav-photo-tab">
+                                <div class="row row-cols-1 row-cols-md-3 g-1">
+                                    <div class="card" >
+                                        <img src="assets/img/flats/Mitinskii-les/38/4.jpg" class="card-img-top" alt="...">
+                                        <div class="card-footer text-muted">
+                                            <p class="card-text">Some quick example text to build.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <img src="assets/img/flats/Mitinskii-les/38/5.jpg" class="card-img-top" alt="...">
+                                        <div class="card-footer text-muted">
+                                            <p class="card-text">Some quick example text to build.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <img src="assets/img/flats/Mitinskii-les/38/6.jpg" class="card-img-top" alt="...">
+                                        <div class="card-footer text-muted">
+                                            <p class="card-text">Some quick example text to build.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <form action="/?documents=<?= $document['doc_id'] ?>" method="POST">
