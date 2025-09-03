@@ -59,7 +59,7 @@ $description_keys = [
 
                             <!--body for "Описание для сайта"-->
                             <div class="tab-pane fade p-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <?php if (count($descriptionArr) > 0): ?>
+                                <?php if (is_array($descriptionArr) && count($descriptionArr) > 0): ?>
                                     <?php foreach ($description_keys as $key=>$value ): ?>
                                         <div class="card-text">
                                             <span class="fw-semibold pe-1"><?=$value;?></span>

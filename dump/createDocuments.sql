@@ -9,6 +9,13 @@ CREATE TABLE user (
                        role INT(10) NOT NULL
 );
 
+CREATE TABLE caption (
+                      id INT AUTO_INCREMENT PRIMARY KEY,
+                      caption_key VARCHAR(100) NOT NULL UNIQUE, #mode,
+                      input_type VARCHAR(25) NOT NULL,# text,select ;
+                      caption_ru VARCHAR(255) NOT NULL# Статус проекта:, ;
+);
+
 CREATE TABLE mode (
                       id INT AUTO_INCREMENT PRIMARY KEY,
                       title_mode VARCHAR(255) NOT NULL# Завершен, в работе, создан;
@@ -141,6 +148,7 @@ VALUES (4, 'бытовая техника Weissgauff, фартук на кухн
 INSERT INTO worksPerformed (id, title_work, document_id)
 VALUES (5, 'Установка сплит системы.' ,2);
 
+
 INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (1,  'ЖК Кронштадтский',1);
 INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (2,  'ЖК Митинский лес',2);
 INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (3,  'ЖК Митинский лес',3);
@@ -153,6 +161,18 @@ INSERT INTO image (image_id, image_url, document_id) VALUES (4,  'assets/img/fla
 INSERT INTO image (image_id, image_url, document_id) VALUES (5,  'assets/img/flats/Mitinskii-les/38/7.jpg',2);
 INSERT INTO image (image_id, image_url, document_id) VALUES (6,  'assets/img/flats/Mitinskii-les/38/8.jpg',2);
 INSERT INTO image (image_id, image_url, document_id) VALUES (7,  'assets/img/flats/Mitinskii-les/38/9.png',2);
+
+
+INSERT INTO caption (id, caption_key, input_type,caption_ru)
+VALUES (1, 'type' ,'text','Тип объекта:');
+INSERT INTO caption (id, caption_key, input_type,caption_ru)
+VALUES (2, 'mode' ,'select','Статус проекта:');
+INSERT INTO caption (id, caption_key, input_type,caption_ru)
+VALUES (3, 'street' ,'text','Улица:');
+INSERT INTO caption (id, caption_key, input_type,caption_ru)
+VALUES (4, 'apartment' ,'text','Дом:');
+INSERT INTO caption (id, caption_key, input_type,caption_ru)
+VALUES (5, 'fileName' ,'file','Смета:');
 
 # INSERT INTO imageDocuments (image_id, document_id) VALUES (1,  1);
 # INSERT INTO imageDocuments (image_id, document_id) VALUES (2,  1);

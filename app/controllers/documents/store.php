@@ -36,6 +36,7 @@ $document = $db->query($querySt,[$idDoc]);
 $descriptionArr = [];
 $worksArr = [];
 $statusModeArr = [];
+$captionsArr = [];
 
 if ($document) {
     $document = $document->find();
@@ -60,6 +61,15 @@ if ($document) {
                 WHERE D.id = ? AND W.title_work IS NOT NULL 
                 ORDER BY W.id ;",[$idDoc]);
     $worksArr = $works->findAll();
+    if (count($worksArr) == 0) {
+        $worksArr = array(
+            0=> ["title_work" => ""],
+            1=> ["title_work" => ""],
+            3=> ["title_work" => ""],
+            4=> ["title_work" => ""],
+            5=> ["title_work" => ""]
+        );
+    }
 
     $status_mode = $db->query("SELECT id, title_mode FROM mode;",[]);
     $statusMode = $status_mode->findAll();
@@ -69,9 +79,18 @@ if ($document) {
             $statusModeArr[$mode['id']] = $mode['title_mode'];
         }
     }
-    var_dump($statusModeArr);
+
+    $captions = $db->query("SELECT caption_key, input_type, caption_ru FROM caption;",[]);
+    $captions = $captions->findAll();
+
+    if (is_array($captions)) {
+        foreach ($captions as $caption) {
+            $captionsArr[$caption['caption_key']] = $caption;
+        }
+    }
+
 } else {
     $document = [];
 }
-var_dump($document);
+//var_dump($document);
 require_once VIEWS . '/documents/edit.tpl.php';
