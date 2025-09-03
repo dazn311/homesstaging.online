@@ -2,17 +2,17 @@
 require VIEWS . '/incs/header.php';
 
 $type_input = [
-    'type' => 'string',
+    'type' => 'text',
     'mode' => 'select',
-    'street' => 'string',
-    'apartment' => 'string',
+    'street' => 'text',
+    'apartment' => 'text',
     'fileName' => 'file',
-    'title' => 'string',
-    'category' => 'string',
-    'price' => 'string',
+    'title' => 'text',
+    'category' => 'text',
+    'price' => 'text',
     'end_date' => 'date',
-    'project_des' => 'string',
-    'project_url' => 'string',
+    'project_des' => 'text',
+    'project_url' => 'text',
 ];
 
 $document_keys = [
@@ -38,6 +38,9 @@ $options_mode = ['end', 'edit', 'new'];
 <style>
     .avatar {
         width: 20px;
+    }
+    .nav-link {
+        color: var(--accent-color);
     }
 </style>
 <main class="main py-3">
@@ -87,7 +90,7 @@ $options_mode = ['end', 'edit', 'new'];
                                 </p>
 
                                 <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
-                                      novalidate method="POST">
+                                      novalidate method="POST" enctype="multipart/form-data">
 <!--                                    input type-->
                                     <div class="input-group">
                                         <div class=" input-group-text"
@@ -108,17 +111,17 @@ $options_mode = ['end', 'edit', 'new'];
 <!--                               select mode-->
                                     <div class="input-group">
                                         <div class=" input-group-text"
-                                             style="min-width: 150px;"><?=$captionsArr['type']['caption_ru']; ?></div>
+                                             style="min-width: 150px;"><?=$captionsArr['mode']['caption_ru']; ?></div>
                                         <select
                                                 class="form-control form-control-sm"
-                                                id="type"
-                                                name="type"
-                                                aria-describedby="type"
-                                                value="<?= $document['type']; ?>"
+                                                id="mode"
+                                                name="mode"
+                                                aria-describedby="mode"
+                                                value="<?= $document['mode']; ?>"
                                                 required
                                         >
                                         <?php foreach ($statusModeArr as $modeId => $statusMode): ?>
-                                            <option value="<?= (string)$modeId; ?>" <?= $document['type'] == $modeId ? 'selected' : ''; ?> >
+                                            <option value="<?= (string)$modeId; ?>" <?= $document['mode'] == $modeId ? 'selected' : ''; ?> >
                                                 <?= $statusMode; ?>
                                             </option>
                                         <?php endforeach; ?>
@@ -158,28 +161,34 @@ $options_mode = ['end', 'edit', 'new'];
                                                 required
                                         >
                                     </div>
-<!--                               end  input apartment-->
+<!--                            end  input apartment-->
 
-<!--                                    input fileName-->
+<!--                            input fileName-->
                                     <div class="input-group">
                                         <div class=" input-group-text"
-                                             style="min-width: 150px;"><?=$captionsArr['fileName']['caption_ru']; ?></div>
+                                             style="min-width: 150px;">
+                                            <?php
+                                                echo $captionsArr['fileName']['caption_ru'];
+                                                $fileName = $document['fileName'] ?? '';
+                                                echo ' ' . $fileName;
+                                            ?>
+                                        </div>
                                         <input
-                                                type="<?=$captionsArr['fileName']['input_type']; ?>"
-                                                class="form-control form-control-sm"
-                                                id="fileName"
-                                                name="fileName"
-                                                aria-describedby="fileName"
-                                                value="<?= $document['fileName']; ?>"
-                                                placeholder="fileName"
-                                                required
+                                            type="<?=$captionsArr['fileName']['input_type']; ?>"
+                                            class="form-control form-control-sm"
+                                            id="fileName"
+                                            name="fileName"
+                                            aria-describedby="fileName"
+                                            value="<?= $document['fileName']; ?>"
+                                            placeholder="fileName"
+                                            required
                                         >
                                     </div>
-<!--                               end  input fileName-->
+<!--                             end  input fileName-->
 
                                     <div class="form-group mt-3">
                                         <input type="hidden" name="_method" value="POST">
-                                        <input type="hidden" name="_action" value="save">
+                                        <input type="hidden" name="_action" value="save_project">
                                         <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
                                         <div class="input-group">
                                             <i class="bi bi-save input-group-text"></i>
@@ -190,7 +199,6 @@ $options_mode = ['end', 'edit', 'new'];
 
                             </div>
                             <!--end body for "Основные"-->
-
 
                             <!--body for "Описание для сайта"-->
                             <div class="tab-pane fade p-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -213,7 +221,7 @@ $options_mode = ['end', 'edit', 'new'];
                                     <?php endforeach; ?>
                                     <div class="form-group mt-3">
                                         <input type="hidden" name="_method" value="POST">
-                                        <input type="hidden" name="_action" value="save_profile">
+                                        <input type="hidden" name="_action" value="save_description">
                                         <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
                                         <div class="input-group">
                                             <i class="bi bi-save input-group-text"></i>
@@ -261,7 +269,6 @@ $options_mode = ['end', 'edit', 'new'];
                             </div>
                             <!--end body for "Произведенные работы"-->
                         </div>
-
                     </div>
                 </div>
             </div>

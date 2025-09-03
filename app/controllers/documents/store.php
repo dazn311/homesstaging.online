@@ -14,10 +14,17 @@ $idDoc = route_param('documents','all');// '1248303'
 $title = 'doc_store=>edit.tpl';
 
 $data = load(['_action'], true);
-
-if ($data['_action'] == 'save') {
-    require_once CONTROLLERS . '/documents/save.php';
+//var_dump($data);
+switch ($data['_action']) {
+    case 'save_project':
+        require_once CONTROLLERS . '/documents/save_project.php';
+        break;
+    case 'save_description':
+        require_once CONTROLLERS . '/documents/save_description.php';
+        break;
+        default:
 }
+
 
 $querySt = "
     SELECT D.id AS doc_id, D.project_key, D.createDate, D.mode_id AS mode, D.type, D.fileName,
