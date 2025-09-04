@@ -64,22 +64,26 @@ if (!$validation->hasErrors()) {
              $filePath = 'uploads' . "{$dir}/{$now}.{$file_ext}";
              $image = $manager->read($data['docFile']['tmp_name']);
 
-             $width = $image->width();
-             $height = $image->height();
-
-             $heightImage = 800;
-             if ($width < $height) {
-                 $heightImage = $heightImage * ($height / $width);
-             } else {
-                 $heightImage = $heightImage * ($width / $height);
+             $width = $image->width();//929
+             $height = $image->height();//1280
+             // Natusia Minsk sdfsdf (929×1280) -> 599×799
+             //  988×1280
+             //  988/1280 = 0.771875
+             //  988/753 = 1.31208499336
+//             $heightImage = $height;
+             $widthImage = $width;
+             if ($height != 800) {
+                 // 800 / 1280 = 0.625;
+                 $aspect = 800 / $height;
+                 $widthImage = $width * $aspect;
              }
-             $heightImage = (int) $heightImage;
 
-             $image->resize(800,$heightImage)
-                    ->save($filePath);
+             $widthImage = (int) $widthImage;
+
+             $image -> scaleDown($widthImage)
+                    -> save($filePath);
 
              if ($image) {
-                 //INSERT INTO image (image_id, image_url, document_id) VALUES (3,  'assets/img/flats/Mitinskii-les/38/5.jpg',2);
                  $imageUrl = $filePath;
                  $imageDescription = $data['imageDescription'];
                  $res = $db->query("INSERT INTO image (image_url, image_description, document_id) VALUES (?,?,?);", [$imageUrl, $imageDescription, $id_doc]);
