@@ -25,6 +25,8 @@ switch ($data['_action']) {
         require_once CONTROLLERS . '/documents/save_works.php';
     case 'save_images':
         require_once CONTROLLERS . '/documents/save_images.php';
+    case 'delete_images':
+        require_once CONTROLLERS . '/documents/delete_images.php';
         break;
         default:
 }
@@ -102,7 +104,7 @@ if ($document) {
             $captionsArr[$caption['caption_key']] = $caption;
         }
     }
-    $images = $db->query("SELECT image_url, image_description FROM image WHERE document_id = ?;",[$idDoc]);
+    $images = $db->query("SELECT image_id, image_url, image_description FROM image WHERE document_id = ?;",[$idDoc]);
     $imagesArr = $images->findAll();
 
 } else {

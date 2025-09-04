@@ -277,8 +277,18 @@ $options_mode = ['end', 'edit', 'new'];
                                         <?php foreach ($imagesArr as $image ): ?>
                                             <div class="card" >
                                                 <img src="<?=$image['image_url']?>" class="card-img-top" alt="...">
-                                                <div class="card-footer text-muted">
-                                                    <p class="card-text"><?=$image['image_description']?></p>
+                                                <div class="card-footer text-muted d-flex justify-content-between">
+                                                    <div class="card-text"><?=$image['image_description']?></div>
+                                                    <form
+                                                            action="/?documents=<?= $document['doc_id'] ?>"
+                                                            class="needs-validation"
+                                                            novalidate
+                                                            method="POST"
+                                                            enctype="multipart/form-data">
+                                                        <input type="hidden" name="_action" value="delete_images">
+                                                        <input type="hidden" name="image_id" value="<?= $image['image_id'] ?>">
+                                                    <button type="submit" class="btn-close" aria-label="Close"></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>
@@ -291,7 +301,7 @@ $options_mode = ['end', 'edit', 'new'];
                                         enctype="multipart/form-data">
 <!--                                    input imageDescription-->
                                         <div class="input-group">
-                                            <div class=" input-group-text" style="min-width: 150px;">imageDescription</div>
+                                            <div class=" input-group-text" style="min-width: 150px;">Описание картинки</div>
                                             <input
                                                     type="text"
                                                     class="form-control form-control-sm"
@@ -299,7 +309,7 @@ $options_mode = ['end', 'edit', 'new'];
                                                     name="imageDescription"
                                                     aria-describedby="imageDescription"
                                                     value=""
-                                                    placeholder="image description"
+                                                    placeholder="Зал или спальня"
                                             >
                                         </div>
 <!--                                    end  input apartment-->
