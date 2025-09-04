@@ -23,6 +23,8 @@ switch ($data['_action']) {
         require_once CONTROLLERS . '/documents/save_description.php';
     case 'save_works':
         require_once CONTROLLERS . '/documents/save_works.php';
+    case 'save_images':
+        require_once CONTROLLERS . '/documents/save_images.php';
         break;
         default:
 }

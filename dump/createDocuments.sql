@@ -74,7 +74,7 @@ CREATE TABLE breadcrumbs (
 
 CREATE TABLE image (
                        image_id INT NOT NULL AUTO_INCREMENT,
-                       image_url VARCHAR(100) NOT NULL UNIQUE,
+                       image_url VARCHAR(255) NOT NULL UNIQUE,
                        image_description VARCHAR(255) DEFAULT NULL,
                        document_id INT NOT NULL,
                        FOREIGN KEY (document_id) REFERENCES document(id),

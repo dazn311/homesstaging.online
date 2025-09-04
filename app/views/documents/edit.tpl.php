@@ -165,8 +165,7 @@ $options_mode = ['end', 'edit', 'new'];
 
 <!--                            input fileName-->
                                     <div class="input-group">
-                                        <div class=" input-group-text"
-                                             style="min-width: 150px;">
+                                        <div class=" input-group-text" style="min-width: 150px;">
                                             <?php
                                                 echo $captionsArr['fileName']['caption_ru'];
                                                 $fileName = $document['fileName'] ?? '';
@@ -290,19 +289,32 @@ $options_mode = ['end', 'edit', 'new'];
                                         novalidate
                                         method="POST"
                                         enctype="multipart/form-data">
+<!--                                    input imageDescription-->
+                                        <div class="input-group">
+                                            <div class=" input-group-text" style="min-width: 150px;">imageDescription</div>
+                                            <input
+                                                    type="text"
+                                                    class="form-control form-control-sm"
+                                                    id="imageDescription"
+                                                    name="imageDescription"
+                                                    aria-describedby="imageDescription"
+                                                    value=""
+                                                    placeholder="image description"
+                                            >
+                                        </div>
+<!--                                    end  input apartment-->
 
         <!--                            input fileName-->
                                         <div class="input-group">
-                                            <div class=" input-group-text"
-                                                 style="min-width: 150px;">
-                                                Добавить фото:
-                                            </div>
+                                            <div class=" input-group-text" style="min-width: 150px;">Добавить фото:</div>
                                             <input
                                                     type="file"
                                                     class="form-control form-control-sm"
                                                     id="filePhoto"
+                                                    accept="image/png, image/jpeg, image/jpg"
                                                     name="filePhoto"
                                                     aria-describedby="filePhoto"
+                                                    multiple
                                             >
                                         </div>
         <!--                             end  input fileName-->
