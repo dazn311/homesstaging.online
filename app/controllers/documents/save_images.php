@@ -26,11 +26,25 @@ $idDoc = route_param('documents','all');// '1248303'
 
 $title = 'doc_store=>save.tpl';
 
-if (isset($_FILES['filePhoto']) && $_FILES['filePhoto']['error'] === 0) {
-    $data['filePhoto'] = $_FILES['filePhoto']['name'];
-    $data['docFile'] = $_FILES['filePhoto'];
-} else {
-    $data['docFile'] = null;
+switch (true) {
+    case isset($_FILES['filePhoto']):
+        if ($_FILES['filePhoto']['error'] === 0) {
+            $data['filePhoto'] = $_FILES['filePhoto']['name'];
+            $data['docFile'] = $_FILES['filePhoto'];
+            unset($_SESSION['error']);
+        } else if (empty($_FILES['filePhoto']['name'])) {
+            $_SESSION['error'] = 'Выбирите файл для загрузки.';
+            unset($_SESSION['success']);
+            return;
+        } else {
+            $_SESSION['error'] = 'Не верный формат файла или размер привышает допустимого.';
+            unset($_SESSION['success']);
+            return;
+        }
+        break;
+    default:
+        unset($_SESSION['success']);
+        unset($_SESSION['error']);
 }
 
 $validation = $validator->validate($data, [
@@ -52,7 +66,7 @@ if (!$validation->hasErrors()) {
     $document = $db->query($querySt,[$id_doc]);
     $document = $document->find();
 
-     if (count($document) > 0) {
+     if ($document) {
          if (!empty($data['docFile']['tmp_name'])) {
              $file_ext = get_file_ext($data['docFile']['name']);
              $dir = '/' . $document['projectKey'] . '/' . $document['apartment'];// /mitino2/32k1;
@@ -86,27 +100,30 @@ if (!$validation->hasErrors()) {
              if ($image) {
                  $imageUrl = $filePath;
                  $imageDescription = $data['imageDescription'];
+
                  $res = $db->query("INSERT INTO image (image_url, image_description, document_id) VALUES (?,?,?);", [$imageUrl, $imageDescription, $id_doc]);
+                 $_SESSION['success'] = 'Изображение загружено';
                  if ($res) {
                      $_SESSION['filePath'] = $filePath;
+                     $_SESSION['success'] = 'Изображение сохранено в бд.';
+                     return;
                  } else {
-                     $_SESSION['error'] =  $_SESSION['error'] ?? 'insert to image Error';
+                     $_SESSION['error'] = 'insert to image Error';
                  }
              } else {
+                 $_SESSION['error'] = "[" . date('Y-m-d H:i') . "] Ошибка загрузки изображения" . PHP_EOL;
                  error_log("[" . date('Y-m-d H:i') . "] Error upload avatar" . PHP_EOL, 3);
              }
-
-             $_SESSION['success'] = 'OK';
          } else {
-             $_SESSION['error'] =  $_SESSION['error'] ?? 'tmp_name Error';
+             $_SESSION['error'] = 'tmp_name Error';
          }
 
      } else {
-         $_SESSION['error'] =  $_SESSION['error'] ?? 'DB Error';
+         $_SESSION['error'] = '[120 save image] DB Error';
      }
 
 } else {
-    $_SESSION['error'] =  $_SESSION['error'] ?? 'DB Error';
+    $_SESSION['error'] = '[124 save image] DB Error';
 }
 
 

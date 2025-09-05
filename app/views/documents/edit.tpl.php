@@ -15,32 +15,28 @@ $type_input = [
     'project_url' => 'text',
 ];
 
-$document_keys = [
-    'type' => 'Тип объекта:',
-    'mode' => 'Статус проекта:',
-    'street' => 'Улица:',
-    'apartment' => 'Дом:',
-    'fileName' => 'Смета:'
-];
-
 $description_keys = [
-    'title' => 'Заголовок',
-    'category' => 'Категория',
+    'title' => 'Заголовок:',
+    'category' => 'Категория:',
     'price' => 'Бюджет:',
     'end_date' => 'Дата завершения: ',
     'project_des' => 'Описание URL: ',
     'project_url' => 'Проект URL: ',
 ];
 
-$options_mode = ['end', 'edit', 'new'];
-
 ?>
 <style>
     .avatar {
         width: 20px;
     }
+
     .nav-link {
         color: var(--accent-color);
+    }
+
+    .form-pic {
+        margin-right: 10px;
+        min-width: 400px;
     }
 </style>
 <main class="main py-3">
@@ -91,10 +87,11 @@ $options_mode = ['end', 'edit', 'new'];
 
                                 <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
                                       novalidate method="POST" enctype="multipart/form-data">
-<!--                                    input type-->
+                                    <!--                                    input type-->
                                     <div class="input-group">
                                         <div class=" input-group-text"
-                                             style="min-width: 150px;">Тип объекта:</div>
+                                             style="min-width: 150px;">Тип объекта:
+                                        </div>
                                         <input
                                                 type="text"
                                                 class="form-control form-control-sm"
@@ -106,12 +103,12 @@ $options_mode = ['end', 'edit', 'new'];
                                                 required
                                         >
                                     </div>
-<!--                               end  input type-->
+                                    <!--                               end  input type-->
 
-<!--                               select mode-->
+                                    <!--                               select mode-->
                                     <div class="input-group">
                                         <div class=" input-group-text"
-                                             style="min-width: 150px;"><?=$captionsArr['mode']['caption_ru']; ?></div>
+                                             style="min-width: 150px;"><?= $captionsArr['mode']['caption_ru']; ?></div>
                                         <select
                                                 class="form-control form-control-sm"
                                                 id="mode"
@@ -120,21 +117,21 @@ $options_mode = ['end', 'edit', 'new'];
                                                 value="<?= $document['mode']; ?>"
                                                 required
                                         >
-                                        <?php foreach ($statusModeArr as $modeId => $statusMode): ?>
-                                            <option value="<?= (string)$modeId; ?>" <?= $document['mode'] == $modeId ? 'selected' : ''; ?> >
-                                                <?= $statusMode; ?>
-                                            </option>
-                                        <?php endforeach; ?>
+                                            <?php foreach ($statusModeArr as $modeId => $statusMode): ?>
+                                                <option value="<?= (string)$modeId; ?>" <?= $document['mode'] == $modeId ? 'selected' : ''; ?> >
+                                                    <?= $statusMode; ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
-<!--                                    end select mode-->
+                                    <!--                                    end select mode-->
 
-<!--                                    input street-->
+                                    <!--                                    input street-->
                                     <div class="input-group">
                                         <div class=" input-group-text"
-                                             style="min-width: 150px;"><?=$captionsArr['street']['caption_ru']; ?></div>
+                                             style="min-width: 150px;"><?= $captionsArr['street']['caption_ru']; ?></div>
                                         <input
-                                                type="<?=$captionsArr['street']['input_type']; ?>"
+                                                type="<?= $captionsArr['street']['input_type']; ?>"
                                                 class="form-control form-control-sm"
                                                 id="street"
                                                 name="street"
@@ -144,14 +141,14 @@ $options_mode = ['end', 'edit', 'new'];
                                                 required
                                         >
                                     </div>
-<!--                               end  input street-->
+                                    <!--                               end  input street-->
 
-<!--                                    input apartment-->
+                                    <!--                                    input apartment-->
                                     <div class="input-group">
                                         <div class=" input-group-text"
-                                             style="min-width: 150px;"><?=$captionsArr['apartment']['caption_ru']; ?></div>
+                                             style="min-width: 150px;"><?= $captionsArr['apartment']['caption_ru']; ?></div>
                                         <input
-                                                type="<?=$captionsArr['apartment']['input_type']; ?>"
+                                                type="<?= $captionsArr['apartment']['input_type']; ?>"
                                                 class="form-control form-control-sm"
                                                 id="apartment"
                                                 name="apartment"
@@ -161,29 +158,29 @@ $options_mode = ['end', 'edit', 'new'];
                                                 required
                                         >
                                     </div>
-<!--                            end  input apartment-->
+                                    <!--                            end  input apartment-->
 
-<!--                            input fileName-->
+                                    <!--                            input fileName-->
                                     <div class="input-group">
                                         <div class=" input-group-text" style="min-width: 150px;">
                                             <?php
-                                                echo $captionsArr['fileName']['caption_ru'];
-                                                $fileName = $document['fileName'] ?? '';
-                                                echo ' ' . $fileName;
+                                            echo $captionsArr['fileName']['caption_ru'];
+                                            $fileName = $document['fileName'] ?? '';
+                                            echo ' ' . $fileName;
                                             ?>
                                         </div>
                                         <input
-                                            type="<?=$captionsArr['fileName']['input_type']; ?>"
-                                            class="form-control form-control-sm"
-                                            id="fileName"
-                                            name="fileName"
-                                            aria-describedby="fileName"
-                                            value="<?= $document['fileName']; ?>"
-                                            placeholder="fileName"
-                                            required
+                                                type="<?= $captionsArr['fileName']['input_type']; ?>"
+                                                class="form-control form-control-sm"
+                                                id="fileName"
+                                                name="fileName"
+                                                aria-describedby="fileName"
+                                                value="<?= $document['fileName']; ?>"
+                                                placeholder="fileName"
+                                                required
                                         >
                                     </div>
-<!--                             end  input fileName-->
+                                    <!--                             end  input fileName-->
 
                                     <div class="form-group mt-3">
                                         <input type="hidden" name="_method" value="POST">
@@ -202,12 +199,15 @@ $options_mode = ['end', 'edit', 'new'];
                             <!--end body for "Основные"-->
 
                             <!--body for "Описание для сайта"-->
-                            <div class="tab-pane fade p-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation" novalidate
+                            <div class="tab-pane fade p-2" id="nav-profile" role="tabpanel"
+                                 aria-labelledby="nav-profile-tab">
+                                <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
+                                      novalidate
                                       method="POST">
                                     <?php foreach ($description_keys as $key => $value): ?>
                                         <div class="input-group">
-                                            <div class=" input-group-text" style="min-width: 170px;"> <?= $value; ?></div>
+                                            <div class=" input-group-text"
+                                                 style="min-width: 170px;"> <?= $value; ?></div>
                                             <input
                                                     type="<?= $type_input[$key]; ?>"
                                                     class="form-control form-control-sm datepicker"
@@ -234,8 +234,10 @@ $options_mode = ['end', 'edit', 'new'];
                             <!--end body for "Описание для сайта"-->
 
                             <!--body for "Произведенные работы"-->
-                            <div class="tab-pane fade p-2" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation" novalidate
+                            <div class="tab-pane fade p-2" id="nav-contact" role="tabpanel"
+                                 aria-labelledby="nav-contact-tab">
+                                <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
+                                      novalidate
                                       method="POST">
                                     <?php if (count($worksArr) > 0): ?>
                                         <div class="portfolio-description">
@@ -263,7 +265,9 @@ $options_mode = ['end', 'edit', 'new'];
                                         <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
                                         <div class="input-group">
                                             <i class="bi bi-save input-group-text text-success"></i>
-                                            <button type="submit" class="btn btn-success">Сохранить произведенные работы</button>
+                                            <button type="submit" class="btn btn-success">Сохранить произведенные
+                                                работы
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -272,73 +276,100 @@ $options_mode = ['end', 'edit', 'new'];
 
                             <!--body for "Фото"-->
                             <div class="tab-pane fade p-2" id="nav-photo" role="tabpanel" aria-labelledby="nav-photo-tab">
-                                <div class="row row-cols-1 row-cols-md-3 g-1">
-                                    <?php if (isset($imagesArr) && is_array($imagesArr) && count($imagesArr) > 0): ?>
-                                        <?php foreach ($imagesArr as $image ): ?>
-                                            <div class="card" >
-                                                <img src="<?=$image['image_url']?>" class="card-img-top" alt="...">
-                                                <div class="card-footer text-muted d-flex justify-content-between">
-                                                    <div class="card-text"><?=$image['image_description']?></div>
-                                                    <form
-                                                            action="/?documents=<?= $document['doc_id'] ?>"
-                                                            class="needs-validation"
-                                                            novalidate
-                                                            method="POST"
-                                                            enctype="multipart/form-data">
-                                                        <input type="hidden" name="_action" value="delete_images">
-                                                        <input type="hidden" name="image_id" value="<?= $image['image_id'] ?>">
-                                                    <button type="submit" class="btn-close" aria-label="Close"></button>
-                                                    </form>
+                                <?php if (isset($_SESSION['error'])): ?>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>Ошибка!</strong> <?php echo $_SESSION['error']; unset($_SESSION['error']);?>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                <?php elseif (isset($_SESSION['success'])): ?>
+                                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                        <div>
+                                            <?php echo $_SESSION['success']; unset($_SESSION['success']);?>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="d-flex justify-content-between gap-1">
+                                    <div class="form-pic">
+                                        <form
+                                                action="/?documents=<?=$document['doc_id'];?>"
+                                                class="needs-validation"
+                                                novalidate
+                                                method="POST"
+                                                enctype="multipart/form-data">
+                                            <!--                                    input imageDescription-->
+                                            <div class="input-group">
+                                                <div class=" input-group-text" style="min-width: 150px;">Описание картинки</div>
+                                                <input
+                                                        type="text"
+                                                        class="form-control form-control-sm"
+                                                        id="imageDescription"
+                                                        name="imageDescription"
+                                                        aria-describedby="imageDescription"
+                                                        value=""
+                                                        placeholder="Зал или спальня"
+                                                >
+                                            </div>
+
+        <!--                                input fileName-->
+                                            <div class="input-group">
+                                                <div class=" input-group-text" style="min-width: 150px;">Добавить
+                                                    фото:
+                                                </div>
+                                                <input
+                                                        type="file"
+                                                        class="form-control form-control-sm"
+                                                        id="filePhoto"
+                                                        accept="image/png, image/jpeg, image/jpg"
+                                                        name="filePhoto"
+                                                        aria-describedby="filePhoto"
+                                                        multiple
+                                                >
+                                            </div>
+        <!--                                end  input fileName-->
+                                            <div class="form-group mt-3">
+                                                <input type="hidden" name="_method" value="POST">
+                                                <input type="hidden" name="_action" value="save_images">
+                                                <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
+                                                <div class="input-group">
+                                                    <i class="bi bi-save input-group-text text-success"></i>
+                                                    <button type="submit" class="btn btn-success">Сохранить картинки
+                                                    </button>
                                                 </div>
                                             </div>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                    <form
-                                        action="/?documents=<?= $document['doc_id'] ?>"
-                                        class="needs-validation"
-                                        novalidate
-                                        method="POST"
-                                        enctype="multipart/form-data">
-<!--                                    input imageDescription-->
-                                        <div class="input-group">
-                                            <div class=" input-group-text" style="min-width: 150px;">Описание картинки</div>
-                                            <input
-                                                    type="text"
-                                                    class="form-control form-control-sm"
-                                                    id="imageDescription"
-                                                    name="imageDescription"
-                                                    aria-describedby="imageDescription"
-                                                    value=""
-                                                    placeholder="Зал или спальня"
-                                            >
-                                        </div>
-<!--                                    end  input apartment-->
-
-        <!--                            input fileName-->
-                                        <div class="input-group">
-                                            <div class=" input-group-text" style="min-width: 150px;">Добавить фото:</div>
-                                            <input
-                                                    type="file"
-                                                    class="form-control form-control-sm"
-                                                    id="filePhoto"
-                                                    accept="image/png, image/jpeg, image/jpg"
-                                                    name="filePhoto"
-                                                    aria-describedby="filePhoto"
-                                                    multiple
-                                            >
-                                        </div>
-        <!--                             end  input fileName-->
-                                        <div class="form-group mt-3">
-                                            <input type="hidden" name="_method" value="POST">
-                                            <input type="hidden" name="_action" value="save_images">
-                                            <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
-                                            <div class="input-group">
-                                                <i class="bi bi-save input-group-text text-success"></i>
-                                                <button type="submit" class="btn btn-success">Сохранить картинки</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
+                                    <div class="row row-cols-1 row-cols-md-3 g-1">
+                                        <?php if (isset($imagesArr) && is_array($imagesArr) && count($imagesArr) > 0): ?>
+                                            <?php foreach ($imagesArr as $image): ?>
+                                                <div class="card">
+                                                    <img src="<?= $image['image_url'] ?>" class="card-img-top"
+                                                         alt="...">
+                                                    <div class="card-footer text-muted d-flex justify-content-between">
+                                                        <div class="card-text"><?= $image['image_description'] ?></div>
+                                                        <form
+                                                                action="/?documents=<?= $document['doc_id'] ?>"
+                                                                class="needs-validation"
+                                                                novalidate
+                                                                method="POST"
+                                                                enctype="multipart/form-data">
+                                                            <input type="hidden" name="_action" value="delete_images">
+                                                            <input type="hidden" name="image_id"
+                                                                   value="<?= $image['image_id'] ?>">
+                                                            <button type="submit" class="btn-close"
+                                                                    aria-label="Close"></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
+
                             </div>
                             <!--end body for "Фото"-->
                         </div>
