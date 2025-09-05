@@ -1,6 +1,6 @@
 <?php
 /**
-for save project;
+doc_control_save_project;
  */
 
 use Utils\{App, Db, Validator};
@@ -36,36 +36,9 @@ if (isset($_FILES['fileName']) && $_FILES['fileName']['error'] === 0) {
     $data['docFile'] = null;
 }
 
-$validation = $validator->validate($data, [
-    'type' => [
-        'required' => true,
-        'min' => 1,
-        'max' => 30,
-    ],
-    'mode' => [
-        'required' => true,
-        'min' => 1,
-        'max' => 4,
-    ],
-    'street' => [
-        'required' => true,
-        'min' => 6,
-        'max' => 50,
-    ],
-    'apartment' => [
-        'required' => true,
-        'min' => 3,
-        'max' => 100,
-    ],
-//    'docFile' => [
-//        'required' => true,
-//        'ext' => 'xls|xlsx',
-//        'size' => 1_048_576,
-//    ],
-]);
-var_dump($data);
-//var_dump($data);
-var_dump($validation->getErrors());
+//require CONFIG . '/rules.php';
+$validation = $validator->validate($data, RULES_PROJECT);
+
 if (!$validation->hasErrors()) {
     var_dump($data);
     //запись документа;
@@ -75,7 +48,7 @@ if (!$validation->hasErrors()) {
     //запись адресов;
     $request = [$data['street'], $data['apartment'], $id_doc];
     $db->query("UPDATE addressBook SET `street` = ?, `apartment` = ? WHERE `document_id` = ?", $request);
-    var_dump($res);
+
      if ($res) {
          if (!empty($data['docFile']['name'])) {
              $id = $db->getInsertId();
@@ -95,11 +68,11 @@ if (!$validation->hasErrors()) {
          }
          $_SESSION['success'] = 'OK';
      } else {
-         $_SESSION['error'] =  $_SESSION['error'] ?? 'DB Error';
+         $_SESSION['error'] =  $_SESSION['error'] ?? '[97 doc_control_save_project] DB Error';
      }
 
 } else {
-    $_SESSION['error'] =  $_SESSION['error'] ?? 'DB Error';
+    $_SESSION['error'] =  $_SESSION['error'] ?? '[101 doc_control_save_project] DB Error';
 }
 
 

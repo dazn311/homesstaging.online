@@ -27,7 +27,8 @@
                             <div class="portfolio-info">
                                 <h4><?=$PortfolioObj['projectTitle'];?></h4>
                                 <p>бюджет <?php
-                                    $priceInt = (int) $PortfolioObj['price'];
+                                    $priceInt = preg_replace("/[^0-9]*/","",$PortfolioObj['price'] ?? '');
+                                    $priceInt = (int) $priceInt;
                                     $priceInt = $priceInt / 1_000_000;
                                     echo round($priceInt, 3);
                                     ?> млн</p>

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 
     if (!$validation->hasErrors()) {
-        if (!$user = $db->query("SELECT * FROM users WHERE email = ?", [$data['email']])->find()) {
+        if (!$user = $db->query("SELECT * FROM user WHERE email = ?", [$data['email']])->find()) {
             $_SESSION['error'] = 'Wrong email or password';
             redirect();
         }

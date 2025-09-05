@@ -2,6 +2,7 @@
 /**
 for create document;
  */
+require CONFIG . '/rules.php';
 //if (!check_auth()) {
 //    redirect('/');
 //}
@@ -21,10 +22,13 @@ switch ($data['_action']) {
         break;
     case 'save_description':
         require_once CONTROLLERS . '/documents/save_description.php';
+        break;
     case 'save_works':
         require_once CONTROLLERS . '/documents/save_works.php';
+        break;
     case 'save_images':
         require_once CONTROLLERS . '/documents/save_images.php';
+        break;
     case 'delete_images':
         require_once CONTROLLERS . '/documents/delete_images.php';
         break;

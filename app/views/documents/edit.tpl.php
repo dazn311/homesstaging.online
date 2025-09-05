@@ -24,6 +24,25 @@ $description_keys = [
     'project_url' => 'Проект URL: ',
 ];
 
+$nav_tabs = [
+    "general" => [
+        "isActive" => true,
+        "caption" => "Основные"
+    ],
+    "description" => [
+        "isActive" => false,
+        "caption" => "Описание для сайта"
+    ],
+    "works" => [
+        "isActive" => false,
+        "caption" => "Произведенные работы"
+    ],
+    "photo" => [
+        "isActive" => false,
+        "caption" => "Фото"
+    ],
+];
+
 ?>
 <style>
     .avatar {
@@ -38,7 +57,40 @@ $description_keys = [
         margin-right: 10px;
         min-width: 400px;
     }
+
+    div.input-group-text {
+        min-width: 170px;
+        position: relative;
+    }
+
+    .input-group.required .input-group-text:after {
+        color: #d00;
+        content: "*";
+        position: absolute;
+        margin-left: calc(100% - 22px);
+        top: 0;
+    }
 </style>
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Ошибка!</strong> <?php echo $_SESSION['error'];
+        unset($_SESSION['error']); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+<?php elseif (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+            <use xlink:href="#check-circle-fill"/>
+        </svg>
+        <div>
+            <?php echo $_SESSION['success'];
+            unset($_SESSION['success']); ?>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 <main class="main py-3">
     <div class="container">
         <div class="row">
@@ -51,17 +103,18 @@ $description_keys = [
                     <div class="card-body">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                <button class="nav-link active" id="nav-general-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-general" type="button" role="tab"
+                                        aria-controls="nav-general"
                                         aria-selected="true">Основные
                                 </button>
-                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-profile" type="button" role="tab"
-                                        aria-controls="nav-profile" aria-selected="false">Описание для сайта
+                                <button class="nav-link" id="nav-description-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-description" type="button" role="tab"
+                                        aria-controls="nav-description" aria-selected="false">Описание для сайта
                                 </button>
-                                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-contact" type="button" role="tab"
-                                        aria-controls="nav-contact" aria-selected="false">Произведенные работы
+                                <button class="nav-link" id="nav-works-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-works" type="button" role="tab"
+                                        aria-controls="nav-works" aria-selected="false">Произведенные работы
                                 </button>
                                 <button class="nav-link" id="nav-photo-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-photo" type="button" role="tab" aria-controls="nav-photo"
@@ -72,8 +125,8 @@ $description_keys = [
 
                         <div class="tab-content" id="nav-tabContent">
                             <!--body for "Основные"-->
-                            <div class="tab-pane fade show active p-2" id="nav-home" role="tabpanel"
-                                 aria-labelledby="nav-home-tab">
+                            <div class="tab-pane fade show active p-2" id="nav-general" role="tabpanel"
+                                 aria-labelledby="nav-general-tab">
                                 <p class="card-text">
                                     <span class="fw-semibold pe-1">Автор:</span>
                                     <img src="<?= h($document['avatar']) ?>" class="avatar" alt="avatar">
@@ -87,11 +140,9 @@ $description_keys = [
 
                                 <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
                                       novalidate method="POST" enctype="multipart/form-data">
-                                    <!--                                    input type-->
-                                    <div class="input-group">
-                                        <div class=" input-group-text"
-                                             style="min-width: 150px;">Тип объекта:
-                                        </div>
+                                    <!--input type-->
+                                    <div class="input-group <?php echo isset(RULES_PROJECT['type']) ? 'required' : '' ?>">
+                                        <div class="input-group-text">Тип объекта:</div>
                                         <input
                                                 type="text"
                                                 class="form-control form-control-sm"
@@ -103,12 +154,11 @@ $description_keys = [
                                                 required
                                         >
                                     </div>
-                                    <!--                               end  input type-->
+                                    <!--end  input type-->
 
-                                    <!--                               select mode-->
-                                    <div class="input-group">
-                                        <div class=" input-group-text"
-                                             style="min-width: 150px;"><?= $captionsArr['mode']['caption_ru']; ?></div>
+                                    <!--select mode-->
+                                    <div class="input-group <?php echo isset(RULES_PROJECT['mode']) ? 'required' : '' ?>">
+                                        <div class="input-group-text"><?= $captionsArr['mode']['caption_ru']; ?></div>
                                         <select
                                                 class="form-control form-control-sm"
                                                 id="mode"
@@ -124,12 +174,11 @@ $description_keys = [
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <!--                                    end select mode-->
+                                    <!--end select mode-->
 
-                                    <!--                                    input street-->
-                                    <div class="input-group">
-                                        <div class=" input-group-text"
-                                             style="min-width: 150px;"><?= $captionsArr['street']['caption_ru']; ?></div>
+                                    <!--input street-->
+                                    <div class="input-group <?php echo isset(RULES_PROJECT['street']) ? 'required' : '' ?>">
+                                        <div class="input-group-text"><?= $captionsArr['street']['caption_ru']; ?></div>
                                         <input
                                                 type="<?= $captionsArr['street']['input_type']; ?>"
                                                 class="form-control form-control-sm"
@@ -141,12 +190,11 @@ $description_keys = [
                                                 required
                                         >
                                     </div>
-                                    <!--                               end  input street-->
+                                    <!--end  input street-->
 
-                                    <!--                                    input apartment-->
-                                    <div class="input-group">
-                                        <div class=" input-group-text"
-                                             style="min-width: 150px;"><?= $captionsArr['apartment']['caption_ru']; ?></div>
+                                    <!--input apartment-->
+                                    <div class="input-group <?php echo isset(RULES_PROJECT['apartment']) ? 'required' : '' ?>">
+                                        <div class="input-group-text"><?= $captionsArr['apartment']['caption_ru']; ?></div>
                                         <input
                                                 type="<?= $captionsArr['apartment']['input_type']; ?>"
                                                 class="form-control form-control-sm"
@@ -158,11 +206,11 @@ $description_keys = [
                                                 required
                                         >
                                     </div>
-                                    <!--                            end  input apartment-->
+                                    <!--end  input apartment-->
 
-                                    <!--                            input fileName-->
-                                    <div class="input-group">
-                                        <div class=" input-group-text" style="min-width: 150px;">
+                                    <!--input fileName-->
+                                    <div class="input-group <?php echo isset(RULES_PROJECT['fileName']) ? 'required' : '' ?>">
+                                        <div class="input-group-text">
                                             <?php
                                             echo $captionsArr['fileName']['caption_ru'];
                                             $fileName = $document['fileName'] ?? '';
@@ -199,15 +247,14 @@ $description_keys = [
                             <!--end body for "Основные"-->
 
                             <!--body for "Описание для сайта"-->
-                            <div class="tab-pane fade p-2" id="nav-profile" role="tabpanel"
-                                 aria-labelledby="nav-profile-tab">
+                            <div class="tab-pane fade p-2" id="nav-description" role="tabpanel"
+                                 aria-labelledby="nav-description-tab">
                                 <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
                                       novalidate
                                       method="POST">
                                     <?php foreach ($description_keys as $key => $value): ?>
-                                        <div class="input-group">
-                                            <div class=" input-group-text"
-                                                 style="min-width: 170px;"> <?= $value; ?></div>
+                                        <div class="input-group <?php echo isset(RULES_DESCRIPTION[$key]) ? 'required' : '' ?>">
+                                            <div class="input-group-text"> <?= $value; ?></div>
                                             <input
                                                     type="<?= $type_input[$key]; ?>"
                                                     class="form-control form-control-sm datepicker"
@@ -218,6 +265,7 @@ $description_keys = [
                                                     placeholder="<?= $key; ?>"
                                                     required
                                             >
+                                            <?= isset($validation) ? $validation->listErrors($key) : '' ?>
                                         </div>
                                     <?php endforeach; ?>
                                     <div class="form-group mt-3">
@@ -234,8 +282,8 @@ $description_keys = [
                             <!--end body for "Описание для сайта"-->
 
                             <!--body for "Произведенные работы"-->
-                            <div class="tab-pane fade p-2" id="nav-contact" role="tabpanel"
-                                 aria-labelledby="nav-contact-tab">
+                            <div class="tab-pane fade p-2" id="nav-works" role="tabpanel"
+                                 aria-labelledby="nav-works-tab">
                                 <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
                                       novalidate
                                       method="POST">
@@ -275,35 +323,20 @@ $description_keys = [
                             <!--end body for "Произведенные работы"-->
 
                             <!--body for "Фото"-->
-                            <div class="tab-pane fade p-2" id="nav-photo" role="tabpanel" aria-labelledby="nav-photo-tab">
-                                <?php if (isset($_SESSION['error'])): ?>
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <strong>Ошибка!</strong> <?php echo $_SESSION['error']; unset($_SESSION['error']);?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close"></button>
-                                    </div>
-                                <?php elseif (isset($_SESSION['success'])): ?>
-                                    <div class="alert alert-success d-flex align-items-center" role="alert">
-                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                                        <div>
-                                            <?php echo $_SESSION['success']; unset($_SESSION['success']);?>
-                                        </div>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
+                            <div class="tab-pane fade p-2" id="nav-photo" role="tabpanel"
+                                 aria-labelledby="nav-photo-tab">
                                 <div class="d-flex justify-content-between gap-1">
                                     <div class="form-pic">
                                         <form
-                                                action="/?documents=<?=$document['doc_id'];?>"
+                                                action="/?documents=<?= $document['doc_id']; ?>"
                                                 class="needs-validation"
                                                 novalidate
                                                 method="POST"
                                                 enctype="multipart/form-data">
-                                            <!--                                    input imageDescription-->
+
+                                            <!--input imageDescription-->
                                             <div class="input-group">
-                                                <div class=" input-group-text" style="min-width: 150px;">Описание картинки</div>
+                                                <div class="input-group-text">Описание картинки</div>
                                                 <input
                                                         type="text"
                                                         class="form-control form-control-sm"
@@ -314,10 +347,10 @@ $description_keys = [
                                                         placeholder="Зал или спальня"
                                                 >
                                             </div>
-
-        <!--                                input fileName-->
+                                            <!--end input imageDescription-->
+                                            <!--input fileName-->
                                             <div class="input-group">
-                                                <div class=" input-group-text" style="min-width: 150px;">Добавить
+                                                <div class="input-group-text">Добавить
                                                     фото:
                                                 </div>
                                                 <input
@@ -330,7 +363,8 @@ $description_keys = [
                                                         multiple
                                                 >
                                             </div>
-        <!--                                end  input fileName-->
+                                            <!--end input fileName-->
+
                                             <div class="form-group mt-3">
                                                 <input type="hidden" name="_method" value="POST">
                                                 <input type="hidden" name="_action" value="save_images">
@@ -350,16 +384,16 @@ $description_keys = [
                                                     <img src="<?= $image['image_url'] ?>" class="card-img-top"
                                                          alt="...">
                                                     <div class="card-footer text-muted d-flex justify-content-between">
-                                                        <div class="card-text"><?= $image['image_description'] ?></div>
+                                                        <div class="card-text"><?= $image['image_description']; ?></div>
                                                         <form
-                                                                action="/?documents=<?= $document['doc_id'] ?>"
+                                                                action="/?documents=<?= $document['doc_id']; ?>"
                                                                 class="needs-validation"
                                                                 novalidate
                                                                 method="POST"
                                                                 enctype="multipart/form-data">
                                                             <input type="hidden" name="_action" value="delete_images">
                                                             <input type="hidden" name="image_id"
-                                                                   value="<?= $image['image_id'] ?>">
+                                                                   value="<?= $image['image_id']; ?>">
                                                             <button type="submit" class="btn-close"
                                                                     aria-label="Close"></button>
                                                         </form>

@@ -107,7 +107,7 @@ VALUES (2, 'В работе');
 INSERT INTO mode (id, title_mode)
 VALUES (3, 'Завершен');
 
-
+# INSERT INTO `document` (`id`, `type`, `mode_id`, `project_key`, `createDate`, `userRole`, `fileName`) VALUES (NULL, 'Евродвушка', '3', 'ilyinskie1', CURRENT_TIMESTAMP, '1', 'ilyinskie1-Nata-250822.xlsx');
 INSERT INTO document (id, type,  project_key, createDate, userRole, fileName, mode_id)
 VALUES (1, 'Евродвушка',  'kronstadskii1', '2025-05-11 23:31:18', 1, 'kronstadskii1-Nata-250811.xlsx',3);
 
@@ -120,7 +120,7 @@ VALUES (3, 'Евродвушка', 'mitino2', '2025-06-12 23:31:18', 1, 'mitino2
 INSERT INTO document (id, type, project_key, createDate, userRole, fileName, mode_id)
 VALUES (4, 'Евродвушка',  'ilyinskie1', '2025-08-22 23:31:18', 1, 'ilyinskie1-Nata-250822.xlsx',3);
 
-
+# INSERT INTO `addressBook` (`address_id`, `code`, `street`, `apartment`, `document_id`) VALUES (NULL, '143421', 'ул. Заповедная', '21', '4');
 INSERT INTO addressBook (address_id, code, street, apartment, document_id)
 VALUES (3, '125222', 'Кронштадтский бул.', '8к2', 1);
 
@@ -148,7 +148,7 @@ VALUES (4, 'бытовая техника Weissgauff, фартук на кухн
 INSERT INTO worksPerformed (id, title_work, document_id)
 VALUES (5, 'Установка сплит системы.' ,2);
 
-
+# INSERT INTO `breadcrumbs` (`breadcrumbs_id`, `project_title`, `document_id`) VALUES ('4', 'ЖК Ильинские Луга', '4');
 INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (1,  'ЖК Кронштадтский',1);
 INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (2,  'ЖК Митинский лес',2);
 INSERT INTO breadcrumbs (breadcrumbs_id, project_title, document_id) VALUES (3,  'ЖК Митинский лес',3);
