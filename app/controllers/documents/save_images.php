@@ -37,7 +37,7 @@ $validation = $validator->validate($data, [
     'docFile' => [
         'required' => true,
         'ext' => 'png|jpeg|jpg',
-        'size' => 1_048_576,
+        'size' => 10_048_576,
     ],
 ]);
 
