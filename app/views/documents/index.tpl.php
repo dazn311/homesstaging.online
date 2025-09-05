@@ -1,4 +1,7 @@
 <?php
+/**
+view documents index
+ */
     require VIEWS . '/incs/header.php';
 ?>
 
