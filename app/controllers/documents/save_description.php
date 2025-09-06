@@ -37,17 +37,16 @@ if (!$validation->hasErrors()) {
         SET title = ?, category = ?, price = ?, project_url = ?, project_des = ?, end_date = ?, document_id = ?
         WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc, $idDoc]);
 
-        if ($res && count($res) > 0) {
+        if ($res) {
             $_SESSION['success'] = 'данные успешно обновлены.';
         }
     } else {
         $res = $db->query("
             INSERT INTO description (title, category, price, project_url, project_des, end_date, document_id) 
             VALUES (?,?,?,?,?,?,?);",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc]);
-        if ($res && count($res) > 0) {
+        if ($res) {
             $_SESSION['success'] = 'данные успешно созданы и записаны.';
         }
-
     }
 } else {
     $_SESSION['error'] = 'Одно или несколько полей не прошли валидацию.';
