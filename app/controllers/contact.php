@@ -1,7 +1,7 @@
 <?php
 
 // $db = \myfrm\App::get(\myfrm\Db::class);
-$title = 'Home Staging :: contact';
+$title = 'Contact :: HomeStaging';
 
 $post = '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam, repudiandae iusto mollitia, natus repellendus excepturi obcaecati, dicta labore similique minima alias nostrum dolore soluta nam laborum eos inventore eum porro?</p>
 <p>Facere ullam aliquam, dolor perferendis corrupti veniam provident eligendi! Id veritatis corrupti sed adipisci consectetur labore debitis officiis, quasi ut obcaecati ea dolorum repudiandae repellendus aut aperiam? Quaerat, molestias eaque?</p>

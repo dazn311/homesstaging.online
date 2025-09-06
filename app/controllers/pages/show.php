@@ -2,14 +2,14 @@
 
 use Utils\{App, Db};
 
-$title = 'Home Staging :: Home';
+$title = 'Home :: HomeStaging';
 
 $db = App::get(Db::class);
 $idDoc = route_param('id','1248303');// '1248303'
 
 $document = $db->query("
     SELECT * FROM documents 
-    LEFT JOIN users 
+    LEFT JOIN user
         ON documents.userId = users.id 
          WHERE documents.id = ?;",[$idDoc]);
 

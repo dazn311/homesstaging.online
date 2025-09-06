@@ -17,5 +17,5 @@ if (!$users) {
     $users = [];
 }
 //dd($users);
-$title = "Добавить документ :: Home Staging";
+$title = "Добавить документ :: HomeStaging";
 require_once VIEWS . '/documents/create.tpl.php';

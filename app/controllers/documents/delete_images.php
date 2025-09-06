@@ -11,7 +11,7 @@ $fill_able = ['image_id'];
 
 $data = load($fill_able, true);
 
-$title = 'doc_store=>edit.tpl';
+$title = 'doc_store :: HomeStaging';
 
 //запись документа;
 $image_id = $data['image_id'];

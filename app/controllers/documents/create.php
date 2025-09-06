@@ -17,5 +17,5 @@ if (!$users) {
     $users = [];
 }
 //dd($users);
-$title = "doc_create => create.tpl";
+$title = "doc_create :: HomeStaging";
 require_once VIEWS . '/documents/create.tpl.php';

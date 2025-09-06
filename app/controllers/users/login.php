@@ -2,7 +2,7 @@
 
 use Utils\{App, Db, Validator};
 
-$title = "Home Staging :: Login";
+$title = "Login :: HomeStaging";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /** @var Db $db */

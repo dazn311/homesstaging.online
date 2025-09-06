@@ -2,7 +2,7 @@
 
 use Utils\{App, Db};
 
-$title = 'Объект :: doc_show';
+$title = 'Объект :: HomeStaging';
 
 $db = App::get(Db::class);
 
@@ -31,7 +31,7 @@ if ($document) {
     $document = $document->find();
 
     if ($document) {
-        $title = "doc_show_contr {$document['project_key']} => doc_show.tpl";
+        $title = "doc_show_contr {$document['project_key']} :: HomeStaging";
     } else {
         require_once VIEWS . '/errors/404.tpl.php';
         die();

@@ -23,7 +23,7 @@ for save document;
 //
 //$idDoc = route_param('documents','all');// '1248303'
 //
-//$title = 'doc_store=>save.tpl';
+//$title = 'doc_store :: HomeStaging';
 //
 //$validator = new Validator();
 

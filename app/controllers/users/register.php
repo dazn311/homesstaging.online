@@ -2,7 +2,7 @@
 
 use Utils\{App, Db, Validator};
 
-$title = "Home Staging :: Register";
+$title = "Register :: HomeStaging";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /** @var Db $db */
