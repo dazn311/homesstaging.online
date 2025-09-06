@@ -12,12 +12,17 @@ $menu = $db->query("
                 ON D.id = B.document_id 
             LEFT JOIN addressBook A
                 ON D.id = A.document_id 
-                WHERE D.mode = 'end'            
+                WHERE D.mode_id = 3
                 ORDER BY D.createDate DESC ;",[]);
-$menuArr = $menu->findAll();
+
+$menuFetchRes = [];
+
+if ($menu) {
+    $menuFetchRes = $menu->findAll();
+}
 
 $menu2Arr = [];
-foreach ($menuArr as $menu) {
+foreach ($menuFetchRes as $menu) {
     $menu2Arr[$menu['project_title']][] = $menu;
 }
 require_once VIEWS . '/pages/index.tpl.php';

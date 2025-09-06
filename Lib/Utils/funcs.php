@@ -77,7 +77,8 @@ function oldCheck($fieldName): string
 
 function h($str): string
 {
-    return htmlspecialchars($str, ENT_QUOTES);
+    $strValue = $str ?? '';
+    return htmlspecialchars($strValue, ENT_QUOTES);
 }
 
 #[NoReturn] function redirect($url = ''): void

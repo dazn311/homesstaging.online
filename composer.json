@@ -8,7 +8,8 @@
     "vlucas/phpdotenv": "^5.6",
     "predis/predis": "^3.1",
     "ext-pdo": "*",
-    "minishlink/web-push": "^9.0"
+    "minishlink/web-push": "^9.0",
+    "intervention/image": "^3.11"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"

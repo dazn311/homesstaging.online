@@ -12,7 +12,7 @@ $menu = $db->query("
                 ON D.id = B.document_id 
             LEFT JOIN addressBook A
                 ON D.id = A.document_id 
-                WHERE D.mode = 'end'            
+                WHERE D.mode_id = 3      
                 ORDER BY D.createDate DESC ;",[]);
 $menuArr = $menu->findAll();
 
@@ -27,7 +27,7 @@ switch (true) {
         $project_key = $_REQUEST['details'];
 
         $documents = $db->query("
-        SELECT D.id as id, title,category,street,apartment,price,end_date,project_title,project_url,project_des FROM document D
+        SELECT D.id as id, title,category,street,apartment,price,DATE_FORMAT(end_date, '%d.%m.%Y') AS end_date,project_title,project_url,project_des FROM document D
             LEFT JOIN addressBook
                 ON D.id = addressBook.document_id
             LEFT JOIN description
@@ -46,7 +46,7 @@ switch (true) {
         $worksArr = $works->findAll();
 
         $images = $db->query("
-        SELECT image_url AS imageUrl FROM image
+        SELECT image_url AS imageUrl, image_description AS imageDescription FROM image
                 WHERE image.document_id = ?
                 ORDER BY image.image_id
                 LIMIT 10;",[$res['id']]);

@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$validation->hasErrors()) {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         
-        if ($db->query("INSERT INTO users (`name`, `email`, `password`) VALUES (?,?,?)", [$data['name'],$data['email'],$data['password']])) {
+        if ($db->query("INSERT INTO user (`name`, `email`, `password`) VALUES (?,?,?)", [$data['name'],$data['email'],$data['password']])) {
           
           if (!empty($data['avatar']['name'])) {
             $id = $db->getInsertId();

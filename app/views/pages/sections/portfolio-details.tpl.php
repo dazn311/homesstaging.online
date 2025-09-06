@@ -5,7 +5,7 @@
         background-repeat: no-repeat,repeat;
         background-position: right 2px top 0,0 0;
         height: 753px;
-        background-size: cover;
+        background-size: contain;
     }
 </style>
 <section id="portfolio-details" class="portfolio-details section">

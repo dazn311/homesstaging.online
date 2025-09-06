@@ -10,30 +10,35 @@ $idDoc = route_param('documents','all');// '1248303'
 
 
 $querySt = "
-    SELECT D.id AS doc_id, D.project_key, D.createDate, D.mode, D.type, D.fileName,
+    SELECT D.id AS doc_id, D.project_key, D.createDate, M.title_mode AS mode, D.type, D.fileName,
                A.street, A.apartment,
                U.avatar, U.name
     FROM document D
         LEFT JOIN addressBook A
             ON D.id = A.document_id
+        LEFT JOIN mode M
+            ON M.id = D.mode_id
         LEFT JOIN user U
             ON D.userRole = U.role
         WHERE D.id = ?;";
 
 $document = $db->query($querySt,[$idDoc]);
+$descriptionArr = [];
+$worksArr = [];
+$imagesArr = [];
 
 if ($document) {
     $document = $document->find();
 
     if ($document) {
-        $title = "doc_show {$document['project_key']} => show.tpl";
+        $title = "doc_show_contr {$document['project_key']} => doc_show.tpl";
     } else {
         require_once VIEWS . '/errors/404.tpl.php';
         die();
     }
 
     $description = $db->query("
-        SELECT W.title, W.category, W.price, W.project_url, W.project_des, W.end_date FROM document D
+        SELECT W.title, W.category, W.price, W.project_url, W.project_des, DATE_FORMAT(W.end_date, '%d.%m.%Y') AS end_date FROM document D
             LEFT JOIN description W
                 ON D.id = W.document_id 
                 WHERE D.id = ?;",[$idDoc]);
@@ -46,6 +51,10 @@ if ($document) {
                 WHERE D.id = ? AND W.title_work IS NOT NULL 
                 ORDER BY W.id ;",[$idDoc]);
     $worksArr = $works->findAll();
+
+    $images = $db->query("SELECT image_url, image_description FROM image WHERE document_id = ?;",[$idDoc]);
+    $imagesArr = $images->findAll();
+
 } else {
     require_once VIEWS . '/errors/404.tpl.php';
     die();

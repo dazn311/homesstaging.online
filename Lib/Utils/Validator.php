@@ -9,14 +9,14 @@ class Validator
     protected array $data_items;
     protected array $rules_list = ['required', 'min', 'max', 'email', 'match', 'unique', 'ext', 'size'];
     protected array $messages = [
-        'required' => 'The :fieldname: field is required',
-        'min' => 'The :fieldname: field must be a minimun :rulevalue: characters',
-        'max' => 'The :fieldname: field must be a maximum :rulevalue: characters',
-        'email' => 'Not valid email',
-        'match' => 'The :fieldname: field must match :rulevalue: field',
-        'unique' => 'The :fieldname: is already taken',
-        'ext' => 'File :fieldname: extension does not match. Allowed :rulevalue:',
-        'size' => 'File :fieldname: is too big. Allowed :rulevalue: bytes',
+        'required' => 'Значение поля ":fieldname:" обязательное',
+        'min' => 'Значение поля ":fieldname:" должно быть больше :rulevalue: символов',
+        'max' => 'Значение поля ":fieldname:" должно быть меньше :rulevalue: символов',
+        'email' => 'Не валидный email',
+        'match' => 'Значение поля ":fieldname:" должно совпадать с :rulevalue: ',
+        'unique' => 'Значение поля ":fieldname:" должно быть уникальным',
+        'ext' => 'Расширение файла :fieldname: не допустимое. Возможно только :rulevalue:',
+        'size' => 'Размер файла :fieldname: слишком большой. Допустимо :rulevalue: байт',
     ];
 
     public function validate($data = [], $rules = [])

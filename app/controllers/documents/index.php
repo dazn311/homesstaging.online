@@ -7,15 +7,21 @@ $title = 'Проекты :: doc_index';
 $db = App::get(Db::class);
 
 $menu = $db->query("
-        SELECT D.id AS doc_id, D.project_key, D.createDate, D.mode, D.type, D.fileName,
+        SELECT D.id AS doc_id, D.project_key, D.createDate, M.title_mode AS mode, D.type, D.fileName,
                B.breadcrumbs_id, B.project_title, A.street, A.apartment  
         FROM document D
             LEFT JOIN breadcrumbs B     
-                ON D.id = B.document_id 
+                ON D.id = B.document_id
+            LEFT JOIN mode M
+                ON M.id = D.mode_id
             LEFT JOIN addressBook A
-                ON D.id = A.document_id 
+                ON D.id = A.document_id
                 ORDER BY D.createDate DESC ;",[]);
-$documents = $menu->findAll();
+$documents = [];
+if ($menu) {
+    $documents = $menu->findAll();
+}
+
 
 $recent_posts[] = [
     'id'=> 2,
