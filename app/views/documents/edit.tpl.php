@@ -26,22 +26,35 @@ $description_keys = [
 
 $nav_tabs = [
     "general" => [
-        "isActive" => true,
+        "isActive" => false,
+        "active" => "",
+        "showActive" => "",
         "caption" => "Основные"
     ],
     "description" => [
         "isActive" => false,
+        "active" => "",
+        "showActive" => "",
         "caption" => "Описание для сайта"
     ],
     "works" => [
         "isActive" => false,
+        "active" => "",
+        "showActive" => "",
         "caption" => "Произведенные работы"
     ],
     "photo" => [
         "isActive" => false,
+        "active" => "",
+        "showActive" => "",
         "caption" => "Фото"
     ],
 ];
+
+$active_tab = $_SESSION['activeTab'] ?? 'general';
+$nav_tabs[$active_tab]["isActive"] = true;
+$nav_tabs[$active_tab]["active"] = 'active';
+$nav_tabs[$active_tab]["showActive"] = 'show active';
 
 ?>
 <style>
@@ -103,29 +116,20 @@ $nav_tabs = [
                     <div class="card-body">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-general-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-general" type="button" role="tab"
-                                        aria-controls="nav-general"
-                                        aria-selected="true">Основные
-                                </button>
-                                <button class="nav-link" id="nav-description-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-description" type="button" role="tab"
-                                        aria-controls="nav-description" aria-selected="false">Описание для сайта
-                                </button>
-                                <button class="nav-link" id="nav-works-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-works" type="button" role="tab"
-                                        aria-controls="nav-works" aria-selected="false">Произведенные работы
-                                </button>
-                                <button class="nav-link" id="nav-photo-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-photo" type="button" role="tab" aria-controls="nav-photo"
-                                        aria-selected="false">Фото
-                                </button>
+                                <?php foreach ($nav_tabs as $tKey => $tabs): ?>
+                                    <button class="nav-link <?=$tabs['active'];?>" id="nav-<?=$tKey;?>-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-<?=$tKey;?>" type="button" role="tab"
+                                            aria-controls="nav-<?=$tKey;?>"
+                                            aria-selected="<?=$tabs['isActive'];?>">
+                                        <?=$tabs['caption'];?>
+                                    </button>
+                                <?php endforeach; ?>
                             </div>
                         </nav>
 
                         <div class="tab-content" id="nav-tabContent">
                             <!--body for "Основные"-->
-                            <div class="tab-pane fade show active p-2" id="nav-general" role="tabpanel"
+                            <div class="tab-pane fade p-2 <?=$nav_tabs['general']["showActive"]?>" id="nav-general" role="tabpanel"
                                  aria-labelledby="nav-general-tab">
                                 <p class="card-text">
                                     <span class="fw-semibold pe-1">Автор:</span>
@@ -150,7 +154,6 @@ $nav_tabs = [
                                                 name="type"
                                                 aria-describedby="type"
                                                 value="<?= $document['type']; ?>"
-                                                placeholder="type"
                                                 required
                                         >
                                     </div>
@@ -186,7 +189,6 @@ $nav_tabs = [
                                                 name="street"
                                                 aria-describedby="street"
                                                 value="<?= $document['street']; ?>"
-                                                placeholder="street"
                                                 required
                                         >
                                     </div>
@@ -194,7 +196,7 @@ $nav_tabs = [
 
                                     <!--input apartment-->
                                     <div class="input-group <?php echo isset(RULES_PROJECT['apartment']) ? 'required' : '' ?>">
-                                        <div class="input-group-text"><?= $captionsArr['apartment']['caption_ru']; ?></div>
+                                        <div class="input-group-text"><?=$captionsArr['apartment']['caption_ru']; ?></div>
                                         <input
                                                 type="<?= $captionsArr['apartment']['input_type']; ?>"
                                                 class="form-control form-control-sm"
@@ -202,7 +204,6 @@ $nav_tabs = [
                                                 name="apartment"
                                                 aria-describedby="apartment"
                                                 value="<?= $document['apartment']; ?>"
-                                                placeholder="apartment"
                                                 required
                                         >
                                     </div>
@@ -214,7 +215,7 @@ $nav_tabs = [
                                             <?php
                                             echo $captionsArr['fileName']['caption_ru'];
                                             $fileName = $document['fileName'] ?? '';
-                                            echo ' ' . $fileName;
+                                            echo '<span class="text-warning bg-secondary px-2"> ' . $fileName . '</span>';
                                             ?>
                                         </div>
                                         <input
@@ -224,7 +225,6 @@ $nav_tabs = [
                                                 name="fileName"
                                                 aria-describedby="fileName"
                                                 value="<?= $document['fileName']; ?>"
-                                                placeholder="fileName"
                                                 required
                                         >
                                     </div>
@@ -247,7 +247,7 @@ $nav_tabs = [
                             <!--end body for "Основные"-->
 
                             <!--body for "Описание для сайта"-->
-                            <div class="tab-pane fade p-2" id="nav-description" role="tabpanel"
+                            <div class="tab-pane fade p-2 <?=$nav_tabs['description']["showActive"]?>" id="nav-description" role="tabpanel"
                                  aria-labelledby="nav-description-tab">
                                 <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
                                       novalidate
@@ -262,7 +262,7 @@ $nav_tabs = [
                                                     name="<?= $key; ?>"
                                                     aria-describedby="<?= $key; ?>"
                                                     value="<?= $descriptionArr[$key] ?? ''; ?>"
-                                                    placeholder="<?= $key; ?>"
+                                                    placeholder=""
                                                     required
                                             >
                                             <?= isset($validation) ? $validation->listErrors($key) : '' ?>
@@ -282,7 +282,7 @@ $nav_tabs = [
                             <!--end body for "Описание для сайта"-->
 
                             <!--body for "Произведенные работы"-->
-                            <div class="tab-pane fade p-2" id="nav-works" role="tabpanel"
+                            <div class="tab-pane fade p-2 <?=$nav_tabs['works']["showActive"]?>" id="nav-works" role="tabpanel"
                                  aria-labelledby="nav-works-tab">
                                 <form action="/?documents=<?= $document['doc_id'] ?>" class="needs-validation"
                                       novalidate
@@ -300,7 +300,7 @@ $nav_tabs = [
                                                             name="worksPerformed_<?= $key; ?>"
                                                             aria-describedby="worksPerformed_<?= $key; ?>"
                                                             value="<?= $work['title_work'] ?>"
-                                                            placeholder="заполните выполненные работы"
+                                                            placeholder=""
                                                             required
                                                     >
                                                 </div>
@@ -323,7 +323,7 @@ $nav_tabs = [
                             <!--end body for "Произведенные работы"-->
 
                             <!--body for "Фото"-->
-                            <div class="tab-pane fade p-2" id="nav-photo" role="tabpanel"
+                            <div class="tab-pane fade p-2 <?=$nav_tabs['photo']["showActive"]?>" id="nav-photo" role="tabpanel"
                                  aria-labelledby="nav-photo-tab">
                                 <div class="d-flex justify-content-between gap-1">
                                     <div class="form-pic">
@@ -344,7 +344,7 @@ $nav_tabs = [
                                                         name="imageDescription"
                                                         aria-describedby="imageDescription"
                                                         value=""
-                                                        placeholder="Зал или спальня"
+                                                        placeholder=""
                                                 >
                                             </div>
                                             <!--end input imageDescription-->

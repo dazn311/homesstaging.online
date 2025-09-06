@@ -18,21 +18,28 @@ $data = load(['_action'], true);
 //var_dump($data);
 switch ($data['_action']) {
     case 'save_project':
+        $_SESSION['activeTab'] = 'general';
         require_once CONTROLLERS . '/documents/save_project.php';
         break;
     case 'save_description':
+        $_SESSION['activeTab'] = 'description';
         require_once CONTROLLERS . '/documents/save_description.php';
         break;
     case 'save_works':
+        $_SESSION['activeTab'] = 'works';
         require_once CONTROLLERS . '/documents/save_works.php';
         break;
     case 'save_images':
+        $_SESSION['activeTab'] = 'photo';
         require_once CONTROLLERS . '/documents/save_images.php';
         break;
     case 'delete_images':
+        $_SESSION['activeTab'] = 'photo';
         require_once CONTROLLERS . '/documents/delete_images.php';
         break;
-        default:
+    default:
+        $_SESSION['activeTab'] = 'general';
+        break;
 }
 
 

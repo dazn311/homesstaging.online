@@ -53,8 +53,7 @@ $description_keys = [
                                 <p class="card-text"><span class="fw-semibold pe-1">Тип объекта:</span><?=$document['type'];?></p>
                                 <p class="card-text"><span class="fw-semibold pe-1">Статус проекта:</span><?=$document['mode'];?></p>
                                 <p class="card-text"><span class="fw-semibold pe-1">Улица:</span><?=$document['street'];?></p>
-                                <p class="card-text"><span class="fw-semibold pe-1">5
-                                    </span><?=$document['apartment'];?></p>
+                                <p class="card-text"><span class="fw-semibold pe-1">Дом:</span><?=$document['apartment'];?></p>
                                 <p class="card-text"><span class="fw-semibold pe-1">Смета:</span> <?=$document['fileName'];?></p>
                             </div>
 
