@@ -1,5 +1,8 @@
 <?php
-
+/*
+ * control-doc-index;
+ * route /?documents=all
+ * */
 use Utils\{App, Db};
 
 $title = 'Проекты :: HomeStaging';
@@ -18,32 +21,26 @@ $menu = $db->query("
                 ON D.id = A.document_id
                 ORDER BY D.createDate DESC ;",[]);
 $documents = [];
+
 if ($menu) {
     $documents = $menu->findAll();
 }
 
-
-$recent_posts[] = [
-    'id'=> 2,
-    'title'=> 'ЖК Ильинские луга',
-];
+if (isset($_SESSION['lastDocId'])) {
+    $lastDocId = (int) $_SESSION['lastDocId'];
+    foreach ($documents as $documentObject) {
+        if ($documentObject['doc_id'] == $lastDocId) {
+            $recent_posts[] = $documentObject;
+        }
+    }
+} else {
+    $recent_posts[] = [
+        'doc_id'=> 2,
+        'project_key'=> 'mitino1',
+        'project_title'=> 'ЖК Митинский лес',
+        'street'=> 'ул. Муравская',
+        'apartment'=> '38Бк1',
+    ];
+}
 
 require_once VIEWS . '/documents/index.tpl.php';
-
-/**
- * $documents = $db->query("
- * SELECT
- * documents.fileName,
- * documents.type,
- * documents.idDoc,
- * Customers.CustomerName,
- * users.name,
- * users.avatar
- * FROM
- * documents
- * INNER JOIN
- * users ON documents.userId = users.id
- * WHERE
- * documents.type = 'invrpt'
- * AND documents.mode > 'edit';");
- */

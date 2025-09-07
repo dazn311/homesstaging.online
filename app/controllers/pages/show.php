@@ -1,5 +1,8 @@
 <?php
-
+/*
+ * control-page-show;
+ * route /?documents=all
+ * */
 use Utils\{App, Db};
 
 $title = 'Home :: HomeStaging';

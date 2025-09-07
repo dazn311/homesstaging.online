@@ -1,5 +1,8 @@
 <?php
-
+/*
+ * control-doc-show;
+ * route /?documents=2
+ * */
 use Utils\{App, Db};
 
 $title = 'Объект :: HomeStaging';
@@ -31,7 +34,7 @@ if ($document) {
     $document = $document->find();
 
     if ($document) {
-        $title = "doc_show_contr {$document['project_key']} :: HomeStaging";
+        $title = "{$document['project_key']} :: HomeStaging";
     } else {
         require_once VIEWS . '/errors/404.tpl.php';
         die();
@@ -54,7 +57,7 @@ if ($document) {
 
     $images = $db->query("SELECT image_url, image_description FROM image WHERE document_id = ?;",[$idDoc]);
     $imagesArr = $images->findAll();
-
+    $_SESSION['lastDocId'] = $idDoc;
 } else {
     require_once VIEWS . '/errors/404.tpl.php';
     die();
