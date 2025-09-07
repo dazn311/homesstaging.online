@@ -12,54 +12,54 @@ $root_path2 = dirname($_SERVER['DOCUMENT_ROOT']);
 $root_doc = $_SERVER['DOCUMENT_ROOT'];
 $router = new Router();
 
-$router->add("/", function() {
-    global $root_path2;
-    require "$root_path2/pages/main-page.php";
-});
-
-$router->add("/page", function() {
-    echo "[15]router: new page";
-});
-
-$router->add("/user", function() {
-    global $root_path2;
-    require "$root_path2/pages/user-page.php";
-});
-
-$router->add("/php", function() {
-    global $root_path2;
-    require "$root_path2/php/index.php";
-});
-
-$router->add("/dashboard", function() {
-    global $root_path2;
-    require __DIR__ ."/../../pages/dashboard.php";
-});
-
-$router->add("/login", function() {
-    global $root_path2;
-    require "$root_path2/pages/login-page.php";
-});
-
-$router->add("/logout", function() {
-    global $root_path2;
-    require "$root_path2/pages/logout-page.php";
-});
-
-$router->add("/register", function() {
-    global $root_path2;
-    require "$root_path2/pages/register-page.php";
-});
-
-$router->add("/pages/mitinskii-les", function() {
-    global $root_path2;
-    require "$root_path2/pages/mitinskii-les.php";
-});
+//$router->add("/", function() {
+//    global $root_path2;
+//    require "$root_path2/pages/main-page.php";
+//});
+//
+//$router->add("/page", function() {
+//    echo "[15]router: new page";
+//});
+//
+//$router->add("/user", function() {
+//    global $root_path2;
+//    require "$root_path2/pages/user-page.php";
+//});
+//
+//$router->add("/php", function() {
+//    global $root_path2;
+//    require "$root_path2/php/index.php";
+//});
+//
+//$router->add("/dashboard", function() {
+//    global $root_path2;
+//    require __DIR__ ."/../../pages/dashboard.php";
+//});
+//
+//$router->add("/login", function() {
+//    global $root_path2;
+//    require "$root_path2/pages/login-page.php";
+//});
+//
+//$router->add("/logout", function() {
+//    global $root_path2;
+//    require "$root_path2/pages/logout-page.php";
+//});
+//
+//$router->add("/register", function() {
+//    global $root_path2;
+//    require "$root_path2/pages/register-page.php";
+//});
+//
+//$router->add("/pages/mitinskii-les", function() {
+//    global $root_path2;
+//    require "$root_path2/pages/mitinskii-les.php";
+//});
 
 //var_dump($path);
 //echo '$root_path2: ' . $root_path2;
 //echo '<div>'. '$path: ' . $path . '</div>';
-$router->dispatch($path);
+//$router->dispatch($path);
 
 /*echo 'req: ' . $request;
 switch (true) {

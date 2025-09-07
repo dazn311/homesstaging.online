@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'avatar' => [
             // 'required' => true,
             // 'ext' => 'jpg|jpeg|png',
-            'size' => 1_048_576,
+            'size' => 10_048_576,
         ],
     ]);
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $filePath = UPLOADS . "{$dir}/avatar-{$id}.{$file_ext}";
             $fileUrl = "/uploads{$dir}/avatar-{$id}.{$file_ext}";
             if (move_uploaded_file($data['avatar']['tmp_name'], $filePath)) {
-              $db->query("UPDATE users SET avatar = ? WHERE id = ?", [$fileUrl,$id]);
+              $db->query("UPDATE user SET avatar = ? WHERE id = ?", [$fileUrl,$id]);
             } else {
               error_log("[" . date('Y-m-d H:i') . "] Error upload avatar" . PHP_EOL, 3);
             }

@@ -1,4 +1,6 @@
-<?php require VIEWS . '/incs/header.php' ?>
+<?php
+require VIEWS . '/incs/header.php';
+?>
 
 <main class="main py-3">
     <div class="container">

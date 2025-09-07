@@ -1,15 +1,16 @@
-<?php require VIEWS . '/incs/header.php' ?>
+<?php
+//var_dump($_SESSION);
+require VIEWS . '/incs/header.php';
+?>
 
 <main class="main py-3">
 
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-
                 <h3>Авторизация</h3>
-
-                <form action="" method="post">
-
+                <form action="/?login=user" class="needs-validation"
+                      novalidate method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input
@@ -24,13 +25,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                        <label for="password" class="form-label">Пароль</label>
+                        <input name="password" type="password" class="form-control" id="password" >
                         <?= isset($validation) ? $validation->listErrors('password') : ''  ?>
                     </div>
-
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary">Войти</button>
                     </div>
 
                 </form>

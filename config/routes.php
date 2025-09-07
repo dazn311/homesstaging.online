@@ -34,6 +34,8 @@ $router->get('','', 'pages/index.php');
 //$router->get('api/document/new/(?<type>\w{6})', 'api/document-type.php');
 
 // User
+$router->add('', '(?<key>register)=(?<id>\w+)', 'users/register', ['get', 'post']);//->only('guest');
+$router->add('', '(?<key>login)=(?<id>\w+)', 'users/login', ['get', 'post']);//->only('guest');
 //$router->add('register', 'users/register.php', ['get', 'post'])->only('guest');
 //$router->post('register', 'users/store.php')->only('guest');
 //$router->add('login', 'users/login.php', ['get', 'post'])->only('guest');

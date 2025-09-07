@@ -3,9 +3,9 @@
 for create document;
  */
 require CONFIG . '/rules.php';
-//if (!check_auth()) {
-//    redirect('/');
-//}
+if (!check_auth()) {
+    redirect('/');
+}
 use Utils\{App, Db};
 
 $db = App::get(Db::class);

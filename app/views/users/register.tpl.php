@@ -7,32 +7,31 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
 
-                <h3>Register page</h3>
+                <h3>Регистрация</h3>
                 <?= $_SESSION['success'] ?? '' ?>
                 <?= $_SESSION['error'] ?? ''?>
 
-                <form action="" method="post" enctype="multipart/form-data">
-
+                <form action="/?register=user" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input name="name" type="text" class="form-control" id="name" placeholder="Name" value='<?= old('name') ?>'>
+                        <label for="name" class="form-label">Имя</label>
+                        <input name="name" type="text" class="form-control" id="name"  value='<?= old('name') ?>'>
                         <?= isset($validation) ? $validation->listErrors('name') : ''  ?>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="Email" value='<?= old('email') ?>'>
+                        <input name="email" type="email" class="form-control" id="email" value='<?= old('email') ?>'>
                         <?= isset($validation) ? $validation->listErrors('email') : ''  ?>
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input name="password" type="password" class="form-control" id="password" placeholder="Password" value='<?= old('password') ?>'>
+                        <label for="password" class="form-label">Пароль</label>
+                        <input name="password" type="password" class="form-control" id="password" value='<?= old('password') ?>'>
                         <?= isset($validation) ? $validation->listErrors('password') : ''  ?>
                     </div>
 
                     <div class="mb-3">
-                        <label for="avatar" class="form-label">Avatar</label>
+                        <label for="avatar" class="form-label">Аватар</label>
                         <input name="avatar" class="form-control" type="file" id="avatar" accept="image/png, image/jpeg" >
                         <?= isset($validation) ? $validation->listErrors('avatar') : ''  ?>
                     </div>

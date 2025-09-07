@@ -10,7 +10,7 @@ class Auth implements IUser
     public function handle(): void
     {
         if (!check_auth()) {
-            redirect('/login');
+            redirect('/?login=user');
         }
     }
 

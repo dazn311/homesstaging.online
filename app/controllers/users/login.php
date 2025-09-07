@@ -2,14 +2,14 @@
 
 use Utils\{App, Db, Validator};
 
-$title = "Login :: HomeStaging";
+$title = "Login :: HomeStaging :: ACUL";
 
+$data = load(['email', 'password']);
+$_SESSION['oldData'] = $data;
+//var_dump($_GET);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /** @var Db $db */
     $db = App::get(Db::class);
-
-    $data = load(['email', 'password']);
-    $_SESSION['oldData'] = $data;
 
     $validator = new Validator();
     $validation = $validator->validate($data, [
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         $_SESSION['success'] = 'Successful login';
-        redirect(PATH);
+        redirect('/?documents=all');
     }
 } else {
     $_SESSION['oldData'] = ['email'=> '', 'password'=> ''];
