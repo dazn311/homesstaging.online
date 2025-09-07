@@ -2,19 +2,21 @@
 
 use Utils\{App, Db, Validator};
 
-$title = "Login :: HomeStaging :: ACUL";
+$title = "Login :: HomeStaging";
 
 $data = load(['email', 'password']);
+
+$validator = new Validator();
+
 $_SESSION['oldData'] = $data;
-//var_dump($_GET);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     /** @var Db $db */
     $db = App::get(Db::class);
 
-    $validator = new Validator();
     $validation = $validator->validate($data, [
         'email' => [
-            'email' => true,
+            'required' => true,
         ],
         'password' => [
             'required' => true,
@@ -23,15 +25,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!$validation->hasErrors()) {
         if (!$user = $db->query("SELECT * FROM user WHERE email = ?", [$data['email']])->find()) {
-            $_SESSION['error'] = 'Wrong email or password';
-            redirect();
+            $_SESSION['error'] = 'Ошибка: не верный логин или пароль ' . $data['email'] . ', ' . $data['password'];
+            redirect('/?login=user');
         }
 
         if (!password_verify($data['password'], $user['password'])) {
-            $_SESSION['error'] = 'Wrong email or password';
-            redirect();
+            $_SESSION['error'] = 'Ошибка: не верный логин или пароль ' . $data['email'] . ', ' . $data['password'];
+            redirect('/?login=user');
         }
-
+        $_SESSION['user'] = [];
         foreach ($user as $key => $value) {
             if ($key != 'password') {
                 $_SESSION['user'][$key] = $value;
@@ -41,8 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['success'] = 'Successful login';
         redirect('/?documents=all');
     }
-} else {
-    $_SESSION['oldData'] = ['email'=> '', 'password'=> ''];
 }
 
 require_once VIEWS . '/users/login.tpl.php';

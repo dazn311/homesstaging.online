@@ -25,6 +25,11 @@
                     <li><a href="/#about">Обо мне</a></li>
                     <li><a href="/#portfolio">Портфолио</a></li>
                     <li><a href="/#contact">Контакты</a></li>
+                    <?php if (check_auth()): ?>
+                        <li><a href="/?logout=user">Выйти</a></li>
+                    <?php else: ?>
+                        <li><a href="/?login=user">Логин</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
 

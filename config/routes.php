@@ -9,6 +9,8 @@ const MIDDLEWARE = [
     'guest' => Guest::class,
 ];
 
+$router->add('', '(?<key>login)=(?<id>\w+)', 'users/login', ['get', 'post']);//->only('guest');
+$router->get('', '(?<key>logout)=(?<id>\w+)', 'users/logout')->only('auth');
 ///uploads/avatars/2025/08/11/avatar-5.png
 $router->get('uploads/avatars/\d+/\d+/\d+/avatar-\d+.png','images', 'api/uploads.php');
 //chat;
@@ -28,6 +30,7 @@ $router->delete('', '(?<key>documents)=(?<id>\d+)', 'documents/destroy');
 
 $router->get('','', 'pages/index.php');
 
+$_SESSION['routePath'] =  '=>config_routes';
 // api/document/new/invrpt?isEditMode=true
 // api/document/1248923?isEditMode=true
 //$router->get('api/document/(?<id>\d+)', 'api/document-id.php');
@@ -35,7 +38,6 @@ $router->get('','', 'pages/index.php');
 
 // User
 $router->add('', '(?<key>register)=(?<id>\w+)', 'users/register', ['get', 'post']);//->only('guest');
-$router->add('', '(?<key>login)=(?<id>\w+)', 'users/login', ['get', 'post']);//->only('guest');
 //$router->add('register', 'users/register.php', ['get', 'post'])->only('guest');
 //$router->post('register', 'users/store.php')->only('guest');
 //$router->add('login', 'users/login.php', ['get', 'post'])->only('guest');

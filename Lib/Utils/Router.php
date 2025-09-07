@@ -40,25 +40,18 @@ class Router
                 }
                 if ($this->params && $route['params']) { //'documents=2'
                     if (preg_match("#{$route['params']}#", $this->params, $matches)) {
-//                        var_dump($route['params']);
-//                        var_dump($this->params);
-//                        var_dump($matches);
-//                        var_dump($route);
 
                         if (isset($matches['key']) && isset($matches['id'])) {
                             $isMatches = true;
                             $key = $matches['key'];
                             $id = $matches['id'];
                             self::$route_params[$key] = $id;
-//                            var_dump(['method'=>$this->method]);
-//                            var_dump(['$_POST'=>$_POST]);
-//                            var_dump(['$route'=>$route]);
                             if ($this->method == 'GET') {
                                 require CONTROLLERS . '/' . $route['controller'] . ".php";
                                 die();
                             }
                             if ($this->method == 'POST') {
-                                require CONTROLLERS . "/{$key}/store.php";
+                                require CONTROLLERS . '/' . $route['controller'] . ".php";
                                 die();
                             }
 
@@ -67,7 +60,6 @@ class Router
                 }
             }
         }
-//var_dump($this);
         if (!$isMatches) {
             require CONTROLLERS . "/api/no-find-route.php";
             abort();
