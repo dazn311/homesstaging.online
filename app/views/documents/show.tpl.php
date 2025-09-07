@@ -26,8 +26,7 @@ $description_keys = [
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex gap-1">
-                        <h1><?= h($document['project_key']) ?></h1>
-                        <span style="opacity: 0.3;line-height: 48px;">(просмотр)</span>
+                        <h1>Проект: <?= h($document['project_key']) ?></h1>
                     </div>
                     <div class="card-body">
                         <nav>
@@ -41,31 +40,59 @@ $description_keys = [
                         <div class="tab-content" id="nav-tabContent">
                             <!--body for "Основные"-->
                             <div class="tab-pane fade show active p-2" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <p class="card-text">
-                                    <span class="fw-semibold pe-1">Автор:</span>
+                                <p class="card-text px-2">
+                                    <span class="fw-semibold pe-1">Доступ:</span>
                                     <img src="<?= h($document['avatar']) ?>" class="avatar" alt="avatar">
                                     <?= h($document['name']) ?>
                                 </p>
-                                <p class="card-text"><span class="fw-semibold pe-1">Дата создания:</span><?php
-                                    $date = new DateTimeImmutable($document['createDate'], new DateTimeZone('Europe/Moscow'));
-                                    echo $date->format('d.m.y (H:i)');
-                                    ?></p>
-                                <p class="card-text"><span class="fw-semibold pe-1">Тип объекта:</span><?=$document['type'];?></p>
-                                <p class="card-text"><span class="fw-semibold pe-1">Статус проекта:</span><?=$document['mode'];?></p>
-                                <p class="card-text"><span class="fw-semibold pe-1">Улица:</span><?=$document['street'];?></p>
-                                <p class="card-text"><span class="fw-semibold pe-1">Дом:</span><?=$document['apartment'];?></p>
-                                <p class="card-text"><span class="fw-semibold pe-1">Смета:</span> <?=$document['fileName'];?></p>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Дата создания:</th>
+                                            <td>
+                                                <?php
+                                                $date = new DateTimeImmutable($document['createDate'], new DateTimeZone('Europe/Moscow'));
+                                                echo $date->format('d.m.y (H:i)');
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Тип объекта:</th>
+                                            <td><?=$document['type'];?></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Статус проекта:</th>
+                                            <td colspan="2"><?=$document['mode'];?></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Улица:</th>
+                                            <td colspan="2"><?=$document['street'];?></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Дом:</th>
+                                            <td colspan="2"><?=$document['apartment'];?></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Смета:</th>
+                                            <td colspan="2"><?=$document['fileName'];?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
                             <!--body for "Описание для сайта"-->
                             <div class="tab-pane fade p-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                 <?php if (is_array($descriptionArr) && count($descriptionArr) > 0): ?>
-                                    <?php foreach ($description_keys as $key=>$value ): ?>
-                                        <div class="card-text">
-                                            <span class="fw-semibold pe-1"><?=$value;?></span>
-                                            <span class="desc"> <?=$descriptionArr[$key];?></span>
-                                        </div>
-                                    <?php endforeach; ?>
+                                    <table class="table">
+                                        <tbody>
+                                            <?php foreach ($description_keys as $key=>$value ): ?>
+                                                <tr>
+                                                    <th scope="row"><?=$value;?></th>
+                                                    <td><?=$descriptionArr[$key];?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
                                 <?php endif; ?>
                             </div>
                             <!--body for "Произведенные работы"-->
@@ -106,14 +133,20 @@ $description_keys = [
                                 </div>
                             </div>
                         </div>
-
-                        <form action="/?documents=<?= $document['doc_id'] ?>" method="POST">
-                            <input type="hidden" name="_method" value="POST">
-                            <input type="hidden" name="id" value="<?= $document['doc_id'] ?>">
-                            <button type="submit" class="btn btn-primary">
+                        <?php if (check_auth()): ?>
+                            <form action="/?documents=<?=$document['doc_id'] ?>" method="POST">
+                                <input type="hidden" name="_method" value="POST">
+                                <input type="hidden" name="id" value="<?=$document['doc_id'] ?>">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-pencil-square"></i><span class="ms-2">Редактировать документ</span>
+                                </button>
+                            </form>
+                        <?php else: ?>
+                            <button type="submit" class="btn btn-primary" disabled>
                                 <i class="bi bi-pencil-square"></i><span class="ms-2">Редактировать документ</span>
                             </button>
-                        </form>
+                        <?php endif; ?>
+
                     </div>
                 </div>
             </div>
