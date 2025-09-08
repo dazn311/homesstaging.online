@@ -263,8 +263,8 @@ $nav_tabs[$active_tab]["showActive"] = 'show active';
                                             <input
                                                     type="<?= $type_input[$key]; ?>"
                                                     class="form-control form-control-sm datepicker"
-                                                    id="<?= $key; ?>"
-                                                    name="<?= $key; ?>"
+                                                    id="<?=$key; ?>"
+                                                    name="<?=$key; ?>"
                                                     aria-describedby="<?= $key; ?>"
                                                     value="<?= $descriptionArr[$key] ?? ''; ?>"
                                                     placeholder=""

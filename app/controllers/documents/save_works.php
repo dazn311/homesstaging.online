@@ -43,5 +43,10 @@ if (count($insertValues) > 0) {
         $paramsArr[] =  $id_doc;
     }
     $valueStr = implode(',', $valueArr);
-    $db->query("INSERT INTO worksPerformed (title_work, document_id) VALUES {$valueStr};", $paramsArr);
+    $res = $db->query("INSERT INTO worksPerformed (title_work, document_id) VALUES {$valueStr};", $paramsArr);
+    if ($res) {
+        $_SESSION['success'] = 'данные успешно созданы и записаны.';
+    } else {
+        $_SESSION['error'] = 'данные не созданы и не записаны в бд.' . ' Номер документа: ' . $id_doc;
+    }
 }

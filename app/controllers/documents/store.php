@@ -70,7 +70,7 @@ if ($document) {
         require_once VIEWS . '/errors/404.tpl.php';
         die();
     } else {
-        $title = "doc_store {$document['project_key']} :: HomeStaging";
+        $title = "Редактирование {$document['project_key']} :: HomeStaging";
     }
     $description = $db->query("
         SELECT W.title, W.category, W.price, W.project_url, W.project_des, DATE_FORMAT( W.end_date, '%Y-%m-%d') AS end_date FROM document D

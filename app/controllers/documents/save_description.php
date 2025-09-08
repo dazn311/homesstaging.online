@@ -18,11 +18,8 @@ $data = load($fill_able, true);
 
 $idDoc = route_param('documents','all');// '1248303'
 
-$title = 'doc_store :: HomeStaging';
-
 $validator = new Validator();
 
-//require CONFIG . '/rules.php';
 $validation = $validator->validate($data, RULES_DESCRIPTION);
 
 if (!$validation->hasErrors()) {
@@ -31,11 +28,11 @@ if (!$validation->hasErrors()) {
 
     $isHasTab = $db->query("SELECT COUNT(id) AS lengthId FROM description WHERE document_id = ?",[$idDoc]);
     $isHasTab = $isHasTab->find();
-
+    $endDate = empty($data['end_date']) ? null : $data['end_date'];
     if ($isHasTab['lengthId'] > 0) {
         $res = $db->query("UPDATE description
         SET title = ?, category = ?, price = ?, project_url = ?, project_des = ?, end_date = ?, document_id = ?
-        WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc, $idDoc]);
+        WHERE document_id = ?;",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$endDate,$idDoc, $idDoc]);
 
         if ($res) {
             $_SESSION['success'] = 'данные успешно обновлены.';
@@ -43,9 +40,11 @@ if (!$validation->hasErrors()) {
     } else {
         $res = $db->query("
             INSERT INTO description (title, category, price, project_url, project_des, end_date, document_id) 
-            VALUES (?,?,?,?,?,?,?);",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$data['end_date'],$idDoc]);
+            VALUES (?,?,?,?,?,?,?);",[$data['title'],$data['category'],$data['price'],$data['project_url'],$data['project_des'],$endDate,$idDoc]);
         if ($res) {
             $_SESSION['success'] = 'данные успешно созданы и записаны.';
+        } else {
+            $_SESSION['error'] = 'данные не созданы и не записаны в бд.' . ' Номер документа: ' . $id_doc . ', DATE:' . $data['end_date'];
         }
     }
 } else {

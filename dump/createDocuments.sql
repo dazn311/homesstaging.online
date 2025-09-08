@@ -34,11 +34,11 @@ CREATE TABLE document (
 
 CREATE TABLE description (
                              id INT AUTO_INCREMENT,
-                             title VARCHAR(20) NOT NULL, #Евродвушка
-                             category VARCHAR(50) NOT NULL, # Комплектация "под ключ"
-                             price VARCHAR(10) NOT NULL, # 988 000₽
-                             project_url VARCHAR(100) NOT NULL, # https://t.me/homeupakovka
-                             project_des VARCHAR(100) NOT NULL, #  мой канал Telegram
+                             title VARCHAR(20) DEFAULT 'Евродвушка', #Евродвушка
+                             category VARCHAR(50) DEFAULT 'Комплектация "под ключ"', # Комплектация "под ключ"
+                             price VARCHAR(10) NOT NULL, # 988000
+                             project_url VARCHAR(100)DEFAULT 'https://t.me/homeupakovka', # https://t.me/homeupakovka
+                             project_des VARCHAR(100) DEFAULT 'Telegram канал', #  Telegram канал
                              createDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                              end_date TIMESTAMP DEFAULT NULL,
                              document_id INT NOT NULL,
