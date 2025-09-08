@@ -157,6 +157,7 @@ $nav_tabs[$active_tab]["showActive"] = 'show active';
                                                 required
                                         >
                                     </div>
+                                    <?= isset($validation) ? $validation->listErrors('type') : ''  ?>
                                     <!--end  input type-->
 
                                     <!--select mode-->
@@ -176,6 +177,7 @@ $nav_tabs[$active_tab]["showActive"] = 'show active';
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
+                                        <?= isset($validation) ? $validation->listErrors('mode') : ''  ?>
                                     </div>
                                     <!--end select mode-->
 
@@ -191,6 +193,7 @@ $nav_tabs[$active_tab]["showActive"] = 'show active';
                                                 value="<?= $document['street']; ?>"
                                                 required
                                         >
+                                        <?= isset($validation) ? $validation->listErrors('street') : ''  ?>
                                     </div>
                                     <!--end  input street-->
 
@@ -206,6 +209,7 @@ $nav_tabs[$active_tab]["showActive"] = 'show active';
                                                 value="<?= $document['apartment']; ?>"
                                                 required
                                         >
+                                        <?= isset($validation) ? $validation->listErrors('apartment') : ''  ?>
                                     </div>
                                     <!--end  input apartment-->
 
@@ -227,6 +231,7 @@ $nav_tabs[$active_tab]["showActive"] = 'show active';
                                                 value="<?= $document['fileName']; ?>"
                                                 required
                                         >
+                                        <?= isset($validation) ? $validation->listErrors('fileName') : ''  ?>
                                     </div>
                                     <!--                             end  input fileName-->
 

@@ -24,7 +24,6 @@ require VIEWS . '/incs/header.php';
                                 name="email"
                                 type="email"
                                 class="form-control"
-                                placeholder="Email"
                                 value="<?=$_SESSION['oldData']['email']?>"
                                 required>
                         <?= isset($validation) ? $validation->listErrors('email') : ''  ?>

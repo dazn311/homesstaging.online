@@ -33,19 +33,19 @@ const RULES_PROJECT = [
         'max' => 4,
     ],
     'street' => [
-        'min' => 6,
+        'min' => 2,
         'max' => 100,
     ],
     'apartment' => [
-        'min' => 3,
+        'min' => 1,
         'max' => 50,
     ],
     'fileName' => [
-        'min' => 3,
+//        'min' => 3,
         'max' => 100,
     ],
     'docFile' => [
-        'required' => true,
+//        'required' => true,
         'ext' => 'xls|xlsx',
         'size' => 10_048_576,
     ],
