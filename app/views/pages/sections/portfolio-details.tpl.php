@@ -51,6 +51,9 @@
                         <li><strong>Бюджет</strong>: <?=$res['price'] ?>₽</li>
                         <li><strong>Дата завершения</strong>: <?=$res['end_date'] ?></li>
                         <li>
+                            <strong>Руководитель проекта</strong>: Светлана Борисова
+                        </li>
+                        <li>
                             <strong>Проект URL</strong>:
                             <a href="<?=$res['project_url'] ?>">
                                 <i class="bi bi-telegram" style="padding-left: 4px;" ><?=$res['project_des'] ?></i>

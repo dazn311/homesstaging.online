@@ -5,8 +5,10 @@
                 <div class="footer-about">
                     <a href="/" class="logo sitename">Москва</a>
                     <div class="footer-contact pt-3">
-                        <p>ул. Белобородова</p>
-                        <p>125222, Митино.</p>
+                        <p>и ближайшее Подмосковье:</p>
+                        <p>Красногорск</p>
+                        <p>Пятницкое ш.</p>
+                        <p>Химки</p>
                         <p class="mt-3"><strong>Phone:</strong> <a href="tel:+79256388830">+7 (925) 63-888-30</a></p>
                         <p><strong>Email:</strong> <span>natalia888@homesstaging.online</span></p>
                     </div>

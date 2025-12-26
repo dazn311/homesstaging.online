@@ -56,8 +56,8 @@
                     </li>
                     <li>
                         <i class="bi"></i>
-                        <span style="font-weight: 600;">✨Особая благодарность за помощь и поддержку моему учителю и куратору Светлане Борисовой, известному хоумстейджеру и блогеру, ее Телеграм-канал.....</span>
-                        <a href="https://t.me/homestaging_BS"><i class="bi bi-telegram"></i></a>
+                        <span style="font-weight: 600;">✨Особая благодарность за помощь и поддержку моему учителю и куратору Светлане Борисовой, известному хоумстейджеру и блогеру, ее </span>
+                        <a href="https://t.me/homestaging_BS" target="_blank"><i class="bi bi-telegram">Телеграм-канал</i></a>
                     </li>
                 </ul>
                 <a href="https://t.me/homeupakovka" class="read-more"><span>еще</span><i
